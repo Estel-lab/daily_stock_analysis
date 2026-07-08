@@ -1041,6 +1041,68 @@ Focus on index trend, liquidity, and sector rotation to shape the next-session t
         )
         return snapshot.model_dump()
 
+    # 波动率类指数（如 VIX）与方向性指数语义相反，不能混入指数涨跌均值
+    _VOLATILITY_INDEX_KEYWORDS = ("VIX",)
+
+    @classmethod
+    def _is_volatility_index(cls, idx: MarketIndex) -> bool:
+        text = f"{idx.code} {idx.name}".upper()
+        return any(keyword in text for keyword in cls._VOLATILITY_INDEX_KEYWORDS)
+
+    def _directional_index_changes(self, overview: MarketOverview) -> List[float]:
+        """方向性指数涨跌幅列表（剔除 VIX 等波动率指数，避免情绪分被反向污染）"""
+        return [
+            idx.change_pct
+            for idx in overview.indices
+            if idx.change_pct is not None and not self._is_volatility_index(idx)
+        ]
+
+    def _find_volatility_index(self, overview: MarketOverview) -> Optional[MarketIndex]:
+        return next((idx for idx in overview.indices if self._is_volatility_index(idx)), None)
+
+    def _build_sentiment_indicators_block(self, overview: MarketOverview, review_language: str) -> str:
+        """构建情绪指标区块（VIX 档位解读与单日异动标记），无波动率数据时返回空串"""
+        vix = self._find_volatility_index(overview)
+        if vix is None or not vix.current:
+            return ""
+        level = float(vix.current)
+        change = float(vix.change_pct or 0.0)
+        if review_language == "en":
+            if level < 15:
+                regime = "low volatility (complacency / risk-on)"
+            elif level < 20:
+                regime = "normal range, sentiment steady"
+            elif level < 30:
+                regime = "elevated, risk-off pressure building"
+            else:
+                regime = "panic zone, extreme fear"
+            spike = ""
+            if change >= 15:
+                spike = "\n- ⚠️ One-day volatility spike: sentiment regime-change risk, tighten risk control"
+            elif change <= -12:
+                spike = "\n- Volatility cooling fast: fear receding"
+            return (
+                "## Sentiment Indicators\n"
+                f"- {vix.name}: {level:.2f} ({change:+.2f}%) — {regime}{spike}"
+            )
+        if level < 15:
+            regime = "低波动区间（情绪乐观/自满）"
+        elif level < 20:
+            regime = "正常区间，情绪平稳"
+        elif level < 30:
+            regime = "偏高区间，避险情绪升温"
+        else:
+            regime = "恐慌区间，极端避险"
+        spike = ""
+        if change >= 15:
+            spike = "\n- ⚠️ 波动率单日异动：情绪突变风险，注意收紧风控"
+        elif change <= -12:
+            spike = "\n- 波动率快速回落：恐慌情绪缓解"
+        return (
+            "## 情绪指标\n"
+            f"- {vix.name}: {level:.2f} ({change:+.2f}%) — {regime}{spike}"
+        )
+
     def _build_market_light_reasons_zh(self, overview: MarketOverview, score: int) -> List[str]:
         participation = overview.up_count + overview.down_count
         up_ratio = overview.up_count / participation if participation else None
@@ -1052,7 +1114,7 @@ Focus on index trend, liquidity, and sector rotation to shape the next-session t
                 reasons.append(f"上涨家数占比 {up_ratio:.0%}，亏钱效应较强")
             else:
                 reasons.append(f"上涨家数占比 {up_ratio:.0%}，市场分化")
-        index_changes = [idx.change_pct for idx in overview.indices if idx.change_pct is not None]
+        index_changes = self._directional_index_changes(overview)
         if index_changes:
             avg_change = sum(index_changes) / len(index_changes)
             reasons.append(f"主要指数平均涨跌幅 {avg_change:+.2f}%")
@@ -1075,7 +1137,7 @@ Focus on index trend, liquidity, and sector rotation to shape the next-session t
                 reasons.append(f"advancers ratio {up_ratio:.0%}, downside pressure dominates")
             else:
                 reasons.append(f"advancers ratio {up_ratio:.0%}, breadth is mixed")
-        index_changes = [idx.change_pct for idx in overview.indices if idx.change_pct is not None]
+        index_changes = self._directional_index_changes(overview)
         if index_changes:
             avg_change = sum(index_changes) / len(index_changes)
             reasons.append(f"average major-index change {avg_change:+.2f}%")
@@ -1254,7 +1316,7 @@ Focus on index trend, liquidity, and sector rotation to shape the next-session t
         if breadth_available:
             breadth_score = int(overview.up_count / participants * 100)
 
-        index_changes = [idx.change_pct for idx in overview.indices if idx.change_pct is not None]
+        index_changes = self._directional_index_changes(overview)
         index_available = bool(overview.indices and index_changes)
         index_score = 50
         if index_available:
@@ -1472,6 +1534,9 @@ Concept lagging: {bottom_concepts_text if bottom_concepts_text else "N/A"}"""
             if data_limit_lines:
                 data_limits_block = "## 数据边界\n" + "\n".join(data_limit_lines)
 
+        # 情绪指标（VIX 档位解读，仅在数据可用时输出）
+        sentiment_block = self._build_sentiment_indicators_block(overview, review_language)
+
         data_no_indices_hint = (
             "注意：由于行情数据获取失败，请主要根据【市场新闻】进行定性分析和总结，不要编造具体的指数点位。"
             if not indices_text
@@ -1542,6 +1607,8 @@ Concept lagging: {bottom_concepts_text if bottom_concepts_text else "N/A"}"""
 ## Major Indices
 {indices_placeholder}
 
+{sentiment_block}
+
 {stats_block}
 
 {sector_block}
@@ -1595,6 +1662,8 @@ Output the report content directly, no extra commentary.
 
 ## 主要指数
 {indices_placeholder}
+
+{sentiment_block}
 
 {stats_block}
 

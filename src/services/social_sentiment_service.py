@@ -76,6 +76,8 @@ class SocialSentimentService:
         self._cache: Dict[str, tuple] = {}
         self._cache_lock = threading.RLock()
         self._cache_inflight: Dict[str, threading.Event] = {}
+        # Warn once per process when monthly quota runs low
+        self._quota_warned = False
 
     @property
     def is_available(self) -> bool:
@@ -89,10 +91,32 @@ class SocialSentimentService:
     # API calls
     # ------------------------------------------------------------------
 
+    # 月度剩余额度低于该值时告警（免费档 250 次/月）
+    _QUOTA_WARN_THRESHOLD = 50
+
+    def _log_quota_remaining(self, resp) -> None:
+        """Log monthly quota from response headers; warn when running low."""
+        remaining = resp.headers.get("X-RateLimit-Remaining-Monthly")
+        if remaining is None:
+            return
+        try:
+            remaining_int = int(remaining)
+        except (TypeError, ValueError):
+            return
+        if remaining_int <= self._QUOTA_WARN_THRESHOLD and not self._quota_warned:
+            self._quota_warned = True
+            limit = resp.headers.get("X-RateLimit-Limit-Monthly", "?")
+            logger.warning(
+                "Social sentiment API monthly quota running low: %s/%s remaining",
+                remaining_int,
+                limit,
+            )
+
     def _fetch_json(self, url: str, params: Optional[Dict[str, Any]] = None) -> Optional[Dict]:
         """Fetch JSON from API, return None on any error."""
         try:
             resp = _get_with_retry(url, headers=self._headers, params=params)
+            self._log_quota_remaining(resp)
             if resp.status_code == 200:
                 return resp.json()
             logger.warning("Social sentiment API %s returned %s", url, resp.status_code)

@@ -59,7 +59,16 @@ jobs:
       - name: 创建必要目录
         run: |
           mkdir -p data logs reports
-      
+
+      # 恢复历史分析数据库（跨运行持久化，供情绪突变对比与信号复盘使用）
+      - name: 恢复历史数据库缓存
+        uses: actions/cache/restore@v4
+        with:
+          path: data
+          key: analysis-db-${{ github.run_id }}
+          restore-keys: |
+            analysis-db-
+
       - name: 执行股票分析
         env:
           # ==========================================
@@ -538,6 +547,14 @@ jobs:
             reports/
             logs/
           retention-days: 30
+
+      # 保存历史分析数据库（key 含 run_id 保证每次都写入新缓存，restore 时按前缀取最新）
+      - name: 保存历史数据库缓存
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: data
+          key: analysis-db-${{ github.run_id }}
       
       - name: 显示运行结果
         if: always()
