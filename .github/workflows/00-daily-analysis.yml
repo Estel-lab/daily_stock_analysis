@@ -1,9 +1,10 @@
 name: 每日股票分析
 
 on:
-  # 定时触发 - 每天北京时间 18:00 (UTC 10:00)
+  # 定时触发 - 美股收盘后运行（UTC 21:30 = 北京时间次日 05:30）
+  # 美股收盘为美东 16:00，即 UTC 20:00（夏令时）/ 21:00（冬令时），21:30 全年均在收盘后
   schedule:
-    - cron: '0 10 * * 1-5'     # 周一到周五，UTC 10:00 = 北京时间 18:00
+    - cron: '30 21 * * 1-5'    # 周一到周五，UTC 21:30 = 北京时间次日 05:30
   
   # 手动触发
   workflow_dispatch:
@@ -289,6 +290,12 @@ jobs:
           BRAVE_API_KEYS: ${{ secrets.BRAVE_API_KEYS }}
           SEARXNG_BASE_URLS: ${{ vars.SEARXNG_BASE_URLS || secrets.SEARXNG_BASE_URLS }}
           SEARXNG_PUBLIC_INSTANCES_ENABLED: ${{ vars.SEARXNG_PUBLIC_INSTANCES_ENABLED || secrets.SEARXNG_PUBLIC_INSTANCES_ENABLED }}
+
+          # ==========================================
+          # 社交舆情（Reddit / X / Polymarket，仅美股生效）
+          # ==========================================
+          SOCIAL_SENTIMENT_API_KEY: ${{ secrets.SOCIAL_SENTIMENT_API_KEY }}
+          SOCIAL_SENTIMENT_API_URL: ${{ vars.SOCIAL_SENTIMENT_API_URL || secrets.SOCIAL_SENTIMENT_API_URL }}
           
           # ==========================================
           # 通知渠道（可同时配置多个，全部推送）
@@ -380,7 +387,7 @@ jobs:
           # ==========================================
           # 避免直接写入 STOCK_LIST，保留同名 Environment variables 的 runner 环境值。
           STOCK_LIST_CONFIG: ${{ vars.STOCK_LIST || secrets.STOCK_LIST }}
-          MARKET_REVIEW_REGION: ${{ vars.MARKET_REVIEW_REGION || secrets.MARKET_REVIEW_REGION || 'cn' }}
+          MARKET_REVIEW_REGION: ${{ vars.MARKET_REVIEW_REGION || secrets.MARKET_REVIEW_REGION || 'us' }}
           MARKET_REVIEW_COLOR_SCHEME: ${{ vars.MARKET_REVIEW_COLOR_SCHEME || secrets.MARKET_REVIEW_COLOR_SCHEME || 'green_up' }}
           
           # ==========================================
