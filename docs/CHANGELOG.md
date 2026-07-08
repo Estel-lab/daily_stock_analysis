@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [改进] GitHub Actions 每日分析工作流新增报告数据质量检查步骤（`scripts/check_report_quality.py`，非阻断）：识别疑似空报告与个股章节 N/A 大面积缺数据，并补齐 Finnhub 美股数据源环境变量映射与配置自检显示。
 - [修复] 社交舆情服务 Reddit 个股详情接口路径由已下线的 `/reddit/stocks/v1/report/{ticker}` 更正为 `/reddit/stocks/v1/stock/{ticker}`，修复美股个股 Reddit 舆情始终 404 缺失的问题。
 - [改进] 决策仪表盘日报（Markdown 详细版）在逐股详情后新增「今日总结」结尾段，收拢市场状态与买入/卖出/观望分组结论，便于长报告分批推送后在末尾直接看到结论；summary_only 模式下不重复输出。
 - [改进] GitHub Actions 每日分析工作流补齐 TickFlow 数据源环境变量映射，并收敛 README 数据源稳定性说明到完整指南。
