@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [新功能] 大盘复盘 Prompt 新增「情绪指标」区块：VIX 恐慌指数档位解读（低波动/正常/偏高/恐慌）与单日异动标记，美股情绪判断从新闻定性升级为数据定量。
+- [修复] Market Light 指数情绪分与复盘理由中的指数涨跌均值剔除 VIX 等波动率指数，修复美股暴跌日 VIX 飙升把情绪分反向拉高的问题。
+- [新功能] 决策仪表盘「今日总结」新增「情绪突变」提示：个股评分较上一次分析变化 ≥15 时标注（依赖历史库）；GitHub Actions 每日分析工作流新增分析数据库跨运行缓存持久化，使历史对比与信号复盘在 Actions 环境生效。
+- [改进] 社交舆情服务读取 adanos 响应头月度额度，剩余不足 50 次时输出告警日志。
 - [改进] GitHub Actions 每日分析工作流新增报告数据质量检查步骤（`scripts/check_report_quality.py`，非阻断）：识别疑似空报告与个股章节 N/A 大面积缺数据，并补齐 Finnhub 美股数据源环境变量映射与配置自检显示。
 - [修复] 社交舆情服务 Reddit 个股详情接口路径由已下线的 `/reddit/stocks/v1/report/{ticker}` 更正为 `/reddit/stocks/v1/stock/{ticker}`，修复美股个股 Reddit 舆情始终 404 缺失的问题。
 - [改进] 决策仪表盘日报（Markdown 详细版）在逐股详情后新增「今日总结」结尾段，收拢市场状态与买入/卖出/观望分组结论，便于长报告分批推送后在末尾直接看到结论；summary_only 模式下不重复输出。

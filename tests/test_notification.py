@@ -781,6 +781,55 @@ class TestNotificationServiceReportGeneration(unittest.TestCase):
                 self.assertIn("🟢 **买入**: Apple(AAPL)", wrap_section)
                 self.assertIn("🟡 **观望**: NVIDIA(NVDA)", wrap_section)
 
+    @mock.patch("src.services.history_comparison_service.get_signal_changes_batch")
+    @mock.patch("src.notification.get_config")
+    def test_daily_wrap_up_flags_sentiment_shift(
+        self, mock_get_config: mock.MagicMock, mock_batch: mock.MagicMock
+    ):
+        mock_get_config.return_value = _make_config(report_renderer_enabled=False)
+        mock_batch.return_value = {
+            "AAPL": [{"sentiment_score": 50}],   # 50 -> 78, Δ+28 触发
+            "NVDA": [{"sentiment_score": 55}],   # 55 -> 52, Δ-3 不触发
+        }
+        results = [
+            AnalysisResult(
+                code="AAPL", name="Apple", sentiment_score=78, trend_prediction="看多",
+                operation_advice="买入", analysis_summary="强势", decision_type="buy",
+            ),
+            AnalysisResult(
+                code="NVDA", name="NVIDIA", sentiment_score=52, trend_prediction="震荡",
+                operation_advice="持有", analysis_summary="观望", decision_type="hold",
+            ),
+        ]
+
+        service = NotificationService()
+        out = service.generate_dashboard_report(results, report_date="2026-02-01")
+
+        wrap_section = out[out.index("## 📌 今日总结"):]
+        self.assertIn("⚡ **情绪突变**", wrap_section)
+        self.assertIn("⬆️ Apple(AAPL) 50→78", wrap_section)
+        self.assertNotIn("NVIDIA(NVDA) 55→52", wrap_section)
+
+    @mock.patch("src.services.history_comparison_service.get_signal_changes_batch")
+    @mock.patch("src.notification.get_config")
+    def test_daily_wrap_up_silent_without_history(
+        self, mock_get_config: mock.MagicMock, mock_batch: mock.MagicMock
+    ):
+        mock_get_config.return_value = _make_config(report_renderer_enabled=False)
+        mock_batch.return_value = {}
+        results = [
+            AnalysisResult(
+                code="AAPL", name="Apple", sentiment_score=78, trend_prediction="看多",
+                operation_advice="买入", analysis_summary="强势", decision_type="buy",
+            ),
+        ]
+
+        service = NotificationService()
+        out = service.generate_dashboard_report(results, report_date="2026-02-01")
+
+        self.assertIn("## 📌 今日总结", out)
+        self.assertNotIn("情绪突变", out)
+
     @mock.patch("src.notification.get_config")
     def test_generate_dashboard_report_shows_phase_decision_in_default_renderer(
         self, mock_get_config: mock.MagicMock

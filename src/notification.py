@@ -1480,6 +1480,12 @@ class NotificationService(
             if hold_names:
                 report_lines.append(f"- 🟡 **{labels['watch_label']}**: {hold_names}")
 
+            # 情绪突变：对比上一次分析记录，评分变化 ≥15 时提示（无历史记录时静默跳过）
+            shift_lines = self._build_sentiment_shift_lines(sorted_results, report_language, name_sep)
+            if shift_lines:
+                shift_label = _nlabel("Sentiment Shifts", "情绪突变", "감정 급변")
+                report_lines.append(f"- ⚡ **{shift_label}**: {name_sep.join(shift_lines)}")
+
         # 底部（去除免责声明）
         report_lines.extend([
             "",
@@ -1490,6 +1496,46 @@ class NotificationService(
             report_lines.append(f"*{labels['analysis_model_label']}：{', '.join(models)}*")
 
         return "\n".join(report_lines)
+
+    # 单票评分较上次分析变化达到该阈值视为情绪突变
+    SENTIMENT_SHIFT_THRESHOLD = 15
+
+    def _build_sentiment_shift_lines(
+        self,
+        results: List[AnalysisResult],
+        report_language: str,
+        name_sep: str,
+    ) -> List[str]:
+        """对比历史记录构建情绪突变条目；无历史或查询失败时返回空列表（fail-open）"""
+        try:
+            from src.services.history_comparison_service import get_signal_changes_batch
+
+            exclude_ids = {
+                r.code: r.query_id
+                for r in results
+                if getattr(r, 'query_id', None)
+            }
+            codes = list(dict.fromkeys(r.code for r in results))
+            prev_map = get_signal_changes_batch(codes, limit=1, exclude_query_ids=exclude_ids)
+        except Exception as e:
+            logger.debug("Sentiment shift comparison skipped: %s", e)
+            return []
+
+        lines = []
+        for r in results:
+            prev_records = prev_map.get(r.code) or []
+            if not prev_records:
+                continue
+            prev_score = prev_records[0].get("sentiment_score")
+            if prev_score is None:
+                continue
+            delta = r.sentiment_score - prev_score
+            if abs(delta) < self.SENTIMENT_SHIFT_THRESHOLD:
+                continue
+            arrow = "⬆️" if delta > 0 else "⬇️"
+            display_name = self._get_display_name(r, report_language)
+            lines.append(f"{arrow} {display_name}({r.code}) {prev_score}→{r.sentiment_score}")
+        return lines
 
     def generate_wechat_dashboard(self, results: List[AnalysisResult]) -> str:
         """
