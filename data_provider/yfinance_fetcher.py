@@ -780,6 +780,31 @@ class YfinanceFetcher(BaseFetcher):
             logger.warning(f"[Yfinance] 获取美股指数 {user_code} 实时行情失败: {e}")
             return None
 
+    def get_chip_distribution(self, stock_code: str):
+        """
+        美股筹码分布估算（基于 120 日量价分布，source 标记 estimated）。
+
+        仅处理美股股票；数据不足或异常返回 None，由管理器继续降级。
+        """
+        if not self._is_us_stock(stock_code):
+            return None
+        try:
+            from .us_chip_estimator import estimate_chip_distribution
+
+            df = self.get_daily_data(stock_code, days=120)
+            if df is None or df.empty or 'close' not in df.columns:
+                return None
+            current_price = float(df['close'].iloc[-1])
+            chip = estimate_chip_distribution(df, current_price, stock_code)
+            if chip is not None:
+                logger.info(
+                    f"[Yfinance] {stock_code} 筹码分布估算完成: 获利比例={chip.profit_ratio:.1%} (量价近似)"
+                )
+            return chip
+        except Exception as e:
+            logger.debug(f"[Yfinance] {stock_code} 筹码分布估算失败: {e}")
+            return None
+
     def get_realtime_quote(self, stock_code: str) -> Optional[UnifiedRealtimeQuote]:
         """
         获取美股/美股指数实时行情数据
@@ -880,15 +905,35 @@ class YfinanceFetcher(BaseFetcher):
             except Exception:
                 name = STOCK_NAME_MAP.get(symbol, '')
 
+            # 从 ticker.info 补充估值与活跃度指标（yfinance 免费提供，尽力而为）
+            def _pos_float(value):
+                try:
+                    v = float(value)
+                    return v if v > 0 else None
+                except (TypeError, ValueError):
+                    return None
+
+            pe_ratio = _pos_float(ticker_info.get('trailingPE'))
+            pb_ratio = _pos_float(ticker_info.get('priceToBook'))
+            avg_volume_10d = _pos_float(
+                ticker_info.get('averageVolume10days') or ticker_info.get('averageDailyVolume10Day')
+            )
+            float_shares = _pos_float(ticker_info.get('floatShares') or ticker_info.get('sharesOutstanding'))
+            volume_f = _pos_float(volume)
+            volume_ratio = round(volume_f / avg_volume_10d, 2) if volume_f and avg_volume_10d else None
+            turnover_rate = round(volume_f / float_shares * 100, 2) if volume_f and float_shares else None
+            # 成交额近似：现价 x 成交量（与日 K 标准化口径一致）
+            amount = round(volume_f * price, 2) if volume_f and price else None
+
             missing_fields = [
                 field
                 for field, value in {
                     "price": price,
                     "prev_close": prev_close,
                     "volume": volume,
-                    "amount": None,
-                    "pe_ratio": None,
-                    "pb_ratio": None,
+                    "amount": amount,
+                    "pe_ratio": pe_ratio,
+                    "pb_ratio": pb_ratio,
                 }.items()
                 if value is None
             ]
@@ -904,16 +949,16 @@ class YfinanceFetcher(BaseFetcher):
                 change_pct=round(change_pct, 2) if change_pct is not None else None,
                 change_amount=round(change_amount, 4) if change_amount is not None else None,
                 volume=volume,
-                amount=None,  # yfinance 不直接提供成交额
-                volume_ratio=None,
-                turnover_rate=None,
+                amount=amount,  # 现价 x 成交量近似
+                volume_ratio=volume_ratio,
+                turnover_rate=turnover_rate,
                 amplitude=round(amplitude, 2) if amplitude is not None else None,
                 open_price=open_price,
                 high=high,
                 low=low,
                 pre_close=prev_close,
-                pe_ratio=None,
-                pb_ratio=None,
+                pe_ratio=pe_ratio,
+                pb_ratio=pb_ratio,
                 total_mv=market_cap,
                 circ_mv=None,
             )

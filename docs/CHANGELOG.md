@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [新功能] 美股筹码分布估算：基于 120 日量价分布 + 时间衰减近似计算获利比例、平均成本与 90%/70% 成本区间（source 标记 estimated），接入既有筹码 fallback 链，填补美股筹码数据空缺。
+- [改进] YFinance 美股实时行情补充 PE/PB、量比（现量/10 日均量）、换手率（现量/流通股本）与成交额近似，消除报告「当日行情」对应字段长期 N/A 与 quote fallback 数据限制提示。
 - [改进] Finnhub 美股日 K 适配免费 plan：/stock/candle 返回 403 时本次运行内不再重复请求（快速切换下一数据源），实时行情 /quote 不受影响；工作流补齐 AlphaVantage 日 K fallback 环境变量映射与数据源自检显示。
 - [新功能] 新增可视化 HTML 报告：个股评分条形图（按买/持/卖着色并带文字标签）与评分历史趋势折线图（ECharts，自适应深浅色，图表加载失败自动退回数据表），保存至 `reports/visual_report_*.html`，配置飞书文档时上传到同一文件夹并在文档与推送中附链接；新增 `VISUAL_REPORT_ENABLED` 配置。
 - [改进] 决策仪表盘「分析结果摘要」评分增加 Unicode 条形（▰▰▰▰▰▰▱▱▱▱），在飞书消息与云文档中直接可视。
