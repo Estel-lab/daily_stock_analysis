@@ -1453,6 +1453,33 @@ class NotificationService(
                     "",
                 ])
 
+        # ========== 结尾总结（长报告分批推送后在末尾收拢结论，summary_only 模式下与开头摘要重复故跳过） ==========
+        if results and not self._report_summary_only:
+            wrap_title = _nlabel("Daily Wrap-Up", "今日总结", "오늘 요약")
+            name_sep = "、" if report_language not in ("en", "ko") else ", "
+
+            def _wrap_names(decision_types: tuple) -> str:
+                return name_sep.join(
+                    f"{self._get_display_name(r, report_language)}({r.code})"
+                    for r in sorted_results
+                    if getattr(r, 'decision_type', '') in decision_types
+                )
+
+            report_lines.extend([
+                f"## 📌 {wrap_title}",
+                "",
+            ])
+            self._append_market_status_line(report_lines, results, report_language)
+            buy_names = _wrap_names(('buy',))
+            sell_names = _wrap_names(('sell',))
+            hold_names = _wrap_names(('hold', ''))
+            if buy_names:
+                report_lines.append(f"- 🟢 **{labels['buy_label']}**: {buy_names}")
+            if sell_names:
+                report_lines.append(f"- 🔴 **{labels['sell_label']}**: {sell_names}")
+            if hold_names:
+                report_lines.append(f"- 🟡 **{labels['watch_label']}**: {hold_names}")
+
         # 底部（去除免责声明）
         report_lines.extend([
             "",

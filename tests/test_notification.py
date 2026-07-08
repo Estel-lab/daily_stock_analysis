@@ -743,6 +743,45 @@ class TestNotificationServiceReportGeneration(unittest.TestCase):
         self.assertIn("*分析模型：gemini/gemini-2.5-flash*", out)
 
     @mock.patch("src.notification.get_config")
+    def test_generate_dashboard_report_appends_daily_wrap_up_at_end(self, mock_get_config: mock.MagicMock):
+        mock_get_config.return_value = _make_config(report_renderer_enabled=False)
+        results = [
+            AnalysisResult(
+                code="AAPL",
+                name="Apple",
+                sentiment_score=78,
+                trend_prediction="看多",
+                operation_advice="买入",
+                analysis_summary="强势",
+                decision_type="buy",
+            ),
+            AnalysisResult(
+                code="NVDA",
+                name="NVIDIA",
+                sentiment_score=52,
+                trend_prediction="震荡",
+                operation_advice="持有",
+                analysis_summary="观望",
+                decision_type="hold",
+            ),
+        ]
+
+        for summary_only in (True, False):
+            service = NotificationService()
+            service._report_summary_only = summary_only
+            out = service.generate_dashboard_report(results, report_date="2026-02-01")
+            if summary_only:
+                self.assertNotIn("## 📌 今日总结", out)
+            else:
+                self.assertIn("## 📌 今日总结", out)
+                wrap_pos = out.index("## 📌 今日总结")
+                # 结尾总结必须位于最后一只个股详情之后
+                self.assertGreater(wrap_pos, out.rindex("## 🟡"))
+                wrap_section = out[wrap_pos:]
+                self.assertIn("🟢 **买入**: Apple(AAPL)", wrap_section)
+                self.assertIn("🟡 **观望**: NVIDIA(NVDA)", wrap_section)
+
+    @mock.patch("src.notification.get_config")
     def test_generate_dashboard_report_shows_phase_decision_in_default_renderer(
         self, mock_get_config: mock.MagicMock
     ):

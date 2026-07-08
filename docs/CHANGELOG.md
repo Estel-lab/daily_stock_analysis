@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
 - [修复] 社交舆情服务 Reddit 个股详情接口路径由已下线的 `/reddit/stocks/v1/report/{ticker}` 更正为 `/reddit/stocks/v1/stock/{ticker}`，修复美股个股 Reddit 舆情始终 404 缺失的问题。
+- [改进] 决策仪表盘日报（Markdown 详细版）在逐股详情后新增「今日总结」结尾段，收拢市场状态与买入/卖出/观望分组结论，便于长报告分批推送后在末尾直接看到结论；summary_only 模式下不重复输出。
 - [改进] GitHub Actions 每日分析工作流补齐 TickFlow 数据源环境变量映射，并收敛 README 数据源稳定性说明到完整指南。
 - [修复] WebUI 启动时显式 `--host` / `--port` 不再被 `.env` 中的 `WEBUI_HOST` / `WEBUI_PORT` 覆盖，未传 CLI 参数时统一使用解析后的运行时配置。
 - [改进] GitHub Actions: 每日分析工作流（`00-daily-analysis.yml`）新增钉钉通知环境变量映射，支持在云端定时任务中直接使用钉钉机器人。
