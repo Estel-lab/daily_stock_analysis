@@ -987,6 +987,21 @@ def run_full_analysis(
         except Exception as e:
             logger.warning(f"自动回测失败（已忽略）: {e}")
 
+        # === 信号复盘推送（默认每周五；历史不足时静默跳过） ===
+        try:
+            review_weekday = int(getattr(config, 'signal_review_weekday', 4))
+            if review_weekday >= 0 and datetime.now().weekday() == review_weekday and not args.no_notify:
+                from src.services.signal_review_service import build_signal_review_text
+
+                review_text = build_signal_review_text()
+                if review_text:
+                    pipeline.notifier.send(review_text, route_type="report")
+                    logger.info("信号复盘摘要推送完成")
+                else:
+                    logger.info("信号复盘跳过：暂无已评估的回测样本（历史积累不足）")
+        except Exception as e:
+            logger.warning(f"信号复盘推送失败（已忽略）: {e}")
+
         return True
 
     except Exception as e:

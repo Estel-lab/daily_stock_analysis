@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [新功能] 新增信号复盘摘要推送：默认每周五汇总自动回测整体表现（已评估样本、胜率、方向准确率、平均收益、分建议胜率），历史样本不足时静默跳过；新增 `SIGNAL_REVIEW_WEEKDAY` 配置。
+- [新功能] 新增美股财报日历提示：距财报 14 天内自动向个股分析上下文注入财报日期与事件提醒（传统与 Agent 两条分析路径），数据来自 yfinance，fail-open；新增 `EARNINGS_CALENDAR_ENABLED` 配置。
 - [新功能] 大盘复盘 Prompt 新增「情绪指标」区块：VIX 恐慌指数档位解读（低波动/正常/偏高/恐慌）与单日异动标记，美股情绪判断从新闻定性升级为数据定量。
 - [修复] Market Light 指数情绪分与复盘理由中的指数涨跌均值剔除 VIX 等波动率指数，修复美股暴跌日 VIX 飙升把情绪分反向拉高的问题。
 - [新功能] 决策仪表盘「今日总结」新增「情绪突变」提示：个股评分较上一次分析变化 ≥15 时标注（依赖历史库）；GitHub Actions 每日分析工作流新增分析数据库跨运行缓存持久化，使历史对比与信号复盘在 Actions 环境生效。

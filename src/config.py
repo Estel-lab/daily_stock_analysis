@@ -999,6 +999,10 @@ class Config:
 
     # === 回测配置 ===
     backtest_enabled: bool = True
+    # 信号复盘推送星期（0=周一 … 6=周日；-1 关闭；默认 4=周五）
+    signal_review_weekday: int = 4
+    # 美股财报日历提示（14 天内有财报时注入分析上下文）
+    earnings_calendar_enabled: bool = True
     backtest_eval_window_days: int = 10
     backtest_min_age_days: int = 14
     backtest_engine_version: str = "v1"
@@ -1918,6 +1922,8 @@ class Config:
             ),
             save_context_snapshot=os.getenv('SAVE_CONTEXT_SNAPSHOT', 'true').lower() == 'true',
             backtest_enabled=os.getenv('BACKTEST_ENABLED', 'true').lower() == 'true',
+            signal_review_weekday=parse_env_int(os.getenv('SIGNAL_REVIEW_WEEKDAY'), 4, field_name='SIGNAL_REVIEW_WEEKDAY', minimum=-1),
+            earnings_calendar_enabled=os.getenv('EARNINGS_CALENDAR_ENABLED', 'true').lower() == 'true',
             backtest_eval_window_days=parse_env_int(os.getenv('BACKTEST_EVAL_WINDOW_DAYS'), 10, field_name='BACKTEST_EVAL_WINDOW_DAYS', minimum=1),
             backtest_min_age_days=parse_env_int(os.getenv('BACKTEST_MIN_AGE_DAYS'), 14, field_name='BACKTEST_MIN_AGE_DAYS', minimum=1),
             backtest_engine_version=os.getenv('BACKTEST_ENGINE_VERSION', 'v1'),

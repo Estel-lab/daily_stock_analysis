@@ -606,6 +606,17 @@ class StockAnalysisPipeline:
                 except Exception as e:
                     logger.warning(f"{stock_name}({code}) Social sentiment fetch failed: {e}")
 
+            # Step 4.6: 财报日历提示（美股，14 天内有财报时注入，fail-open）
+            if is_us_stock_code(code) and getattr(self.config, 'earnings_calendar_enabled', True):
+                try:
+                    from src.services.earnings_calendar_service import get_upcoming_earnings_line
+                    earnings_line = get_upcoming_earnings_line(code, stock_name)
+                    if earnings_line:
+                        logger.info(f"{stock_name}({code}) Upcoming earnings hint injected")
+                        news_context = f"{news_context}\n\n{earnings_line}" if news_context else earnings_line
+                except Exception as e:
+                    logger.warning(f"{stock_name}({code}) Earnings calendar fetch failed: {e}")
+
             if persisted_intelligence_context:
                 news_context = (
                     f"{news_context}\n\n{persisted_intelligence_context}"
@@ -1265,6 +1276,20 @@ class StockAnalysisPipeline:
                         logger.info(f"[{code}] Agent mode: social sentiment data injected into news_context")
                 except Exception as e:
                     logger.warning(f"[{code}] Agent mode: social sentiment fetch failed: {e}")
+
+            # Agent path: 财报日历提示（美股，与传统路径同语义，fail-open）
+            if is_us_stock_code(code) and getattr(self.config, 'earnings_calendar_enabled', True):
+                try:
+                    from src.services.earnings_calendar_service import get_upcoming_earnings_line
+                    earnings_line = get_upcoming_earnings_line(code, stock_name)
+                    if earnings_line:
+                        existing = initial_context.get("news_context")
+                        initial_context["news_context"] = (
+                            f"{existing}\n\n{earnings_line}" if existing else earnings_line
+                        )
+                        logger.info(f"[{code}] Agent mode: upcoming earnings hint injected")
+                except Exception as e:
+                    logger.warning(f"[{code}] Agent mode: earnings calendar fetch failed: {e}")
 
             persisted_intelligence_context = self._load_persisted_intelligence_context(
                 code=code,
