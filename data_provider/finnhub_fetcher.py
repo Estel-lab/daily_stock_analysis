@@ -32,6 +32,8 @@ class FinnhubFetcher(BaseFetcher):
         from src.config import get_config
         config = get_config()
         self._api_key = getattr(config, 'finnhub_api_key', None) or os.getenv('FINNHUB_API_KEY')
+        # 免费 plan 无 /stock/candle 权限；检测到 403 后本次运行内不再请求 candle
+        self._candle_access_denied = False
         if not self._api_key:
             logger.debug("[Finnhub] API key not configured, fetcher disabled")
 
@@ -43,6 +45,10 @@ class FinnhubFetcher(BaseFetcher):
             raise DataFetchError("[Finnhub] API key not configured")
         if not self._is_us_stock(stock_code):
             raise DataFetchError(f"[Finnhub] {stock_code} is not a US stock")
+        if self._candle_access_denied:
+            raise DataFetchError(
+                "[Finnhub] /stock/candle access denied earlier in this run (plan has no candle permission)"
+            )
 
         symbol = stock_code.strip().upper()
         start_ts = int(datetime.strptime(start_date, '%Y-%m-%d').timestamp())
@@ -60,8 +66,16 @@ class FinnhubFetcher(BaseFetcher):
         try:
             self.random_sleep(0.3, 0.8)
             resp = requests.get(url, params=params, timeout=15)
+            if resp.status_code == 403:
+                self._candle_access_denied = True
+                raise DataFetchError(
+                    f"[Finnhub] /stock/candle returned 403 for {symbol}: "
+                    "current plan has no candle permission, skipping candle for the rest of this run"
+                )
             resp.raise_for_status()
             data = resp.json()
+        except DataFetchError:
+            raise
         except Exception as e:
             raise DataFetchError(f"[Finnhub] HTTP request failed for {symbol}: {e}") from e
 
