@@ -1184,7 +1184,7 @@ class NotificationService(
                 report_lines.append(
                     f"{signal_emoji} **{display_name}({r.code})**: "
                     f"{localize_operation_advice(r.operation_advice, report_language)} | "
-                    f"{labels['score_label']} {r.sentiment_score} | "
+                    f"{labels['score_label']} {self._score_bar(r.sentiment_score)} {r.sentiment_score} | "
                     f"{localize_trend_prediction(r.trend_prediction, report_language)}"
                 )
             report_lines.extend([
@@ -1496,6 +1496,16 @@ class NotificationService(
             report_lines.append(f"*{labels['analysis_model_label']}：{', '.join(models)}*")
 
         return "\n".join(report_lines)
+
+    @staticmethod
+    def _score_bar(score: Any, width: int = 10) -> str:
+        """把 0-100 评分渲染为 Unicode 条形（markdown/飞书文档纯文本均可显示）"""
+        try:
+            value = max(0, min(100, int(score)))
+        except (TypeError, ValueError):
+            return ""
+        filled = round(value / 100 * width)
+        return "▰" * filled + "▱" * (width - filled)
 
     # 单票评分较上次分析变化达到该阈值视为情绪突变
     SENTIMENT_SHIFT_THRESHOLD = 15

@@ -34,6 +34,48 @@ class FeishuDocManager:
         """检查配置是否完整"""
         return bool(self.app_id and self.app_secret and self.folder_token)
 
+    def upload_file_to_folder(self, file_path: str, file_name: Optional[str] = None) -> Optional[str]:
+        """
+        上传本地文件到配置的飞书文件夹（drive upload_all），返回文件访问链接。
+        SDK 不支持或上传失败时返回 None（fail-open，不影响文档创建主流程）。
+        """
+        if not self.client or not self.is_configured():
+            return None
+        try:
+            import os
+
+            from lark_oapi.api.drive.v1 import (
+                UploadAllFileRequest,
+                UploadAllFileRequestBody,
+            )
+
+            name = file_name or os.path.basename(file_path)
+            size = os.path.getsize(file_path)
+            with open(file_path, "rb") as f:
+                request = UploadAllFileRequest.builder() \
+                    .request_body(UploadAllFileRequestBody.builder()
+                                  .file_name(name)
+                                  .parent_type("explorer")
+                                  .parent_node(self.folder_token)
+                                  .size(size)
+                                  .file(f)
+                                  .build()) \
+                    .build()
+                response = self.client.drive.v1.file.upload_all(request)
+            if not response.success():
+                logger.warning(f"飞书文件上传失败: {response.code} - {response.msg}")
+                return None
+            file_token = getattr(response.data, "file_token", None)
+            if not file_token:
+                logger.warning("飞书文件上传成功但未返回 file_token")
+                return None
+            file_url = f"https://feishu.cn/file/{file_token}"
+            logger.info(f"飞书文件上传成功: {name} ({file_url})")
+            return file_url
+        except Exception as e:
+            logger.warning(f"飞书文件上传异常（已忽略）: {e}")
+            return None
+
     def create_daily_doc(self, title: str, content_md: str) -> Optional[str]:
         """
         创建日报文档

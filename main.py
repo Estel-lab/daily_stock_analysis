@@ -953,14 +953,50 @@ def run_full_analysis(
                     )
                     full_content += f"# 🚀 个股决策仪表盘\n\n{dashboard_content}"
 
+                # 2.5 生成可视化 HTML 报告并上传到同一飞书文件夹（fail-open）
+                visual_url = None
+                if results and getattr(config, 'visual_report_enabled', True):
+                    try:
+                        from src.services.history_comparison_service import get_signal_changes_batch
+                        from src.services.visual_report_service import build_visual_report_html
+
+                        try:
+                            exclude_ids = {
+                                r.code: r.query_id
+                                for r in results
+                                if getattr(r, 'query_id', None)
+                            }
+                            history_by_code = get_signal_changes_batch(
+                                list(dict.fromkeys(r.code for r in results)),
+                                limit=10,
+                                exclude_query_ids=exclude_ids,
+                            )
+                        except Exception:
+                            history_by_code = {}
+
+                        html = build_visual_report_html(results, history_by_code)
+                        visual_path = os.path.join(
+                            'reports', f"visual_report_{now.strftime('%Y%m%d')}.html"
+                        )
+                        os.makedirs('reports', exist_ok=True)
+                        with open(visual_path, 'w', encoding='utf-8') as f:
+                            f.write(html)
+                        logger.info(f"可视化报告已保存: {visual_path}")
+                        visual_url = feishu_doc.upload_file_to_folder(visual_path)
+                        if visual_url:
+                            full_content = f"📊 可视化报告（交互图表）: {visual_url}\n\n" + full_content
+                    except Exception as e:
+                        logger.warning(f"可视化报告生成失败（已忽略）: {e}")
+
                 # 3. 创建文档
                 doc_url = feishu_doc.create_daily_doc(doc_title, full_content)
                 if doc_url:
                     logger.info(f"飞书云文档创建成功: {doc_url}")
                     # 可选：将文档链接也推送到群里
                     if not args.no_notify:
+                        visual_line = f"\n可视化报告: {visual_url}" if visual_url else ""
                         pipeline.notifier.send(
-                            f"[{now.strftime('%Y-%m-%d %H:%M')}] 复盘文档创建成功: {doc_url}",
+                            f"[{now.strftime('%Y-%m-%d %H:%M')}] 复盘文档创建成功: {doc_url}{visual_line}",
                             route_type="report",
                         )
 
