@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [改进] 每日分析与选股筛 workflow 新增失败告警（dead-man's switch）：任何步骤失败时用纯标准库脚本 `scripts/notify_workflow_failure.py` 直推飞书/企业微信（支持飞书签名），不依赖 pip 安装成功；未配置 webhook 时静默跳过。
+- [改进] 每日分析历史数据库新增 artifact 备份兜底（保留 30 天）：Actions cache 被淘汰时可下载 `analysis-db-backup` 恢复到 `data/` 后重跑重建缓存链。
 - [新功能] 机器人新增 `/earnings`（美股财报日期查询）与 `/screen`（动量+价值选股筛，需检出 ai-berkshire 并配置 `AI_BERKSHIRE_DIR`）命令。
 - [新功能] 财报日历升级为财报窗口工作流：财报前 14 天注入「财报前瞻」指令段（预期分歧、事件风险、仓位纪律），财报后 3 天注入「财报点评」指令段（实际 vs 预期、观点修正），替代原单行提示；仅美股，fail-open。
 - [改进] 通知推送统一附加免责声明尾注（AI 生成、不构成投资建议），覆盖日报/简报/企业微信仪表盘与 send 通道；`NOTIFICATION_DISCLAIMER_ENABLED=false` 可关闭，`NOTIFICATION_DISCLAIMER_TEXT` 可自定义文案，内容已含声明时不重复追加。
