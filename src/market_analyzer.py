@@ -1480,7 +1480,10 @@ Focus on index trend, liquidity, and sector rotation to shape the next-session t
             source = self._compact_news_text(self._get_news_field(n, "source"), limit=60)
             published_date = self._compact_news_text(self._get_news_field(n, "published_date"), limit=30)
             url = self._compact_news_text(self._get_news_field(n, "url"), limit=180)
-            meta_parts = [part for part in (source, published_date) if part]
+            from src.search_service import news_freshness_label, news_source_tier_label
+            fresh = news_freshness_label(published_date)
+            tier = news_source_tier_label(source, url)
+            meta_parts = [part for part in (source, published_date, fresh, tier) if part]
             meta = f" ({' / '.join(meta_parts)})" if meta_parts else ""
             url_line = f"\n   URL: {url}" if url else ""
             news_text += f"{i}. {title}{meta}\n   {snippet or '-'}{url_line}\n"

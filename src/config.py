@@ -750,6 +750,8 @@ class Config:
 
     # Unified temperature for all LLM calls (LLM_TEMPERATURE); legacy per-provider temps are fallback only
     llm_temperature: float = 0.7
+    # 个股决策分析温度（低温减少建议日间无谓翻转；默认 0.3，ANALYSIS_TEMPERATURE 覆盖）
+    analysis_temperature: float = 0.3
 
     # Provider prompt-cache controls. These do not control provider implicit cache.
     llm_prompt_cache_telemetry_enabled: bool = True
@@ -1646,6 +1648,7 @@ class Config:
             litellm_model=litellm_model,
             litellm_fallback_models=litellm_fallback_models,
             llm_temperature=resolve_unified_llm_temperature(litellm_model),
+            analysis_temperature=parse_env_float(os.getenv('ANALYSIS_TEMPERATURE'), 0.3, field_name='ANALYSIS_TEMPERATURE', minimum=0.0, maximum=2.0),
             litellm_config_path=litellm_config_path,
             llm_models_source=llm_models_source,
             llm_channels=llm_channels,

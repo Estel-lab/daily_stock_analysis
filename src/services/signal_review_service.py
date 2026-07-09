@@ -69,3 +69,37 @@ def build_signal_review_text(summary: Optional[Dict[str, Any]] = None) -> Option
     lines.append("")
     lines.append("> 胜率长期低于 50% 时应下调对报告建议的信任权重；样本 <20 条时结论仅供参考。")
     return "\n".join(lines)
+
+
+def build_calibration_hint(code: str) -> Optional[str]:
+    """
+    构建个股历史校准提示（回测胜率反馈进分析 prompt）；无回测数据返回 None。
+    """
+    try:
+        from src.services.backtest_service import BacktestService
+
+        service = BacktestService()
+        overall = service.get_summary(scope="overall", code=None) or {}
+        stock = service.get_summary(scope="stock", code=code) or {}
+    except Exception as e:
+        logger.debug("Calibration hint fetch failed for %s: %s", code, e)
+        return None
+
+    parts = []
+    if (overall.get("completed_count") or 0) > 0:
+        parts.append(
+            f"系统整体历史胜率 {_fmt_pct(overall.get('win_rate_pct'))}"
+            f"（样本 {overall.get('completed_count')}）"
+        )
+    if (stock.get("completed_count") or 0) > 0:
+        parts.append(
+            f"本股历史胜率 {_fmt_pct(stock.get('win_rate_pct'))}"
+            f"（样本 {stock.get('completed_count')}）"
+        )
+    if not parts:
+        return None
+    return (
+        "📈 历史校准（本系统过往建议的回测表现）: "
+        + "；".join(parts)
+        + "。胜率明显低于 50% 时请下调建议置信度并偏保守。"
+    )

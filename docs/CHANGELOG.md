@@ -8,6 +8,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [改进] 美股大盘复盘新闻查询改为英文优先（原中文查询导致英文一手信源检索不到且多耗搜索额度）；新闻上下文与大盘 Prompt 新增时效标签（N小时/天前）与权威源分层标注（Bloomberg/Reuters/SEC 等）。
+- [改进] 个股决策分析引入独立低温参数 `ANALYSIS_TEMPERATURE`（默认 0.3），降低同数据下建议的日间随机翻转；大盘复盘叙述温度不变。
+- [新功能] 新增 SEC EDGAR 官方公告源：美股个股近 7 天 8-K/10-Q/10-K/Form 4/13D-G 自动注入分析上下文（官方免费 API，无需 Key）。
+- [改进] 个股情报报告跨引擎/跨维度去重（URL 与归一化标题双键），消除同一事件重复报道对 LLM 的隐性权重放大。
+- [新功能] 回测胜率作为「历史校准」提示注入个股分析 Prompt（整体与本股胜率、样本数），让 LLM 按历史表现调节建议置信度；无回测样本时静默。
+- [新功能] 新增美股期权情绪：最近到期日 Put/Call 未平仓比与成交比注入分析上下文（yfinance 免费期权链）。
+- [新功能] 新增情绪-价格背离确定性检测：近两次评分趋势与价格相对 MA5 强弱背离时注入警示提示。
+- [新功能] 新增 LLM 点位幻觉校验：报告 MA5/10/20 与实际计算值偏差 >2% 时自动在风险提示中追加点位警告。
 - [修复] 飞书云文档 Markdown 渲染：`**加粗**` 转为真实加粗文本样式，Markdown 表格转为「首列加粗: 内容」可读行，引用/列表前缀清理，修复文档中显示原始 `**` 与表格管道符源码的问题；解析逻辑拆分为 SDK 无关的 `src/feishu_md.py` 并补充单元测试。
 - [新功能] 新增 `TAVILY_INCLUDE_DOMAINS` 可选配置：限定 Tavily 新闻搜索只返回指定权威媒体域（如 bloomberg.com,reuters.com），不配置则行为不变。
 - [新功能] 美股筹码分布估算：基于 120 日量价分布 + 时间衰减近似计算获利比例、平均成本与 90%/70% 成本区间（source 标记 estimated），接入既有筹码 fallback 链，填补美股筹码数据空缺。
