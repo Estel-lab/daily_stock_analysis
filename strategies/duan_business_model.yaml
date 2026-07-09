@@ -10,7 +10,11 @@ required_tools:
   - search_stock_news
   - get_realtime_quote
 aliases: [段永平, 商业模式, 好生意, 护城河]
+default_active: true
+default_router: true
 default_priority: 60
+# 震荡市短线信号弱，回归生意本质与长期质地判断
+market_regimes: [sideways]
 
 instructions: |
   **段永平商业模式框架（Business Model Framework）**

@@ -10,7 +10,13 @@ required_tools:
   - get_realtime_quote
   - get_daily_history
 aliases: [巴菲特, 价值投资, 安全边际, 内在价值]
-default_priority: 60
+default_active: true
+default_router: true
+# 25 介于 ma_golden_cross(20) 与 volume_breakout(30) 之间，
+# 保证上涨行情三个技能位中保留一个估值纪律视角
+default_priority: 25
+# 上涨与热点行情最需要估值纪律，防止追高透支
+market_regimes: [trending_up, sector_hot]
 
 instructions: |
   **巴菲特财务估值框架（Financial & Valuation Framework）**

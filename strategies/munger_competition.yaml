@@ -10,7 +10,11 @@ required_tools:
   - search_stock_news
   - get_sector_rankings
 aliases: [芒格, 行业竞争, 多元思维, 逆向思维]
+default_active: true
+default_router: true
 default_priority: 60
+# 板块热点与剧烈波动时，行业格局与逆向思考价值最大
+market_regimes: [sector_hot, volatile]
 
 instructions: |
   **芒格行业竞争框架（Industry & Competition Framework）**

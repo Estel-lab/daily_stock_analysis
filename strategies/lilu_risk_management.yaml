@@ -9,7 +9,11 @@ required_tools:
   - get_stock_info
   - search_stock_news
 aliases: [李录, 风险评估, 管理层, 治理结构]
+default_active: true
+default_router: true
 default_priority: 60
+# 下跌与高波动阶段风险第一，优先排查不可逆损失
+market_regimes: [trending_down, volatile]
 
 instructions: |
   **李录风险与管理层框架（Risk & Management Framework）**
