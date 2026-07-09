@@ -38,7 +38,12 @@ import requests
 
 
 def _make_config(**overrides) -> Config:
-    """Create a Config instance overriding only notification-related fields."""
+    """Create a Config instance overriding only notification-related fields.
+
+    统一免责声明默认关闭：本文件的路由/渠道测试验证内容透传语义，
+    免责声明追加行为由 TestNotificationDisclaimer 单独覆盖。
+    """
+    overrides.setdefault("notification_disclaimer_enabled", False)
     return Config(stock_list=[], **overrides)
 
 
@@ -2188,6 +2193,66 @@ class TestNotificationServiceReportGeneration(unittest.TestCase):
 
         self.assertTrue(ok)
         self.assertAlmostEqual(mock_post.call_count, 4, delta=1)
+
+
+class TestNotificationDisclaimer(unittest.TestCase):
+    """统一免责声明追加行为（NOTIFICATION_DISCLAIMER_ENABLED，默认开启）。"""
+
+    def setUp(self):
+        reset_notification_noise_state()
+
+    @mock.patch("src.notification.get_config")
+    def test_disclaimer_appended_by_default(self, mock_get_config):
+        cfg = _make_config(
+            custom_webhook_urls=["https://example.com/webhook"],
+            notification_disclaimer_enabled=True,
+        )
+        mock_get_config.return_value = cfg
+        service = NotificationService()
+        with mock.patch.object(service, "send_to_custom", return_value=True) as mock_custom:
+            service.send("report body")
+        sent = mock_custom.call_args[0][0]
+        self.assertTrue(sent.startswith("report body"))
+        self.assertIn("不构成投资建议", sent)
+
+    @mock.patch("src.notification.get_config")
+    def test_disclaimer_not_duplicated_when_content_has_marker(self, mock_get_config):
+        cfg = _make_config(
+            custom_webhook_urls=["https://example.com/webhook"],
+            notification_disclaimer_enabled=True,
+        )
+        mock_get_config.return_value = cfg
+        service = NotificationService()
+        content = "body\n\n> 仅供研究参考，不构成投资建议"
+        with mock.patch.object(service, "send_to_custom", return_value=True) as mock_custom:
+            service.send(content)
+        mock_custom.assert_called_once_with(content)
+
+    @mock.patch("src.notification.get_config")
+    def test_disclaimer_disabled_passthrough(self, mock_get_config):
+        cfg = _make_config(
+            custom_webhook_urls=["https://example.com/webhook"],
+            notification_disclaimer_enabled=False,
+        )
+        mock_get_config.return_value = cfg
+        service = NotificationService()
+        with mock.patch.object(service, "send_to_custom", return_value=True) as mock_custom:
+            service.send("plain body")
+        mock_custom.assert_called_once_with("plain body")
+
+    @mock.patch("src.notification.get_config")
+    def test_disclaimer_custom_text(self, mock_get_config):
+        cfg = _make_config(
+            custom_webhook_urls=["https://example.com/webhook"],
+            notification_disclaimer_enabled=True,
+            notification_disclaimer_text="> 自定义声明：不构成投资建议",
+        )
+        mock_get_config.return_value = cfg
+        service = NotificationService()
+        with mock.patch.object(service, "send_to_custom", return_value=True) as mock_custom:
+            service.send("body")
+        sent = mock_custom.call_args[0][0]
+        self.assertTrue(sent.endswith("> 自定义声明：不构成投资建议"))
 
 
 if __name__ == "__main__":

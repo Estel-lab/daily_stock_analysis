@@ -1495,7 +1495,7 @@ class NotificationService(
         if models:
             report_lines.append(f"*{labels['analysis_model_label']}：{', '.join(models)}*")
 
-        return "\n".join(report_lines)
+        return self._append_disclaimer("\n".join(report_lines))
 
     @staticmethod
     def _score_bar(score: Any, width: int = 10) -> str:
@@ -1714,7 +1714,7 @@ class NotificationService(
 
         content = "\n".join(lines)
 
-        return content
+        return self._append_disclaimer(content)
 
     def generate_wechat_summary(self, results: List[AnalysisResult]) -> str:
         """
@@ -1851,7 +1851,7 @@ class NotificationService(
         models = self._collect_models_used(results)
         if models:
             lines.append(f"*{labels['analysis_model_label']}: {', '.join(models)}*")
-        return "\n".join(lines)
+        return self._append_disclaimer("\n".join(lines))
 
     def generate_single_stock_report(self, result: AnalysisResult) -> str:
         """
@@ -2533,6 +2533,23 @@ class NotificationService(
         logger.warning(f"不支持的通知渠道: {channel}")
         return False
 
+    # 免责声明默认文案；检测到该关键词即认为内容已自带声明，不重复追加
+    _DISCLAIMER_MARKER = "不构成投资建议"
+    _DEFAULT_DISCLAIMER = (
+        "> ⚠️ 内容由 AI 生成，仅供研究参考，不构成投资建议；决策前请自行核实数据。"
+    )
+
+    def _append_disclaimer(self, content: str) -> str:
+        """在推送内容尾部统一附加免责声明（NOTIFICATION_DISCLAIMER_ENABLED=false 关闭）。"""
+        if not getattr(self._config, "notification_disclaimer_enabled", True):
+            return content
+        if not content or self._DISCLAIMER_MARKER in content:
+            return content
+        text = (
+            getattr(self._config, "notification_disclaimer_text", "") or ""
+        ).strip() or self._DEFAULT_DISCLAIMER
+        return f"{content.rstrip()}\n\n{text}"
+
     def send_with_results(
         self,
         content: str,
@@ -2566,6 +2583,7 @@ class NotificationService(
         Returns:
             Structured dispatch diagnostics.
         """
+        content = self._append_disclaimer(content)
         context_success = self.send_to_context(content)
         if not self.should_broadcast_static_channels():
             if context_success:

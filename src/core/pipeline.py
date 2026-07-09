@@ -606,14 +606,14 @@ class StockAnalysisPipeline:
                 except Exception as e:
                     logger.warning(f"{stock_name}({code}) Social sentiment fetch failed: {e}")
 
-            # Step 4.6: 财报日历提示（美股，14 天内有财报时注入，fail-open）
+            # Step 4.6: 财报窗口（美股：财报前 14 天注入前瞻指令、财报后 3 天注入点评指令，fail-open）
             if is_us_stock_code(code) and getattr(self.config, 'earnings_calendar_enabled', True):
                 try:
-                    from src.services.earnings_calendar_service import get_upcoming_earnings_line
-                    earnings_line = get_upcoming_earnings_line(code, stock_name)
-                    if earnings_line:
-                        logger.info(f"{stock_name}({code}) Upcoming earnings hint injected")
-                        news_context = f"{news_context}\n\n{earnings_line}" if news_context else earnings_line
+                    from src.services.earnings_calendar_service import get_earnings_window_context
+                    earnings_block = get_earnings_window_context(code, stock_name)
+                    if earnings_block:
+                        logger.info(f"{stock_name}({code}) Earnings window context injected")
+                        news_context = f"{news_context}\n\n{earnings_block}" if news_context else earnings_block
                 except Exception as e:
                     logger.warning(f"{stock_name}({code}) Earnings calendar fetch failed: {e}")
 
@@ -1350,17 +1350,17 @@ class StockAnalysisPipeline:
                 except Exception as e:
                     logger.warning(f"[{code}] Agent mode: social sentiment fetch failed: {e}")
 
-            # Agent path: 财报日历提示（美股，与传统路径同语义，fail-open）
+            # Agent path: 财报窗口（美股，与传统路径同语义：前瞻/点评双相，fail-open）
             if is_us_stock_code(code) and getattr(self.config, 'earnings_calendar_enabled', True):
                 try:
-                    from src.services.earnings_calendar_service import get_upcoming_earnings_line
-                    earnings_line = get_upcoming_earnings_line(code, stock_name)
-                    if earnings_line:
+                    from src.services.earnings_calendar_service import get_earnings_window_context
+                    earnings_block = get_earnings_window_context(code, stock_name)
+                    if earnings_block:
                         existing = initial_context.get("news_context")
                         initial_context["news_context"] = (
-                            f"{existing}\n\n{earnings_line}" if existing else earnings_line
+                            f"{existing}\n\n{earnings_block}" if existing else earnings_block
                         )
-                        logger.info(f"[{code}] Agent mode: upcoming earnings hint injected")
+                        logger.info(f"[{code}] Agent mode: earnings window context injected")
                 except Exception as e:
                     logger.warning(f"[{code}] Agent mode: earnings calendar fetch failed: {e}")
 

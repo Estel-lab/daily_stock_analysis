@@ -65,6 +65,60 @@ class TestEarningsCalendar(unittest.TestCase):
         self.assertIn("距今 7 天", line)
 
 
+class TestEarningsWindowContext(unittest.TestCase):
+    def setUp(self):
+        ecs.clear_cache()
+
+    def _mock_yf(self, earnings_dates):
+        yf = mock.MagicMock()
+        yf.Ticker.return_value.calendar = {"Earnings Date": earnings_dates}
+        return yf
+
+    def test_pre_earnings_block(self):
+        target = date.today() + timedelta(days=5)
+        with mock.patch.dict(sys.modules, {"yfinance": self._mock_yf([target])}):
+            block = ecs.get_earnings_window_context("NVDA", "Nvidia")
+        self.assertIsNotNone(block)
+        self.assertIn("财报窗口（前瞻）", block)
+        self.assertIn("财报前瞻", block)
+        self.assertIn(target.isoformat(), block)
+
+    def test_post_earnings_block(self):
+        reported = date.today() - timedelta(days=2)
+        with mock.patch.dict(sys.modules, {"yfinance": self._mock_yf([reported])}):
+            block = ecs.get_earnings_window_context("NVDA", "Nvidia")
+        self.assertIsNotNone(block)
+        self.assertIn("财报窗口（点评）", block)
+        self.assertIn("财报点评", block)
+        self.assertIn("2 天前", block)
+
+    def test_silent_outside_windows(self):
+        # 财报 30 天后：既不在前瞻窗口也不在点评窗口
+        reported = date.today() - timedelta(days=30)
+        upcoming = date.today() + timedelta(days=60)
+        with mock.patch.dict(
+            sys.modules, {"yfinance": self._mock_yf([reported, upcoming])}
+        ):
+            self.assertIsNone(ecs.get_earnings_window_context("NVDA"))
+
+    def test_pre_takes_precedence_over_post(self):
+        # 极端情况：日历同时含 2 天前与 3 天后的日期，优先前瞻
+        reported = date.today() - timedelta(days=2)
+        upcoming = date.today() + timedelta(days=3)
+        with mock.patch.dict(
+            sys.modules, {"yfinance": self._mock_yf([reported, upcoming])}
+        ):
+            block = ecs.get_earnings_window_context("NVDA")
+        self.assertIsNotNone(block)
+        self.assertIn("财报窗口（前瞻）", block)
+
+    def test_fetch_failure_returns_none(self):
+        yf = mock.MagicMock()
+        yf.Ticker.side_effect = RuntimeError("network down")
+        with mock.patch.dict(sys.modules, {"yfinance": yf}):
+            self.assertIsNone(ecs.get_earnings_window_context("NVDA"))
+
+
 class TestSignalReview(unittest.TestCase):
     def test_builds_summary_text(self):
         summary = {

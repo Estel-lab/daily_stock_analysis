@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [新功能] 机器人新增 `/earnings`（美股财报日期查询）与 `/screen`（动量+价值选股筛，需检出 ai-berkshire 并配置 `AI_BERKSHIRE_DIR`）命令。
+- [新功能] 财报日历升级为财报窗口工作流：财报前 14 天注入「财报前瞻」指令段（预期分歧、事件风险、仓位纪律），财报后 3 天注入「财报点评」指令段（实际 vs 预期、观点修正），替代原单行提示；仅美股，fail-open。
+- [改进] 通知推送统一附加免责声明尾注（AI 生成、不构成投资建议），覆盖日报/简报/企业微信仪表盘与 send 通道；`NOTIFICATION_DISCLAIMER_ENABLED=false` 可关闭，`NOTIFICATION_DISCLAIMER_TEXT` 可自定义文案，内容已含声明时不重复追加。
+- [测试] 新增 `scripts/check_strategies.py` 策略 YAML 校验（必填字段/别名唯一/市场状态枚举/工具名存在）并纳入 `ci_gate.sh` 确定性检查。
 - [新功能] 新增价值投资四大师策略技能（巴菲特财务估值 / 段永平商业模式 / 芒格行业竞争 / 李录风险管理层，framework 类），可在 Agent 问股中通过别名调用（如 `/ask 600519 用巴菲特框架`）。
 - [改进] 四大师策略加入默认激活集与技能路由：按市场状态互补映射（上涨/热点→巴菲特估值纪律、下跌/高波动→李录风险、震荡→段永平商业模式、热点/高波动→芒格行业竞争），每种行情自动分析至少包含一个价值投资视角；主默认技能仍为 bull_trend，不改变现有默认行为。
 - [新功能] 新增动量+价值选股筛工作流 `01-screener.yml` 与 `scripts/screener_notify.py`：复用 ai-berkshire stock_screener 对 STOCK_LIST 每日扫描（60日新高+放量 → 6维价值验证 → 信号分级），买入/观察信号经通知层 alert 路由推送；未配置时不影响现有流程。

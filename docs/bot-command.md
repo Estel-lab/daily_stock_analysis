@@ -195,6 +195,10 @@ class CommandDispatcher:
 
 | /status | /s, 状态 | 系统状态 | `/status` |
 
+| /earnings | /er, 财报 | 查询下一次财报日期（美股） | `/earnings AAPL NVDA` |
+
+| /screen | /scr, 选股 | 动量+价值选股筛（需本机检出 ai-berkshire，见 `AI_BERKSHIRE_DIR`） | `/screen NVDA MU` |
+
 ## 五、`/status` 与模型配置诊断说明
 
 ### 可配置层级与可用性判断依据

@@ -935,6 +935,10 @@ class Config:
     notification_alert_channels: List[str] = field(default_factory=list)
     notification_system_error_channels: List[str] = field(default_factory=list)
 
+    # 统一免责声明：默认开启，在所有推送尾部附加；置 false 关闭，文案可自定义
+    notification_disclaimer_enabled: bool = True
+    notification_disclaimer_text: str = ""
+
     # 通知降噪机制（Issue #1200 P4）：默认全部关闭，仅对静态通知渠道生效
     notification_dedup_ttl_seconds: int = 0
     notification_cooldown_seconds: int = 0
@@ -1856,6 +1860,10 @@ class Config:
             notification_system_error_channels=parse_notification_route_channels(
                 os.getenv('NOTIFICATION_SYSTEM_ERROR_CHANNELS')
             ),
+            notification_disclaimer_enabled=os.getenv(
+                'NOTIFICATION_DISCLAIMER_ENABLED', 'true'
+            ).lower() != 'false',
+            notification_disclaimer_text=os.getenv('NOTIFICATION_DISCLAIMER_TEXT', ''),
             notification_dedup_ttl_seconds=parse_env_int(
                 os.getenv('NOTIFICATION_DEDUP_TTL_SECONDS'),
                 0,
