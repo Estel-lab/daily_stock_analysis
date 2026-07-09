@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [新功能] 新增 MCP Server（`scripts/mcp_server.py`，可选依赖 `pip install mcp`）：把 Agent 工具注册表（18 个只读行情/分析/搜索工具）暴露为 MCP 协议，供 Claude Code 等客户端直接消费 DSA 数据层；`DSA_MCP_TOOLS` 可配置白名单，文档见 `docs/mcp-server.md`。
 - [新功能] 新增投研周报：每周一北京时间 07:00 推送（`02-weekly-report.yml` + `scripts/weekly_report.py`），含本周个股分析摘要（最新评分排序、周内评分变化）、本周选股筛信号统计、下周自选股财报日历；全部复用已有服务，历史库为空时对应段自动省略。
 - [新功能] 强信号自动深研（opt-in）：选股筛出现 BUY 信号且仓库变量 `SCREENER_TRIGGER_DEEP_ANALYSIS=true` 时，自动触发每日分析工作流对信号标的执行 LLM 深度分析（stocks-only）；每日分析 workflow_dispatch 新增可选 `stocks` 输入用于指定分析标的。
 - [新功能] 选股筛信号 outcome 追踪：信号自动追加到 `data/screener_signals.jsonl`（workflow 提交入库），每周一推送附「历史信号复盘」段（信号后 5-45 天收益、按分级胜率汇总）；`SCREENER_REVIEW=true` 可随时触发，`SCREENER_HISTORY_FILE` 可自定义路径。
