@@ -39,10 +39,15 @@ def build_analysis_section(today: date) -> Optional[str]:
     from src.services.history_service import HistoryService
 
     start = (today - timedelta(days=WEEK_DAYS)).isoformat()
+    # report_type 存的是 ReportType 枚举值（simple/full 等），个股与大盘记录混存，
+    # 这里不做等值过滤，改为排除大盘复盘记录
     result = HistoryService().get_history_list(
-        report_type="stock", start_date=start, end_date=today.isoformat(), limit=200
+        start_date=start, end_date=today.isoformat(), limit=200
     )
-    items = result.get("items") or []
+    items = [
+        item for item in (result.get("items") or [])
+        if item.get("report_type") != "market_review"
+    ]
     if not items:
         return None
 
