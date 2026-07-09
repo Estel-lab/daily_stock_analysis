@@ -322,6 +322,7 @@ def main() -> int:
             failed.append(yahoo)
             print(f"  {yahoo:<10} 数据获取失败")
             continue
+        result["dsa_code"] = original  # 保留 DSA 代码，供强信号触发深度分析
         print(f"  {yahoo:<10} {result['grade']:<8} {result['reason']}")
         if result["grade"].startswith("BUY"):
             buy_signals.append(result)
@@ -348,6 +349,15 @@ def main() -> int:
         encoding="utf-8",
     )
     print(f"结果快照：{snapshot_path}")
+
+    # BUY 信号标的（DSA 代码）写入触发文件，供 workflow 决定是否触发深度分析
+    trigger_path = output_dir / "trigger_stocks.txt"
+    buy_codes = list(dict.fromkeys(
+        s.get("dsa_code") or s["ticker"] for s in buy_signals
+    ))
+    trigger_path.write_text(",".join(buy_codes), encoding="utf-8")
+    if buy_codes:
+        print(f"BUY 信号标的：{','.join(buy_codes)}（触发文件：{trigger_path}）")
 
     history_file = default_history_path()
     appended = append_signal_history(buy_signals, watch_signals, history_file)

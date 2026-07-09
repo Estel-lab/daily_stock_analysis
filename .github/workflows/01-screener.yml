@@ -22,8 +22,10 @@ concurrency:
   cancel-in-progress: false
 
 # contents: write 用于提交信号历史 data/screener_signals.jsonl
+# actions: write 用于强信号触发每日分析工作流（workflow_dispatch）
 permissions:
   contents: write
+  actions: write
 
 jobs:
   screen:
@@ -112,6 +114,26 @@ jobs:
           name: screener-results
           path: reports/screener/
           if-no-files-found: ignore
+
+      # 强信号自动深研（opt-in）：存在 BUY 信号且仓库变量 SCREENER_TRIGGER_DEEP_ANALYSIS=true
+      # 时，触发每日分析工作流对信号标的做 LLM 深度分析（stocks-only，消耗 LLM 配额）
+      - name: 强信号触发深度分析
+        if: vars.SCREENER_TRIGGER_DEEP_ANALYSIS == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TRIGGER_FILE=reports/screener/trigger_stocks.txt
+          if [ ! -s "$TRIGGER_FILE" ]; then
+            echo "无 BUY 信号，跳过深度分析触发"
+            exit 0
+          fi
+          STOCKS=$(cat "$TRIGGER_FILE")
+          echo "🎯 触发深度分析: $STOCKS"
+          curl -sS --fail -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/workflows/00-daily-analysis.yml/dispatches" \
+            -d "{\"ref\":\"${GITHUB_REF_NAME}\",\"inputs\":{\"mode\":\"stocks-only\",\"force_run\":\"true\",\"stocks\":\"${STOCKS}\"}}"
 
       # 信号历史入库：append-only jsonl，供每周一复盘胜率统计
       - name: 提交信号历史
