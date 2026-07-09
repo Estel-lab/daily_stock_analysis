@@ -14,6 +14,8 @@
 - AI_BERKSHIRE_DIR: ai-berkshire 仓库检出路径（默认 ./ai-berkshire）
 - SCREENER_STOCKS: 覆盖扫描标的（逗号/空格分隔，DSA 代码格式）；为空时用 STOCK_LIST
 - SCREENER_NOTIFY_EMPTY: 无信号时也推送（默认 false）
+- SCREENER_HISTORY_FILE: 信号历史 jsonl 路径（默认 data/screener_signals.jsonl）
+- SCREENER_REVIEW: true 时强制附加历史信号复盘段（默认仅周一附加）
 
 用法：
     python scripts/screener_notify.py            # 扫描并推送
@@ -152,6 +154,7 @@ def build_message(
     watch_signals: List[dict],
     scanned_count: int,
     skipped: List[Tuple[str, str]],
+    review_section: Optional[str] = None,
 ) -> str:
     """组装推送 Markdown。"""
     today = datetime.now().strftime("%Y-%m-%d")
@@ -175,12 +178,123 @@ def build_message(
             parts.extend(format_signal_line(result))
             parts.append("")
 
+    if review_section:
+        parts.append(review_section)
+        parts.append("")
+
     if skipped:
         skipped_str = "、".join(f"{code}（{reason}）" for code, reason in skipped)
         parts.append(f"> 跳过：{skipped_str}")
 
     parts.append("> 信号来源：ai-berkshire stock_screener · 仅供研究参考，不构成投资建议")
     return "\n".join(parts)
+
+
+def default_history_path() -> Path:
+    return Path(
+        os.getenv("SCREENER_HISTORY_FILE", PROJECT_ROOT / "data" / "screener_signals.jsonl")
+    )
+
+
+def append_signal_history(
+    buy_signals: List[dict],
+    watch_signals: List[dict],
+    path: Path,
+    signal_date: Optional[str] = None,
+) -> int:
+    """把当日信号追加到 jsonl 历史（append-only，供复盘胜率统计）。"""
+    signal_date = signal_date or datetime.now().strftime("%Y-%m-%d")
+    lines = []
+    for result in buy_signals + watch_signals:
+        momentum = result.get("momentum") or {}
+        value = result.get("value")
+        lines.append(json.dumps({
+            "date": signal_date,
+            "ticker": result["ticker"],
+            "grade": result["grade"],
+            "close": momentum.get("close"),
+            "score": (value or {}).get("score"),
+        }, ensure_ascii=False))
+    if lines:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        with path.open("a", encoding="utf-8") as f:
+            f.write("\n".join(lines) + "\n")
+    return len(lines)
+
+
+# 复盘窗口：信号至少 5 天（≈一周）才计收益，最多回看 45 天；单次最多拉 30 个现价
+REVIEW_MIN_AGE_DAYS = 5
+REVIEW_MAX_AGE_DAYS = 45
+REVIEW_MAX_TICKERS = 30
+
+
+def build_outcome_review(screener, path: Path, today: Optional[datetime] = None) -> Optional[str]:
+    """历史 BUY 信号复盘段：逐条收益 + 按分级汇总胜率；无足龄样本返回 None。"""
+    if not path.exists():
+        return None
+    today = today or datetime.now()
+    aged: List[dict] = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        try:
+            record = json.loads(line)
+        except json.JSONDecodeError:
+            continue
+        if not str(record.get("grade", "")).startswith("BUY") or not record.get("close"):
+            continue
+        try:
+            age = (today - datetime.strptime(record["date"], "%Y-%m-%d")).days
+        except (KeyError, ValueError):
+            continue
+        if REVIEW_MIN_AGE_DAYS <= age <= REVIEW_MAX_AGE_DAYS:
+            record["age_days"] = age
+            aged.append(record)
+    if not aged:
+        return None
+
+    aged = aged[-REVIEW_MAX_TICKERS:]
+    current_price: dict = {}
+    for ticker in {r["ticker"] for r in aged}:
+        prices = screener.fetch_prices_curl(ticker, days=10)
+        if prices:
+            current_price[ticker] = prices[-1]["close"]
+
+    reviewed = []
+    for record in aged:
+        now_price = current_price.get(record["ticker"])
+        if not now_price:
+            continue
+        record["return_pct"] = (now_price / float(record["close"]) - 1) * 100
+        reviewed.append(record)
+    if not reviewed:
+        return None
+
+    lines = [
+        "## 📈 历史信号复盘（信号后至今收益）",
+        "",
+    ]
+    by_grade: dict = {}
+    for record in sorted(reviewed, key=lambda r: r["return_pct"], reverse=True):
+        ret = record["return_pct"]
+        emoji = "🟢" if ret >= 0 else "🔴"
+        lines.append(
+            f"- {emoji} **{record['ticker']}** {record['grade']}"
+            f"（{record['date']}，{record['age_days']} 天前）→ {ret:+.1f}%"
+        )
+        by_grade.setdefault(record["grade"], []).append(ret)
+    lines.append("")
+    for grade in sorted(by_grade):
+        rets = by_grade[grade]
+        win_rate = sum(1 for r in rets if r > 0) / len(rets) * 100
+        avg = sum(rets) / len(rets)
+        lines.append(
+            f"- {grade}：样本 {len(rets)} · 胜率 {win_rate:.0f}% · 平均 {avg:+.1f}%"
+        )
+    lines.append("")
+    lines.append(f"> 复盘窗口：信号后 {REVIEW_MIN_AGE_DAYS}-{REVIEW_MAX_AGE_DAYS} 天；样本少时结论仅供参考")
+    return "\n".join(lines)
 
 
 def main() -> int:
@@ -235,13 +349,28 @@ def main() -> int:
     )
     print(f"结果快照：{snapshot_path}")
 
+    history_file = default_history_path()
+    appended = append_signal_history(buy_signals, watch_signals, history_file)
+    if appended:
+        print(f"已追加 {appended} 条信号到历史：{history_file}")
+
+    # 每周一（或 SCREENER_REVIEW=true）附加历史信号复盘
+    review_section = None
+    force_review = os.getenv("SCREENER_REVIEW", "").lower() == "true"
+    if force_review or datetime.now().weekday() == 0:
+        review_section = build_outcome_review(screener, history_file)
+        if review_section:
+            print("已生成历史信号复盘段")
+
     has_signal = bool(buy_signals or watch_signals)
     notify_empty = os.getenv("SCREENER_NOTIFY_EMPTY", "false").lower() == "true"
-    if not has_signal and not notify_empty:
+    if not has_signal and not notify_empty and not review_section:
         print("无信号且未开启 SCREENER_NOTIFY_EMPTY，跳过推送")
         return 0
 
-    message = build_message(buy_signals, watch_signals, len(scannable), skipped)
+    message = build_message(
+        buy_signals, watch_signals, len(scannable), skipped, review_section=review_section
+    )
     if args.dry_run:
         print("\n===== dry-run 推送内容 =====\n")
         print(message)

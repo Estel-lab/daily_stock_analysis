@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [新功能] 选股筛信号 outcome 追踪：信号自动追加到 `data/screener_signals.jsonl`（workflow 提交入库），每周一推送附「历史信号复盘」段（信号后 5-45 天收益、按分级胜率汇总）；`SCREENER_REVIEW=true` 可随时触发，`SCREENER_HISTORY_FILE` 可自定义路径。
 - [新功能] 新增 IBKR 盈透证券持仓导入：`scripts/import_ibkr_flex.py` 经 Flex Web Service 拉取成交（token 鉴权、无需 TWS/网关，仅导入股票成交），转换为新注册的 `ibkr` 券商 CSV 解析器格式，可生成 CSV 供 Web 持仓导入或 `--commit` 直接入库；配置项 `IBKR_FLEX_TOKEN` / `IBKR_FLEX_QUERY_ID`。
 - [改进] 每日分析与选股筛 workflow 新增失败告警（dead-man's switch）：任何步骤失败时用纯标准库脚本 `scripts/notify_workflow_failure.py` 直推飞书/企业微信（支持飞书签名），不依赖 pip 安装成功；未配置 webhook 时静默跳过。
 - [改进] 每日分析历史数据库新增 artifact 备份兜底（保留 30 天）：Actions cache 被淘汰时可下载 `analysis-db-backup` 恢复到 `data/` 后重跑重建缓存链。

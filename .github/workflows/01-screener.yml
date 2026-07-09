@@ -21,6 +21,10 @@ concurrency:
   group: stock-screener
   cancel-in-progress: false
 
+# contents: write 用于提交信号历史 data/screener_signals.jsonl
+permissions:
+  contents: write
+
 jobs:
   screen:
     runs-on: ubuntu-latest
@@ -108,6 +112,24 @@ jobs:
           name: screener-results
           path: reports/screener/
           if-no-files-found: ignore
+
+      # 信号历史入库：append-only jsonl，供每周一复盘胜率统计
+      - name: 提交信号历史
+        run: |
+          if [ ! -f data/screener_signals.jsonl ]; then
+            echo "无信号历史文件，跳过提交"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/screener_signals.jsonl
+          if git diff --cached --quiet; then
+            echo "无新增信号，跳过提交"
+            exit 0
+          fi
+          git commit -m "chore: append screener signal history $(date -u +%Y-%m-%d)"
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git push origin "HEAD:${GITHUB_REF_NAME}"
 
       - name: 失败告警
         if: failure()

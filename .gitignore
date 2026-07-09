@@ -53,8 +53,8 @@ env/
 *~
 .cursorrules
 
-# 数据和日志
-/data/
+# 数据和日志（目录整体忽略改为通配内容，保证 !反选 对个别数据文件生效）
+/data/*
 /.llm_usage_hmac_secret
 **/.llm_usage_hmac_secret
 logs/
@@ -88,3 +88,6 @@ static/
 /apps/dsa-desktop/dist/
 /apps/dsa-desktop/node_modules/
 docs/specs/
+
+# screener 信号历史（append-only，供复盘胜率统计，由 01-screener workflow 提交）
+!/data/screener_signals.jsonl
