@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [新功能] 新增 IBKR 盈透证券持仓导入：`scripts/import_ibkr_flex.py` 经 Flex Web Service 拉取成交（token 鉴权、无需 TWS/网关，仅导入股票成交），转换为新注册的 `ibkr` 券商 CSV 解析器格式，可生成 CSV 供 Web 持仓导入或 `--commit` 直接入库；配置项 `IBKR_FLEX_TOKEN` / `IBKR_FLEX_QUERY_ID`。
 - [改进] 每日分析与选股筛 workflow 新增失败告警（dead-man's switch）：任何步骤失败时用纯标准库脚本 `scripts/notify_workflow_failure.py` 直推飞书/企业微信（支持飞书签名），不依赖 pip 安装成功；未配置 webhook 时静默跳过。
 - [改进] 每日分析历史数据库新增 artifact 备份兜底（保留 30 天）：Actions cache 被淘汰时可下载 `analysis-db-backup` 恢复到 `data/` 后重跑重建缓存链。
 - [新功能] 机器人新增 `/earnings`（美股财报日期查询）与 `/screen`（动量+价值选股筛，需检出 ai-berkshire 并配置 `AI_BERKSHIRE_DIR`）命令。

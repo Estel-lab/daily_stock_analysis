@@ -73,6 +73,20 @@ DEFAULT_PARSER_SPECS: Tuple[CsvParserSpec, ...] = (
             "trade_uid": ("流水号", "成交编号", "成交序号"),
         },
     ),
+    # IBKR Flex Query 成交 CSV（scripts/import_ibkr_flex.py 生成，或 Flex 查询直接导出的 CSV）
+    CsvParserSpec(
+        broker="ibkr",
+        aliases=("interactivebrokers", "ib"),
+        display_name="盈透证券",
+        column_hints={
+            "trade_date": ("TradeDate", "Date/Time", "SettleDateTarget"),
+            "symbol": ("Symbol",),
+            "side": ("Buy/Sell", "BuySell", "Side"),
+            "quantity": ("Quantity",),
+            "price": ("TradePrice", "Price", "T. Price"),
+            "trade_uid": ("TradeID", "IBExecID", "ExecID"),
+        },
+    ),
 )
 
 
