@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [新功能] 新增价值投资四大师策略技能（巴菲特财务估值 / 段永平商业模式 / 芒格行业竞争 / 李录风险管理层，framework 类），可在 Agent 问股中通过别名调用（如 `/ask 600519 用巴菲特框架`）。
+- [新功能] 新增动量+价值选股筛工作流 `01-screener.yml` 与 `scripts/screener_notify.py`：复用 ai-berkshire stock_screener 对 STOCK_LIST 每日扫描（60日新高+放量 → 6维价值验证 → 信号分级），买入/观察信号经通知层 alert 路由推送；未配置时不影响现有流程。
 - [改进] 美股大盘复盘新闻查询改为英文优先（原中文查询导致英文一手信源检索不到且多耗搜索额度）；新闻上下文与大盘 Prompt 新增时效标签（N小时/天前）与权威源分层标注（Bloomberg/Reuters/SEC 等）。
 - [改进] 个股决策分析引入独立低温参数 `ANALYSIS_TEMPERATURE`（默认 0.3），降低同数据下建议的日间随机翻转；大盘复盘叙述温度不变。
 - [新功能] 新增 SEC EDGAR 官方公告源：美股个股近 7 天 8-K/10-Q/10-K/Form 4/13D-G 自动注入分析上下文（官方免费 API，无需 Key）。
