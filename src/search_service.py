@@ -12,6 +12,7 @@ A股自选股智能分析系统 - 搜索服务模块
 """
 
 import logging
+import os
 import re
 import threading
 import time
@@ -333,6 +334,15 @@ class TavilySearchProvider(BaseSearchProvider):
             }
             if topic is not None:
                 search_kwargs["topic"] = topic
+
+            # 可选：限定权威媒体域名（如 bloomberg.com,reuters.com）；不配置则不限制
+            include_domains = [
+                d.strip()
+                for d in os.getenv("TAVILY_INCLUDE_DOMAINS", "").split(",")
+                if d.strip()
+            ]
+            if include_domains:
+                search_kwargs["include_domains"] = include_domains
 
             response = client.search(
                 **search_kwargs,
