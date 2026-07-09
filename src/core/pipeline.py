@@ -617,6 +617,41 @@ class StockAnalysisPipeline:
                 except Exception as e:
                     logger.warning(f"{stock_name}({code}) Earnings calendar fetch failed: {e}")
 
+            # Step 4.7: SEC 公告提示（美股官方一手信息，fail-open）
+            if is_us_stock_code(code):
+                try:
+                    from src.services.sec_edgar_service import get_recent_filings_line
+
+                    sec_line = get_recent_filings_line(code, stock_name)
+                    if sec_line:
+                        logger.info(f"{stock_name}({code}) SEC filings hint injected")
+                        news_context = f"{news_context}\n\n{sec_line}" if news_context else sec_line
+                except Exception as e:
+                    logger.warning(f"{stock_name}({code}) SEC filings fetch failed: {e}")
+
+            # Step 4.8: 历史校准提示（回测胜率反馈进 prompt，无样本时静默）
+            try:
+                from src.services.signal_review_service import build_calibration_hint
+
+                calibration_line = build_calibration_hint(code)
+                if calibration_line:
+                    logger.info(f"{stock_name}({code}) calibration hint injected")
+                    news_context = f"{news_context}\n\n{calibration_line}" if news_context else calibration_line
+            except Exception as e:
+                logger.warning(f"{stock_name}({code}) calibration hint failed: {e}")
+
+            # Step 4.9: 期权情绪（美股，fail-open）
+            if is_us_stock_code(code):
+                try:
+                    from src.services.options_sentiment_service import get_options_sentiment_line
+
+                    options_line = get_options_sentiment_line(code, stock_name)
+                    if options_line:
+                        logger.info(f"{stock_name}({code}) options sentiment injected")
+                        news_context = f"{news_context}\n\n{options_line}" if news_context else options_line
+                except Exception as e:
+                    logger.warning(f"{stock_name}({code}) options sentiment failed: {e}")
+
             if persisted_intelligence_context:
                 news_context = (
                     f"{news_context}\n\n{persisted_intelligence_context}"
@@ -662,6 +697,25 @@ class StockAnalysisPipeline:
             if portfolio_context is not None:
                 enhanced_context["portfolio_context"] = dict(portfolio_context)
             
+            # Step 6.5: 情绪-价格背离检测（确定性规则，命中时注入 prompt）
+            try:
+                from src.services.analysis_quality_service import detect_sentiment_price_divergence
+                from src.services.history_comparison_service import get_signal_changes
+
+                prev_signals = get_signal_changes(code, limit=2, exclude_query_id=query_id)
+                prev_scores = [s["sentiment_score"] for s in prev_signals if s.get("sentiment_score") is not None]
+                today_data = (context or {}).get('today') or {}
+                divergence_line = detect_sentiment_price_divergence(
+                    prev_scores,
+                    today_data.get('close'),
+                    today_data.get('ma5'),
+                )
+                if divergence_line:
+                    logger.info(f"{stock_name}({code}) sentiment-price divergence detected")
+                    news_context = f"{news_context}\n\n{divergence_line}" if news_context else divergence_line
+            except Exception as e:
+                logger.debug(f"{stock_name}({code}) divergence check skipped: {e}")
+
             # Step 7: 调用 AI 分析（传入增强的上下文和新闻）
             (
                 analysis_context_pack_summary,
@@ -748,6 +802,25 @@ class StockAnalysisPipeline:
                 realtime_data = enhanced_context.get('realtime', {})
                 result.current_price = realtime_data.get('price')
                 result.change_pct = realtime_data.get('change_pct')
+
+            # Step 7.55: LLM 点位幻觉校验（MA 报告值 vs 实际值偏差超阈值时追加警告）
+            if result:
+                try:
+                    from src.services.analysis_quality_service import verify_report_price_levels
+
+                    today_data = (context or {}).get('today') or {}
+                    level_warning = verify_report_price_levels(
+                        getattr(result, 'dashboard', None),
+                        {k: today_data.get(k) for k in ('ma5', 'ma10', 'ma20')},
+                    )
+                    if level_warning:
+                        logger.warning(f"{stock_name}({code}) {level_warning}")
+                        existing_warning = getattr(result, 'risk_warning', '') or ''
+                        result.risk_warning = (
+                            f"{existing_warning}\n{level_warning}" if existing_warning else level_warning
+                        )
+                except Exception as e:
+                    logger.debug(f"{stock_name}({code}) price level verification skipped: {e}")
 
             # Step 7.6: chip_structure fallback (Issue #589) and unavailable collapse
             if result:

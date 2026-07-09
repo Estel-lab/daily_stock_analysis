@@ -43,6 +43,61 @@ from src.services.run_diagnostics import record_provider_run, record_provider_ru
 
 logger = logging.getLogger(__name__)
 
+# 权威财经媒体域/名称（用于给 LLM 标注证据来源等级）
+AUTHORITATIVE_NEWS_SOURCES = (
+    "bloomberg", "reuters", "wsj", "wall street journal", "financial times", "ft.com",
+    "cnbc", "barron", "marketwatch", "sec.gov", "federalreserve",
+    "新华", "财联社", "证券时报", "上海证券报", "中国证券报",
+)
+
+
+def news_freshness_label(published_date: Optional[str], now: Optional[datetime] = None) -> str:
+    """把发布时间转为「N小时前/N天前」标签；解析失败返回空串。"""
+    if not published_date:
+        return ""
+    try:
+        raw = str(published_date).strip()
+        dt = None
+        for fmt in ("%Y-%m-%dT%H:%M:%S", "%Y-%m-%d %H:%M:%S", "%Y-%m-%d"):
+            try:
+                dt = datetime.strptime(raw[:19] if "T" in fmt or ":" in fmt else raw[:10], fmt)
+                break
+            except ValueError:
+                continue
+        if dt is None:
+            return ""
+        ref = now or datetime.now()
+        delta = ref - dt
+        hours = delta.total_seconds() / 3600
+        if hours < 0:
+            return ""
+        if hours < 24:
+            return f"{max(1, int(hours))}小时前"
+        return f"{int(hours // 24)}天前"
+    except Exception:
+        return ""
+
+
+def _normalize_news_keys(title: Optional[str], url: Optional[str]) -> List[str]:
+    """标题/URL 归一化 key 列表，用于跨引擎去重（同一事件不同链接按标题去重）。"""
+    keys: List[str] = []
+    if url:
+        u = str(url).strip().lower()
+        u = re.sub(r"[?#].*$", "", u).rstrip("/")
+        if u:
+            keys.append(f"u:{u}")
+    t = re.sub(r"[\s\W]+", "", str(title or "").lower())
+    if t:
+        keys.append(f"t:{t[:60]}")
+    return keys
+
+
+def news_source_tier_label(source: Optional[str], url: Optional[str] = None) -> str:
+    """权威媒体返回「权威源」标签，否则空串。"""
+    haystack = f"{source or ''} {url or ''}".lower()
+    return "权威源" if any(key in haystack for key in AUTHORITATIVE_NEWS_SOURCES) else ""
+
+
 # Transient network errors (retryable)
 _SEARCH_TRANSIENT_EXCEPTIONS = (
     requests.exceptions.SSLError,
@@ -4188,7 +4243,9 @@ class SearchService:
             格式化的情报报告文本
         """
         lines = [f"【{stock_name} 情报搜索结果】"]
-        
+        # 跨引擎/跨维度去重：同一事件的重复报道只保留首次出现
+        seen_news_keys = set()
+
         # 维度展示顺序
         display_order = ['latest_news', 'announcements', 'market_analysis', 'risk_check', 'earnings', 'industry']
 
@@ -4213,8 +4270,20 @@ class SearchService:
             lines.append(f"\n{dim_desc} (来源: {resp.provider}):")
             if resp.success and resp.results:
                 # 增加显示条数
-                for i, r in enumerate(resp.results[:4], 1):
-                    date_str = f" [{r.published_date}]" if r.published_date else ""
+                shown = 0
+                for r in resp.results:
+                    if shown >= 4:
+                        break
+                    dedup_keys = _normalize_news_keys(r.title, getattr(r, "url", None))
+                    if any(k in seen_news_keys for k in dedup_keys):
+                        continue
+                    seen_news_keys.update(dedup_keys)
+                    shown += 1
+                    i = shown
+                    fresh = news_freshness_label(r.published_date)
+                    tier = news_source_tier_label(r.source, getattr(r, "url", None))
+                    meta_tags = "".join(f"[{tag}]" for tag in (r.published_date, fresh, tier) if tag)
+                    date_str = f" {meta_tags}" if meta_tags else ""
                     lines.append(f"  {i}. {r.title}{date_str}")
                     # 如果摘要太短，可能信息量不足
                     snippet = r.snippet[:150] if len(r.snippet) > 20 else r.snippet
@@ -4228,6 +4297,8 @@ class SearchService:
                         if r.relevance_reasons:
                             relevance_parts.append(f"依据: {'；'.join(r.relevance_reasons[:3])}")
                         lines.append(f"     关联度: {'; '.join(relevance_parts)}")
+                if shown == 0:
+                    lines.append("  （结果与其他维度重复，已合并）")
             else:
                 lines.append("  未找到相关信息")
         

@@ -3532,7 +3532,8 @@ class GeminiAnalyzer:
 
             # 设置生成配置
             generation_config = {
-                "temperature": config.llm_temperature,
+                # 决策分析用低温，降低同数据下建议的随机翻转
+                "temperature": getattr(config, 'analysis_temperature', None) or config.llm_temperature,
                 "max_output_tokens": 8192,
             }
 
