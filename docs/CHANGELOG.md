@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [修复] 飞书云文档 Markdown 渲染：`**加粗**` 转为真实加粗文本样式，Markdown 表格转为「首列加粗: 内容」可读行，引用/列表前缀清理，修复文档中显示原始 `**` 与表格管道符源码的问题；解析逻辑拆分为 SDK 无关的 `src/feishu_md.py` 并补充单元测试。
+- [新功能] 新增 `TAVILY_INCLUDE_DOMAINS` 可选配置：限定 Tavily 新闻搜索只返回指定权威媒体域（如 bloomberg.com,reuters.com），不配置则行为不变。
 - [新功能] 美股筹码分布估算：基于 120 日量价分布 + 时间衰减近似计算获利比例、平均成本与 90%/70% 成本区间（source 标记 estimated），接入既有筹码 fallback 链，填补美股筹码数据空缺。
 - [改进] YFinance 美股实时行情补充 PE/PB、量比（现量/10 日均量）、换手率（现量/流通股本）与成交额近似，消除报告「当日行情」对应字段长期 N/A 与 quote fallback 数据限制提示。
 - [改进] Finnhub 美股日 K 适配免费 plan：/stock/candle 返回 403 时本次运行内不再重复请求（快速切换下一数据源），实时行情 /quote 不受影响；工作流补齐 AlphaVantage 日 K fallback 环境变量映射与数据源自检显示。

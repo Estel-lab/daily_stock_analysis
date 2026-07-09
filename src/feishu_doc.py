@@ -142,57 +142,41 @@ class FeishuDocManager:
 
     def _markdown_to_sdk_blocks(self, md_text: str) -> List[Block]:
         """
-        将简单的 Markdown 转换为飞书 SDK 的 Block 对象
+        将 Markdown 转换为飞书 SDK 的 Block 对象。
+
+        结构解析（标题/加粗/表格/引用/列表）由 SDK 无关的
+        src.feishu_md.parse_markdown_structure 完成，这里只做 SDK 映射。
         """
+        from src.feishu_md import parse_markdown_structure
+
+        kind_to_block_type = {"text": 2, "heading1": 3, "heading2": 4, "heading3": 5}
         blocks = []
-        lines = md_text.split('\n')
-
-        for line in lines:
-            line = line.strip()
-            if not line:
-                continue
-
-            # 默认普通文本 (Text = 2)
-            block_type = 2
-            text_content = line
-
-            # 识别标题
-            if line.startswith('# '):
-                block_type = 3  # H1
-                text_content = line[2:]
-            elif line.startswith('## '):
-                block_type = 4  # H2
-                text_content = line[3:]
-            elif line.startswith('### '):
-                block_type = 5  # H3
-                text_content = line[4:]
-            elif line.startswith('---'):
-                # 分割线
+        for kind, runs in parse_markdown_structure(md_text):
+            if kind == "divider":
                 blocks.append(Block.builder()
                               .block_type(22)
                               .divider(Divider.builder().build())
                               .build())
                 continue
 
-            # 构造 Text 类型的 Block
-            # SDK 的结构嵌套比较深: Block -> Text -> elements -> TextElement -> TextRun -> content
-            text_run = TextRun.builder() \
-                .content(text_content) \
-                .text_element_style(TextElementStyle.builder().build()) \
-                .build()
-
-            text_element = TextElement.builder() \
-                .text_run(text_run) \
-                .build()
+            elements = []
+            for content, bold in runs:
+                style_builder = TextElementStyle.builder()
+                if bold:
+                    style_builder.bold(True)
+                text_run = TextRun.builder() \
+                    .content(content) \
+                    .text_element_style(style_builder.build()) \
+                    .build()
+                elements.append(TextElement.builder().text_run(text_run).build())
 
             text_obj = Text.builder() \
-                .elements([text_element]) \
+                .elements(elements) \
                 .style(TextStyle.builder().build()) \
                 .build()
 
-            # 根据 block_type 放入正确的属性容器
+            block_type = kind_to_block_type.get(kind, 2)
             block_builder = Block.builder().block_type(block_type)
-
             if block_type == 2:
                 block_builder.text(text_obj)
             elif block_type == 3:
@@ -201,7 +185,6 @@ class FeishuDocManager:
                 block_builder.heading2(text_obj)
             elif block_type == 5:
                 block_builder.heading3(text_obj)
-
             blocks.append(block_builder.build())
 
         return blocks
