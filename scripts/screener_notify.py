@@ -16,6 +16,8 @@
 - SCREENER_NOTIFY_EMPTY: 无信号时也推送（默认 false）
 - SCREENER_HISTORY_FILE: 信号历史 jsonl 路径（默认 data/screener_signals.jsonl）
 - SCREENER_REVIEW: true 时强制附加历史信号复盘段（默认仅周一附加）
+- SCREENER_MARKET_LIGHT_ENABLED: 大盘红绿灯联动（默认 true）；红灯市场的 BUY 信号
+  降级为观察且不触发自动深研（回测依据：熊市中动量信号 20 日胜率仅 22%）
 
 用法：
     python scripts/screener_notify.py            # 扫描并推送
@@ -31,7 +33,7 @@ import re
 import sys
 from datetime import datetime
 from pathlib import Path
-from typing import List, Optional, Tuple
+from typing import Dict, List, Optional, Tuple
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
@@ -155,6 +157,7 @@ def build_message(
     scanned_count: int,
     skipped: List[Tuple[str, str]],
     review_section: Optional[str] = None,
+    light_notes: Optional[List[str]] = None,
 ) -> str:
     """组装推送 Markdown。"""
     today = datetime.now().strftime("%Y-%m-%d")
@@ -164,6 +167,9 @@ def build_message(
         f"框架：60日新高+放量 → 6维价值验证 → 信号分级 | 扫描 {scanned_count} 个标的",
         "",
     ]
+    if light_notes:
+        parts.extend(light_notes)
+        parts.append("")
     if buy_signals:
         parts.append(f"## 🎯 买入信号（{len(buy_signals)}）")
         for result in sorted(buy_signals, key=lambda r: GRADE_ORDER.get(r["grade"], 9)):
@@ -190,6 +196,83 @@ def build_message(
     return "\n".join(parts)
 
 
+LIGHT_EMOJI = {"green": "🟢", "yellow": "🟡", "red": "🔴"}
+MARKET_LABEL = {"us": "美股", "hk": "港股", "cn": "A股"}
+
+
+def infer_market(yahoo_symbol: str) -> str:
+    """由 Yahoo 代码推断市场（用于选择对应的大盘红绿灯）。"""
+    symbol = (yahoo_symbol or "").upper()
+    if symbol.endswith((".SS", ".SZ")):
+        return "cn"
+    if symbol.endswith(".HK"):
+        return "hk"
+    return "us"
+
+
+def fetch_market_lights(markets: set) -> Dict[str, dict]:
+    """获取各市场当前大盘红绿灯快照；单市场失败 fail-open（跳过该市场）。"""
+    if os.getenv("SCREENER_MARKET_LIGHT_ENABLED", "true").lower() == "false":
+        return {}
+    lights: Dict[str, dict] = {}
+    for region in sorted(markets):
+        try:
+            from src.services.market_light_service import build_current_snapshot  # noqa: PLC0415
+
+            snapshot = build_current_snapshot(region)
+            if snapshot and snapshot.get("status"):
+                lights[region] = snapshot
+                print(
+                    f"大盘红绿灯 {region}: {snapshot['status']}"
+                    f"（{snapshot.get('label', '')} score={snapshot.get('score')}）"
+                )
+        except Exception as exc:
+            print(f"大盘红绿灯 {region} 获取失败（fail-open）: {exc}")
+    return lights
+
+
+def apply_market_light(
+    buy_signals: List[dict],
+    watch_signals: List[dict],
+    lights: Dict[str, dict],
+) -> Tuple[List[dict], List[dict], List[str]]:
+    """红灯市场的 BUY 信号降级为观察（保留 raw_grade 供历史分层）。
+
+    回测依据（reports/选股筛回测-20260710.md）：熊市（2022）中动量突破信号
+    20 日胜率仅 22%、平均 -8.2%，红灯环境下不给仓位建议。
+    """
+    notes: List[str] = []
+    for region, snapshot in lights.items():
+        emoji = LIGHT_EMOJI.get(snapshot["status"], "")
+        notes.append(
+            f"{emoji} {MARKET_LABEL.get(region, region)}大盘：{snapshot.get('label') or snapshot['status']}"
+        )
+
+    red_markets = {r for r, s in lights.items() if s["status"] == "red"}
+    if not red_markets:
+        return buy_signals, watch_signals, notes
+
+    kept_buy: List[dict] = []
+    for signal in buy_signals:
+        market = signal.get("market") or infer_market(signal["ticker"])
+        if market in red_markets:
+            signal["raw_grade"] = signal["grade"]
+            signal["grade"] = "WATCH"
+            signal["demoted_by_light"] = True
+            signal["reason"] = f"大盘红灯降级（原 {signal['raw_grade']}，{signal['reason']}）"
+            signal["advice"] = "红灯环境不建议追突破"
+            watch_signals.append(signal)
+        else:
+            kept_buy.append(signal)
+    demoted = len(buy_signals) - len(kept_buy)
+    if demoted:
+        notes.append(
+            f"⚠️ {demoted} 个 BUY 信号因大盘红灯降级为观察"
+            "（回测：熊市中动量信号 20 日胜率仅 22%）"
+        )
+    return kept_buy, watch_signals, notes
+
+
 def default_history_path() -> Path:
     return Path(
         os.getenv("SCREENER_HISTORY_FILE", PROJECT_ROOT / "data" / "screener_signals.jsonl")
@@ -208,13 +291,18 @@ def append_signal_history(
     for result in buy_signals + watch_signals:
         momentum = result.get("momentum") or {}
         value = result.get("value")
-        lines.append(json.dumps({
+        entry = {
             "date": signal_date,
             "ticker": result["ticker"],
             "grade": result["grade"],
             "close": momentum.get("close"),
             "score": (value or {}).get("score"),
-        }, ensure_ascii=False))
+        }
+        if result.get("raw_grade"):
+            entry["raw_grade"] = result["raw_grade"]  # 红灯降级前的原始分级，供分层复盘
+        if result.get("market"):
+            entry["market"] = result["market"]
+        lines.append(json.dumps(entry, ensure_ascii=False))
     if lines:
         path.parent.mkdir(parents=True, exist_ok=True)
         with path.open("a", encoding="utf-8") as f:
@@ -323,6 +411,7 @@ def main() -> int:
             print(f"  {yahoo:<10} 数据获取失败")
             continue
         result["dsa_code"] = original  # 保留 DSA 代码，供强信号触发深度分析
+        result["market"] = infer_market(yahoo)
         print(f"  {yahoo:<10} {result['grade']:<8} {result['reason']}")
         if result["grade"].startswith("BUY"):
             buy_signals.append(result)
@@ -331,6 +420,13 @@ def main() -> int:
 
     if failed:
         skipped = skipped + [(t, "价格数据获取失败") for t in failed]
+
+    # 大盘红绿灯联动：红灯市场的 BUY 信号降级（fail-open）
+    signal_markets = {s["market"] for s in buy_signals + watch_signals if s.get("market")}
+    lights = fetch_market_lights(signal_markets) if signal_markets else {}
+    buy_signals, watch_signals, light_notes = apply_market_light(
+        buy_signals, watch_signals, lights
+    )
 
     output_dir = PROJECT_ROOT / "reports" / "screener"
     output_dir.mkdir(parents=True, exist_ok=True)
@@ -379,7 +475,8 @@ def main() -> int:
         return 0
 
     message = build_message(
-        buy_signals, watch_signals, len(scannable), skipped, review_section=review_section
+        buy_signals, watch_signals, len(scannable), skipped,
+        review_section=review_section, light_notes=light_notes,
     )
     if args.dry_run:
         print("\n===== dry-run 推送内容 =====\n")

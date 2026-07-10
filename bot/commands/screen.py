@@ -131,13 +131,23 @@ class ScreenCommand(BotCommand):
                 result = screener.scan_ticker(yahoo, verbose=False)
                 if result is None:
                     skipped.append((yahoo, "价格数据获取失败"))
-                elif result["grade"].startswith("BUY"):
+                    continue
+                result["market"] = glue.infer_market(yahoo)
+                if result["grade"].startswith("BUY"):
                     buy_signals.append(result)
                 elif result["grade"] == "WATCH":
                     watch_signals.append(result)
 
+            # 大盘红绿灯联动：与定时推送同一语义（红灯降级，fail-open）
+            markets = {s["market"] for s in buy_signals + watch_signals}
+            lights = glue.fetch_market_lights(markets) if markets else {}
+            buy_signals, watch_signals, light_notes = glue.apply_market_light(
+                buy_signals, watch_signals, lights
+            )
+
             content = glue.build_message(
-                buy_signals, watch_signals, len(scannable), skipped
+                buy_signals, watch_signals, len(scannable), skipped,
+                light_notes=light_notes,
             )
             self._reply(message, content)
         except Exception as exc:
