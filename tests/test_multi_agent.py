@@ -557,6 +557,7 @@ class TestStrategyRouter(unittest.TestCase):
         "src.agent.skills.router.StrategyRouter._get_available_skills",
         return_value=[
             SimpleNamespace(name="bull_trend", default_router=True, default_priority=10),
+            SimpleNamespace(name="buffett_valuation", default_router=True, default_priority=25),
             SimpleNamespace(name="shrink_pullback", default_router=True, default_priority=40),
         ],
     )

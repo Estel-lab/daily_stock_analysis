@@ -66,6 +66,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 - [新功能] 新增 AI 模拟盘：把每日分析建议确定性重放成长仓虚拟组合（偏多→持有，偏空/观望→空仓，语义与回测引擎一致），投研周报输出策略净值 vs 同标的池等权买入持有基准、最大回撤、平仓胜率与近一周交易；`PAPER_TRADING_ENABLED=false` 可关闭，初始资金/仓位/费率/回放窗口可配，历史库为空时静默省略；文档见 `docs/advice-quality-loop.md`。
 - [新功能] 新增建议校准报告：回测结果按市场/建议/模型分层统计胜率（win/(win+loss)，样本 <5 的分层不展示），投研周报输出「建议校准报告」段，个股分析 Prompt 的「历史校准」提示同步追加该股所属市场层与偏多类建议层胜率。
 - [新功能] 新增多空对抗分析（opt-in，`DEBATE_ANALYSIS_ENABLED=true`）：对同一股票独立生成多头论证与空头论证，裁判 LLM 输出裁决（bull/bear/neutral）与 0-100 置信度，追加到报告综合分析摘要末尾并写入 `dashboard["debate"]`；只补充观点不改变评分与建议，每股额外 3 次 LLM 调用，任一环节失败静默跳过；LLM 优先走 Agent LiteLLM 路由，未配置渠道时回退到 `claude_code_cli`/`opencode_cli` generation-only 本地 CLI 后端。
+- [测试] 修复四大师策略合入后未同步的两个过期测试断言（桌面打包策略 YAML 清单 15→19 并补四大师存在性断言、策略路由默认集 mock 补 buffett_valuation），恢复 backend-gate 全绿。
 
 ## [3.25.0] - 2026-07-03
 
