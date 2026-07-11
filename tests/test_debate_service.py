@@ -10,6 +10,7 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")
 
 from src.services.debate_service import (
     DebateOutcome,
+    _GenerationBackendTextLLM,
     build_context_digest,
     format_debate_block,
     is_debate_enabled,
@@ -134,6 +135,60 @@ class DebateServiceTestCase(unittest.TestCase):
     def test_is_debate_enabled_from_config(self):
         self.assertTrue(is_debate_enabled(SimpleNamespace(debate_analysis_enabled=True)))
         self.assertFalse(is_debate_enabled(SimpleNamespace(debate_analysis_enabled=False)))
+
+    def test_generation_backend_adapter_maps_messages(self):
+        class FakeBackend:
+            def __init__(self):
+                self.calls = []
+
+            def generate(self, prompt, generation_config, *, system_prompt=None, **kwargs):
+                self.calls.append((prompt, system_prompt))
+                return SimpleNamespace(
+                    text="回复文本", provider="claude_code_cli", model="claude_code_cli"
+                )
+
+        backend = FakeBackend()
+        adapter = _GenerationBackendTextLLM(backend, "claude_code_cli")
+        response = adapter.call_text(
+            [
+                {"role": "system", "content": "系统指令"},
+                {"role": "user", "content": "用户内容"},
+            ],
+            temperature=0.5,
+            timeout=60,
+        )
+        self.assertEqual(response.content, "回复文本")
+        self.assertEqual(response.model, "claude_code_cli")
+        self.assertEqual(backend.calls, [("用户内容", "系统指令")])
+
+    def test_generation_backend_adapter_fail_open(self):
+        class BrokenBackend:
+            def generate(self, *args, **kwargs):
+                raise RuntimeError("cli exploded")
+
+        adapter = _GenerationBackendTextLLM(BrokenBackend(), "claude_code_cli")
+        response = adapter.call_text([{"role": "user", "content": "x"}])
+        self.assertIsNone(response.content)
+        self.assertEqual(response.provider, "error")
+
+    def test_debate_via_generation_backend_adapter(self):
+        """走 generation-only 后端适配器的完整辩论回路。"""
+        replies = ["1. 多方论点", "1. 空方论点", JUDGE_JSON]
+
+        class FakeBackend:
+            def generate(self, prompt, generation_config, *, system_prompt=None, **kwargs):
+                return SimpleNamespace(
+                    text=replies.pop(0), provider="claude_code_cli", model="claude_code_cli"
+                )
+
+        outcome = run_debate_analysis(
+            code="600519",
+            stock_name="贵州茅台",
+            llm=_GenerationBackendTextLLM(FakeBackend(), "claude_code_cli"),
+        )
+        self.assertIsNotNone(outcome)
+        self.assertEqual(outcome.verdict, "bull")
+        self.assertEqual(outcome.model_used, "claude_code_cli")
 
     def test_is_debate_enabled_from_env_default_off(self):
         original = os.environ.pop("DEBATE_ANALYSIS_ENABLED", None)

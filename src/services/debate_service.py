@@ -11,8 +11,11 @@
    并把结构化结果写入 dashboard["debate"] 供下游消费。
 
 设计要点：
-- opt-in：由 DEBATE_ANALYSIS_ENABLED 控制（默认关闭），LLM 走
+- opt-in：由 DEBATE_ANALYSIS_ENABLED 控制（默认关闭），LLM 优先走
   Agent 同款 LLMToolAdapter 路由栈（LiteLLM 多渠道 fallback）；
+  未配置 LiteLLM 渠道但配置了 generation-only 本地 CLI 后端
+  （GENERATION_BACKEND=claude_code_cli / opencode_cli）时，回退到
+  该后端执行纯文本辩论调用；
 - 只追加观点，不修改评分 / 建议 / 决策字段，避免与既有决策护栏
   （phase / market context guardrail）产生契约冲突；
 - 全链路 fail-open：LLM 不可用、超时、裁决 JSON 解析失败均返回 None。
@@ -148,6 +151,69 @@ def build_context_digest(
     return "\n".join(lines)
 
 
+class _GenerationBackendTextLLM:
+    """把 generation-only 后端（如 claude_code_cli）适配成 call_text 接口。
+
+    仅用于辩论这类纯文本调用；tool-calling 场景仍必须走 LLMToolAdapter。
+    """
+
+    is_available = True
+
+    def __init__(self, backend: Any, backend_id: str):
+        self._backend = backend
+        self._backend_id = backend_id
+
+    def call_text(self, messages, **kwargs):
+        from types import SimpleNamespace
+
+        system_parts = [m["content"] for m in messages if m.get("role") == "system"]
+        user_parts = [m["content"] for m in messages if m.get("role") == "user"]
+        try:
+            result = self._backend.generate(
+                "\n\n".join(user_parts),
+                {"temperature": kwargs.get("temperature")},
+                system_prompt="\n\n".join(system_parts) or None,
+            )
+        except Exception as exc:
+            logger.warning("Debate generation backend (%s) call failed: %s", self._backend_id, exc)
+            return SimpleNamespace(content=None, provider="error", model="")
+        return SimpleNamespace(
+            content=getattr(result, "text", None),
+            provider=getattr(result, "provider", self._backend_id),
+            model=getattr(result, "model", self._backend_id),
+        )
+
+
+def _resolve_default_llm() -> Optional[Any]:
+    """解析辩论用 LLM：优先 Agent LiteLLM 路由，回退 generation-only 本地 CLI 后端。"""
+    try:
+        from src.agent.llm_adapter import LLMToolAdapter
+
+        adapter = LLMToolAdapter()
+        if adapter.is_available:
+            return adapter
+    except Exception as exc:
+        logger.debug("Debate LLMToolAdapter init failed: %s", exc)
+
+    try:
+        from src.config import get_config
+        from src.llm.backend_factory import create_generation_backend
+        from src.llm.backend_registry import (
+            LOCAL_CLI_GENERATION_BACKEND_IDS,
+            resolve_generation_backend_id,
+        )
+
+        config = get_config()
+        backend_id = resolve_generation_backend_id(config)
+        if backend_id in LOCAL_CLI_GENERATION_BACKEND_IDS:
+            backend = create_generation_backend(backend_id, config=config)
+            logger.info("Debate falling back to generation backend: %s", backend_id)
+            return _GenerationBackendTextLLM(backend, backend_id)
+    except Exception as exc:
+        logger.debug("Debate generation backend fallback unavailable: %s", exc)
+    return None
+
+
 def _extract_json(text: str) -> Optional[Dict[str, Any]]:
     """从 LLM 回复中提取首个 JSON 对象（容忍 ```json 包裹与前后杂文）。"""
     if not text:
@@ -201,18 +267,16 @@ def run_debate_analysis(
     执行一轮多空对抗：多头论证 + 空头论证 + 裁判裁决。
 
     Args:
-        llm: 可注入的 LLM 适配器（需实现 call_text），默认使用 LLMToolAdapter。
+        llm: 可注入的 LLM 适配器（需实现 call_text）；默认优先 LLMToolAdapter，
+             其不可用时回退到已配置的 generation-only 本地 CLI 后端。
 
     Returns:
         DebateOutcome；LLM 不可用或任一环节失败时返回 None（fail-open）。
     """
     if llm is None:
-        try:
-            from src.agent.llm_adapter import LLMToolAdapter
-
-            llm = LLMToolAdapter()
-        except Exception as exc:
-            logger.warning("Debate LLM adapter init failed: %s", exc)
+        llm = _resolve_default_llm()
+        if llm is None:
+            logger.info("Debate skipped: no LLM available (LiteLLM channels or local CLI backend)")
             return None
     if hasattr(llm, "is_available") and not llm.is_available:
         logger.info("Debate skipped: LLM adapter unavailable")

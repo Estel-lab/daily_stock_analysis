@@ -65,7 +65,10 @@
 ### 语义
 
 - **opt-in**：默认关闭，`DEBATE_ANALYSIS_ENABLED=true` 开启；每股额外消耗 3 次 LLM 调用
-  （多头论证、空头论证、裁判裁决），LLM 走 Agent 同款 LiteLLM 多渠道路由；
+  （多头论证、空头论证、裁判裁决），LLM 优先走 Agent 同款 LiteLLM 多渠道路由；
+  未配置 LiteLLM 渠道但配置了 generation-only 本地 CLI 后端
+  （`GENERATION_BACKEND=claude_code_cli` / `opencode_cli`）时，自动回退到该后端
+  执行纯文本辩论调用（辩论不需要 tool-calling）；
 - **只追加观点**：不修改评分、操作建议与决策字段，不与 phase / 大盘环境护栏冲突；
 - 裁决输出 `verdict`（bull/bear/neutral）与 `confidence`（0-100），
   裁判 JSON 解析失败、任一环节超时或 LLM 不可用时整段静默跳过。
