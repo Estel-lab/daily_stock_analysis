@@ -862,6 +862,36 @@ class StockAnalysisPipeline:
                     previous_operation_advice=action_source_advice,
                 )
 
+            # Step 7.8: 多空对抗分析（opt-in，fail-open；仅追加独立观点，不改变建议与评分）
+            if result and getattr(self.config, 'debate_analysis_enabled', False):
+                try:
+                    from src.services.debate_service import format_debate_block, run_debate_analysis
+
+                    self._emit_progress(95, f"{stock_name}：正在进行多空对抗分析")
+                    debate_outcome = run_debate_analysis(
+                        code=code,
+                        stock_name=stock_name,
+                        enhanced_context=enhanced_context,
+                        news_context=news_context,
+                        operation_advice=getattr(result, 'operation_advice', None),
+                        sentiment_score=getattr(result, 'sentiment_score', None),
+                    )
+                    if debate_outcome:
+                        block = format_debate_block(debate_outcome)
+                        result.analysis_summary = (
+                            f"{result.analysis_summary}\n\n{block}"
+                            if result.analysis_summary
+                            else block
+                        )
+                        if isinstance(result.dashboard, dict):
+                            result.dashboard['debate'] = debate_outcome.to_dict()
+                        logger.info(
+                            f"{stock_name}({code}) debate verdict: {debate_outcome.verdict}"
+                            f" (confidence {debate_outcome.confidence})"
+                        )
+                except Exception as e:
+                    logger.warning(f"{stock_name}({code}) debate analysis failed: {e}")
+
             # Step 8: 保存分析历史记录
             if result and result.success:
                 try:

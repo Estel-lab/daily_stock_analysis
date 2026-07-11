@@ -63,6 +63,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 <!-- 新条目格式：- [类型] 描述（类型取值：新功能/改进/修复/文档/测试/chore）-->
 <!-- 每条独立一行追加到本段末尾，无需分类标题，合并时冲突最小 -->
 - [新功能] 飞书推送新增文件上传能力：`FeishuSender.send_feishu_file(file_path)` 通过 App Bot SDK (`im.v1.file.create`) 上传文件并发送文件消息；Webhook 模式回退为发送文件内容文本；新增 `FEISHU_SEND_AS_FILE=true` 配置开关，开启后飞书以文件形式发送报告而非文字消息。
+- [新功能] 新增 AI 模拟盘：把每日分析建议确定性重放成长仓虚拟组合（偏多→持有，偏空/观望→空仓，语义与回测引擎一致），投研周报输出策略净值 vs 同标的池等权买入持有基准、最大回撤、平仓胜率与近一周交易；`PAPER_TRADING_ENABLED=false` 可关闭，初始资金/仓位/费率/回放窗口可配，历史库为空时静默省略；文档见 `docs/advice-quality-loop.md`。
+- [新功能] 新增建议校准报告：回测结果按市场/建议/模型分层统计胜率（win/(win+loss)，样本 <5 的分层不展示），投研周报输出「建议校准报告」段，个股分析 Prompt 的「历史校准」提示同步追加该股所属市场层与偏多类建议层胜率。
+- [新功能] 新增多空对抗分析（opt-in，`DEBATE_ANALYSIS_ENABLED=true`）：对同一股票独立生成多头论证与空头论证，裁判 LLM 输出裁决（bull/bear/neutral）与 0-100 置信度，追加到报告综合分析摘要末尾并写入 `dashboard["debate"]`；只补充观点不改变评分与建议，每股额外 3 次 LLM 调用，任一环节失败静默跳过。
 
 ## [3.25.0] - 2026-07-03
 

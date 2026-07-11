@@ -1011,6 +1011,8 @@ class Config:
     earnings_calendar_enabled: bool = True
     # 可视化 HTML 报告（生成 reports/visual_report_*.html 并上传飞书文件夹）
     visual_report_enabled: bool = True
+    # 多空对抗分析（多头/空头论证 + 裁判裁决，追加到报告；额外消耗 3 次 LLM 调用/股）
+    debate_analysis_enabled: bool = False
     backtest_eval_window_days: int = 10
     backtest_min_age_days: int = 14
     backtest_engine_version: str = "v1"
@@ -1938,6 +1940,7 @@ class Config:
             signal_review_weekday=parse_env_int(os.getenv('SIGNAL_REVIEW_WEEKDAY'), 4, field_name='SIGNAL_REVIEW_WEEKDAY', minimum=-1),
             earnings_calendar_enabled=os.getenv('EARNINGS_CALENDAR_ENABLED', 'true').lower() == 'true',
             visual_report_enabled=os.getenv('VISUAL_REPORT_ENABLED', 'true').lower() == 'true',
+            debate_analysis_enabled=os.getenv('DEBATE_ANALYSIS_ENABLED', 'false').lower() == 'true',
             backtest_eval_window_days=parse_env_int(os.getenv('BACKTEST_EVAL_WINDOW_DAYS'), 10, field_name='BACKTEST_EVAL_WINDOW_DAYS', minimum=1),
             backtest_min_age_days=parse_env_int(os.getenv('BACKTEST_MIN_AGE_DAYS'), 14, field_name='BACKTEST_MIN_AGE_DAYS', minimum=1),
             backtest_engine_version=os.getenv('BACKTEST_ENGINE_VERSION', 'v1'),
