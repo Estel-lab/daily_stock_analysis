@@ -119,11 +119,16 @@ class DesktopBackendPackagingAssetsTestCase(unittest.TestCase):
         strategies_dir = self.repo_root / "strategies"
         strategy_names = sorted(path.stem for path in strategies_dir.glob("*.yaml"))
 
-        self.assertEqual(len(strategy_names), 15)
+        self.assertEqual(len(strategy_names), 19)
         self.assertIn("bottom_volume", strategy_names)
         self.assertIn("chan_theory", strategy_names)
         self.assertIn("ma_golden_cross", strategy_names)
         self.assertIn("wave_theory", strategy_names)
+        # 价值投资四大师策略（framework 类）
+        self.assertIn("buffett_valuation", strategy_names)
+        self.assertIn("duan_business_model", strategy_names)
+        self.assertIn("lilu_risk_management", strategy_names)
+        self.assertIn("munger_competition", strategy_names)
 
     def test_backend_pyinstaller_scripts_include_strategies_data_directory(self):
         macos_script = (self.repo_root / "scripts" / "build-backend-macos.sh").read_text(

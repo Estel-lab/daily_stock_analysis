@@ -5,7 +5,10 @@
 1. 本周个股分析摘要：近 7 天分析记录，按最新评分排序，标注周内评分变化；
 2. 本周选股筛信号统计：从 data/screener_signals.jsonl 汇总分级分布
    （逐信号收益复盘在每周一的选股筛推送中，本报告不重复拉价）；
-3. 下周财报日历：自选股美股标的未来 7 天内的财报日期。
+3. AI 模拟盘：按每日建议确定性重放的虚拟组合净值与等权买入持有基准对比
+   （paper_trading_service，PAPER_TRADING_ENABLED=false 可关闭）；
+4. 建议校准报告：回测结果按市场/建议/模型分层的胜率统计（calibration_service）；
+5. 下周财报日历：自选股美股标的未来 7 天内的财报日期。
 
 数据来源全部是已有模块（HistoryService / earnings_calendar_service /
 信号历史文件），本脚本只做组装。依赖历史数据库（workflow 中先恢复缓存）。
@@ -142,11 +145,35 @@ def build_earnings_section(today: date) -> Optional[str]:
     return "\n".join(lines)
 
 
+def build_paper_trading_section_safe(today: date) -> Optional[str]:
+    """AI 模拟盘净值段（fail-open）。"""
+    try:
+        from src.services.paper_trading_service import build_paper_trading_section
+
+        return build_paper_trading_section(today)
+    except Exception as exc:
+        print(f"模拟盘段生成失败（跳过）: {exc}")
+        return None
+
+
+def build_calibration_section_safe() -> Optional[str]:
+    """建议校准报告段（fail-open）。"""
+    try:
+        from src.services.calibration_service import build_calibration_report
+
+        return build_calibration_report()
+    except Exception as exc:
+        print(f"校准报告段生成失败（跳过）: {exc}")
+        return None
+
+
 def build_weekly_report(today: Optional[date] = None) -> Optional[str]:
     today = today or date.today()
     sections = [
         build_analysis_section(today),
         build_signal_section(today),
+        build_paper_trading_section_safe(today),
+        build_calibration_section_safe(),
         build_earnings_section(today),
     ]
     sections = [s for s in sections if s]

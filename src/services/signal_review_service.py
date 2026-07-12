@@ -98,6 +98,17 @@ def build_calibration_hint(code: str) -> Optional[str]:
         )
     if not parts:
         return None
+
+    # 分层校准补充（按该股所属市场 / 偏多类建议），fail-open
+    try:
+        from src.services.calibration_service import build_market_calibration_hint
+
+        layered = build_market_calibration_hint(code)
+        if layered:
+            parts.append(layered)
+    except Exception as e:
+        logger.debug("Layered calibration hint failed for %s: %s", code, e)
+
     return (
         "📈 历史校准（本系统过往建议的回测表现）: "
         + "；".join(parts)
