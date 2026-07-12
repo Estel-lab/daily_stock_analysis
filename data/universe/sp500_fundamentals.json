@@ -1,0 +1,5002 @@
+{
+  "NVDA": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 85.23,
+        "gm": 74.14,
+        "eps_beat": 5.54
+      }
+    }
+  },
+  "AAPL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 16.6,
+        "gm": 47.86,
+        "eps_beat": 3.46
+      }
+    }
+  },
+  "MSFT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 18.3,
+        "gm": 68.31,
+        "eps_beat": 5.22
+      }
+    }
+  },
+  "AMZN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 16.61,
+        "gm": 50.6,
+        "eps_beat": 69.02
+      }
+    }
+  },
+  "GOOGL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 21.79,
+        "gm": 60.37,
+        "eps_beat": 94.3
+      }
+    }
+  },
+  "GOOG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 21.79,
+        "gm": 60.37,
+        "eps_beat": 94.3
+      }
+    }
+  },
+  "AVGO": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 47.87,
+        "gm": 76.28,
+        "eps_beat": 1.74
+      }
+    }
+  },
+  "META": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 33.08,
+        "gm": 81.94,
+        "eps_beat": 7.2
+      }
+    }
+  },
+  "TSLA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 15.78,
+        "gm": 19.07,
+        "eps_beat": 17.15
+      }
+    }
+  },
+  "MU": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 345.72,
+        "gm": 72.57,
+        "eps_beat": 21.25
+      }
+    }
+  },
+  "BRK-B": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.54,
+        "gm": 27.78,
+        "eps_beat": 4.17
+      }
+    }
+  },
+  "LLY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 55.54,
+        "gm": 82.83,
+        "eps_beat": 25.9
+      }
+    }
+  },
+  "AMD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 37.85,
+        "gm": 53.06,
+        "eps_beat": 5.82
+      }
+    }
+  },
+  "WMT": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 7.33,
+        "gm": 24.98,
+        "eps_beat": 0.19
+      }
+    }
+  },
+  "JPM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.94,
+        "gm": 0.0,
+        "eps_beat": 7.78
+      }
+    }
+  },
+  "V": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 17.05,
+        "gm": 97.78,
+        "eps_beat": 6.79
+      }
+    }
+  },
+  "JNJ": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.91,
+        "gm": 68.03,
+        "eps_beat": 0.85
+      }
+    }
+  },
+  "XOM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.59,
+        "gm": 29.77,
+        "eps_beat": 15.14
+      }
+    }
+  },
+  "INTC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.18,
+        "gm": 37.2,
+        "eps_beat": 2108.68
+      }
+    }
+  },
+  "AMAT": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 11.41,
+        "gm": 48.96,
+        "eps_beat": 6.5
+      }
+    }
+  },
+  "CSCO": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 11.96,
+        "gm": 64.3,
+        "eps_beat": 2.29
+      }
+    }
+  },
+  "MA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 15.83,
+        "gm": 100.0,
+        "eps_beat": 4.23
+      }
+    }
+  },
+  "CAT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 22.22,
+        "gm": 28.6,
+        "eps_beat": 19.3
+      }
+    }
+  },
+  "ABBV": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 12.43,
+        "gm": 72.03,
+        "eps_beat": -0.77
+      }
+    }
+  },
+  "LRCX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 23.76,
+        "gm": 49.98,
+        "eps_beat": 7.87
+      }
+    }
+  },
+  "BAC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.17,
+        "gm": 0.0,
+        "eps_beat": 8.78
+      }
+    }
+  },
+  "COST": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 11.58,
+        "gm": 12.88,
+        "eps_beat": -0.85
+      }
+    }
+  },
+  "ORCL": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 20.63,
+        "gm": 65.82,
+        "eps_beat": 7.52
+      }
+    }
+  },
+  "UNH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 1.96,
+        "gm": 18.8,
+        "eps_beat": 9.52
+      }
+    }
+  },
+  "GE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 24.74,
+        "gm": 31.15,
+        "eps_beat": 16.31
+      }
+    }
+  },
+  "KO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 12.07,
+        "gm": 61.74,
+        "eps_beat": 5.88
+      }
+    }
+  },
+  "CVX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.16,
+        "gm": 42.42,
+        "eps_beat": 45.56
+      }
+    }
+  },
+  "MS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 16.99,
+        "gm": 87.39,
+        "eps_beat": 13.61
+      }
+    }
+  },
+  "PG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.38,
+        "gm": 50.98,
+        "eps_beat": 2.22
+      }
+    }
+  },
+  "HD": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 4.79,
+        "gm": 33.13,
+        "eps_beat": 0.69
+      }
+    }
+  },
+  "NFLX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 16.19,
+        "gm": 49.03,
+        "eps_beat": -6.93
+      }
+    }
+  },
+  "MRK": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.87,
+        "gm": 76.73,
+        "eps_beat": 13.15
+      }
+    }
+  },
+  "PLTR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 84.71,
+        "gm": 84.07,
+        "eps_beat": 18.08
+      }
+    }
+  },
+  "KLAC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.49,
+        "gm": 61.45,
+        "eps_beat": 2.5
+      }
+    }
+  },
+  "GEV": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 16.26,
+        "gm": 20.28,
+        "eps_beat": 20.38
+      }
+    }
+  },
+  "SNDK": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 251.03,
+        "gm": 56.04,
+        "eps_beat": 59.67
+      }
+    }
+  },
+  "TXN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 18.58,
+        "gm": 57.32,
+        "eps_beat": 22.76
+      }
+    }
+  },
+  "PM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.09,
+        "gm": 67.28,
+        "eps_beat": 7.07
+      }
+    }
+  },
+  "DELL": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 87.54,
+        "gm": 19.21,
+        "eps_beat": 63.99
+      }
+    }
+  },
+  "IBM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.46,
+        "gm": 58.36,
+        "eps_beat": 5.45
+      }
+    }
+  },
+  "WFC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.44,
+        "gm": 0.0,
+        "eps_beat": -2.67
+      }
+    }
+  },
+  "PANW": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 31.15,
+        "gm": 71.96,
+        "eps_beat": 6.62
+      }
+    }
+  },
+  "RTX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.72,
+        "gm": 20.21,
+        "eps_beat": 16.95
+      }
+    }
+  },
+  "LIN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.25,
+        "gm": 48.77,
+        "eps_beat": 1.4
+      }
+    }
+  },
+  "C": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.18,
+        "gm": 0.0,
+        "eps_beat": 17.91
+      }
+    }
+  },
+  "AXP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.44,
+        "gm": 62.76,
+        "eps_beat": 7.18
+      }
+    }
+  },
+  "ANET": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 35.13,
+        "gm": 63.54,
+        "eps_beat": 7.73
+      }
+    }
+  },
+  "MRVL": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 27.57,
+        "gm": 51.5,
+        "eps_beat": 0.64
+      }
+    }
+  },
+  "STX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 44.07,
+        "gm": 41.57,
+        "eps_beat": 16.76
+      }
+    }
+  },
+  "TMUS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.63,
+        "gm": 63.28,
+        "eps_beat": 31.07
+      }
+    }
+  },
+  "WDC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 45.47,
+        "gm": 45.43,
+        "eps_beat": 13.57
+      }
+    }
+  },
+  "QCOM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -3.46,
+        "gm": 54.8,
+        "eps_beat": 3.58
+      }
+    }
+  },
+  "AMGN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.76,
+        "gm": 71.44,
+        "eps_beat": 8.04
+      }
+    }
+  },
+  "TMO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.18,
+        "gm": 40.93,
+        "eps_beat": 3.79
+      }
+    }
+  },
+  "APH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 58.39,
+        "gm": 37.92,
+        "eps_beat": 11.96
+      }
+    }
+  },
+  "MCD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.44,
+        "gm": 57.35,
+        "eps_beat": 3.11
+      }
+    }
+  },
+  "ADI": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 37.25,
+        "gm": 64.49,
+        "eps_beat": 6.22
+      }
+    }
+  },
+  "CRWD": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 25.57,
+        "gm": 75.14,
+        "eps_beat": 3.05
+      }
+    }
+  },
+  "PEP": {
+    "quarters": {
+      "2026-06-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 6.4,
+        "gm": 54.17,
+        "eps_beat": -0.37
+      }
+    }
+  },
+  "NEE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.27,
+        "gm": 61.4,
+        "eps_beat": 5.67
+      }
+    }
+  },
+  "SCHW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 15.77,
+        "gm": 97.46,
+        "eps_beat": 2.48
+      }
+    }
+  },
+  "VZ": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.85,
+        "gm": 58.91,
+        "eps_beat": 5.81
+      }
+    }
+  },
+  "BA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 13.96,
+        "gm": 4.83,
+        "eps_beat": 70.26
+      }
+    }
+  },
+  "UNP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.15,
+        "gm": 56.53,
+        "eps_beat": 2.42
+      }
+    }
+  },
+  "APP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 58.97,
+        "gm": 88.37,
+        "eps_beat": 3.49
+      }
+    }
+  },
+  "TJX": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 9.24,
+        "gm": 31.35,
+        "eps_beat": 17.23
+      }
+    }
+  },
+  "DIS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.55,
+        "gm": 37.16,
+        "eps_beat": 4.98
+      }
+    }
+  },
+  "GLW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 20.05,
+        "gm": 36.38,
+        "eps_beat": 1.21
+      }
+    }
+  },
+  "ABT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.78,
+        "gm": 56.5,
+        "eps_beat": 0.33
+      }
+    }
+  },
+  "WELL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 38.4,
+        "gm": 39.87,
+        "eps_beat": 9.38
+      }
+    }
+  },
+  "GILD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.39,
+        "gm": 79.37,
+        "eps_beat": 6.24
+      }
+    }
+  },
+  "BLK": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 26.95,
+        "gm": 46.89,
+        "eps_beat": 9.35
+      }
+    }
+  },
+  "DE": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 4.53,
+        "gm": 25.96,
+        "eps_beat": 15.01
+      }
+    }
+  },
+  "ETN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 16.84,
+        "gm": 37.1,
+        "eps_beat": 2.9
+      }
+    }
+  },
+  "UBER": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.48,
+        "gm": 39.63,
+        "eps_beat": -81.74
+      }
+    }
+  },
+  "BX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.24,
+        "gm": 100.0,
+        "eps_beat": 1.69
+      }
+    }
+  },
+  "T": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.87,
+        "gm": 59.41,
+        "eps_beat": 3.42
+      }
+    }
+  },
+  "ISRG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 22.96,
+        "gm": 66.29,
+        "eps_beat": 18.67
+      }
+    }
+  },
+  "DHR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.66,
+        "gm": 58.99,
+        "eps_beat": 6.45
+      }
+    }
+  },
+  "BKNG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 16.17,
+        "gm": 86.99,
+        "eps_beat": 5.67
+      }
+    }
+  },
+  "PFE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.36,
+        "gm": 74.8,
+        "eps_beat": 3.93
+      }
+    }
+  },
+  "CB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.66,
+        "gm": 31.0,
+        "eps_beat": 3.16
+      }
+    }
+  },
+  "PGR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.71,
+        "gm": 18.56,
+        "eps_beat": 1.61
+      }
+    }
+  },
+  "CRM": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 13.27,
+        "gm": 77.64,
+        "eps_beat": 24.07
+      }
+    }
+  },
+  "CVS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.17,
+        "gm": 13.39,
+        "eps_beat": 16.48
+      }
+    }
+  },
+  "COP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -4.58,
+        "gm": 45.59,
+        "eps_beat": 11.55
+      }
+    }
+  },
+  "PLD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.39,
+        "gm": 75.6,
+        "eps_beat": 41.56
+      }
+    }
+  },
+  "SPGI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.43,
+        "gm": 70.47,
+        "eps_beat": 3.18
+      }
+    }
+  },
+  "SYK": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.63,
+        "gm": 64.7,
+        "eps_beat": -12.86
+      }
+    }
+  },
+  "COF": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 52.31,
+        "gm": 0.0,
+        "eps_beat": -3.34
+      }
+    }
+  },
+  "VRTX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.82,
+        "gm": 54.39,
+        "eps_beat": 3.81
+      }
+    }
+  },
+  "VRT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 30.13,
+        "gm": 37.15,
+        "eps_beat": 15.67
+      }
+    }
+  },
+  "PH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.6,
+        "gm": 37.44,
+        "eps_beat": 4.36
+      }
+    }
+  },
+  "SBUX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.79,
+        "gm": 21.9,
+        "eps_beat": 14.51
+      }
+    }
+  },
+  "LMT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 0.32,
+        "gm": 9.91,
+        "eps_beat": -3.78
+      }
+    }
+  },
+  "MO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.29,
+        "gm": 87.38,
+        "eps_beat": 5.92
+      }
+    }
+  },
+  "LOW": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 10.26,
+        "gm": 33.29,
+        "eps_beat": 2.12
+      }
+    }
+  },
+  "BMY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.57,
+        "gm": 71.98,
+        "eps_beat": 11.18
+      }
+    }
+  },
+  "FTNT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 20.13,
+        "gm": 80.3,
+        "eps_beat": 32.63
+      }
+    }
+  },
+  "NOW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 22.09,
+        "gm": 76.56,
+        "eps_beat": 0.39
+      }
+    }
+  },
+  "HWM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 19.1,
+        "gm": 35.05,
+        "eps_beat": 10.28
+      }
+    }
+  },
+  "SO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.0,
+        "gm": 48.0,
+        "eps_beat": 8.87
+      }
+    }
+  },
+  "MDT": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 9.86,
+        "gm": 65.31,
+        "eps_beat": 0.56
+      }
+    }
+  },
+  "TT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.99,
+        "gm": 35.92,
+        "eps_beat": 3.94
+      }
+    }
+  },
+  "CDNS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 18.66,
+        "gm": 86.08,
+        "eps_beat": 3.98
+      }
+    }
+  },
+  "BNY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 13.85,
+        "gm": 0.0,
+        "eps_beat": 16.54
+      }
+    }
+  },
+  "EQIX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.84,
+        "gm": 51.61,
+        "eps_beat": -3.8
+      }
+    }
+  },
+  "NEM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 45.85,
+        "gm": 67.36,
+        "eps_beat": 33.45
+      }
+    }
+  },
+  "GD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.29,
+        "gm": 15.24,
+        "eps_beat": 11.06
+      }
+    }
+  },
+  "PNC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 13.03,
+        "gm": 0.0,
+        "eps_beat": 4.64
+      }
+    }
+  },
+  "HOOD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 15.1,
+        "gm": 92.24,
+        "eps_beat": 8.63
+      }
+    }
+  },
+  "MAR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.24,
+        "gm": 79.04,
+        "eps_beat": 6.49
+      }
+    }
+  },
+  "PWR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 26.33,
+        "gm": 15.1,
+        "eps_beat": 31.8
+      }
+    }
+  },
+  "DUK": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.26,
+        "gm": 51.05,
+        "eps_beat": 7.24
+      }
+    }
+  },
+  "USB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.79,
+        "gm": 0.0,
+        "eps_beat": 3.41
+      }
+    }
+  },
+  "ADP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.95,
+        "gm": 48.5,
+        "eps_beat": 2.26
+      }
+    }
+  },
+  "UPS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -1.6,
+        "gm": 22.45,
+        "eps_beat": 4.84
+      }
+    }
+  },
+  "MNST": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 26.89,
+        "gm": 55.47,
+        "eps_beat": 10.16
+      }
+    }
+  },
+  "MCK": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.02,
+        "gm": 3.6,
+        "eps_beat": 1.06
+      }
+    }
+  },
+  "WM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.47,
+        "gm": 40.6,
+        "eps_beat": 3.98
+      }
+    }
+  },
+  "CMI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.74,
+        "gm": 25.85,
+        "eps_beat": 8.81
+      }
+    }
+  },
+  "CSX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 1.72,
+        "gm": 46.82,
+        "eps_beat": 10.6
+      }
+    }
+  },
+  "WMB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -0.59,
+        "gm": 63.51,
+        "eps_beat": 16.43
+      }
+    }
+  },
+  "DDOG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 32.15,
+        "gm": 79.91,
+        "eps_beat": 18.25
+      }
+    }
+  },
+  "ELV": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.64,
+        "gm": 25.89,
+        "eps_beat": 16.36
+      }
+    }
+  },
+  "HCA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.3,
+        "gm": 41.61,
+        "eps_beat": 0.29
+      }
+    }
+  },
+  "CEG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 63.85,
+        "gm": 23.26,
+        "eps_beat": 5.3
+      }
+    }
+  },
+  "ADBE": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 12.69,
+        "gm": 89.4,
+        "eps_beat": 2.5
+      }
+    }
+  },
+  "FCX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.83,
+        "gm": 38.64,
+        "eps_beat": 21.95
+      }
+    }
+  },
+  "ABNB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 17.87,
+        "gm": 82.91,
+        "eps_beat": -14.13
+      }
+    }
+  },
+  "JCI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.21,
+        "gm": 36.56,
+        "eps_beat": 6.46
+      }
+    }
+  },
+  "KKR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 39.22,
+        "gm": 55.54,
+        "eps_beat": 10.28
+      }
+    }
+  },
+  "CME": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.48,
+        "gm": 100.0,
+        "eps_beat": -0.25
+      }
+    }
+  },
+  "MRSH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.59,
+        "gm": 43.85,
+        "eps_beat": 2.14
+      }
+    }
+  },
+  "SNPS": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 41.87,
+        "gm": 82.6,
+        "eps_beat": 5.95
+      }
+    }
+  },
+  "MCO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.06,
+        "gm": 74.43,
+        "eps_beat": 2.58
+      }
+    }
+  },
+  "CMCSA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.25,
+        "gm": 70.13,
+        "eps_beat": 8.29
+      }
+    }
+  },
+  "DASH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 33.11,
+        "gm": 51.76,
+        "eps_beat": 7.71
+      }
+    }
+  },
+  "VLO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.02,
+        "gm": 14.56,
+        "eps_beat": 33.47
+      }
+    }
+  },
+  "MPC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.51,
+        "gm": 10.74,
+        "eps_beat": 120.63
+      }
+    }
+  },
+  "ACN": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 5.59,
+        "gm": 32.01,
+        "eps_beat": 2.46
+      }
+    }
+  },
+  "SHW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.81,
+        "gm": 49.04,
+        "eps_beat": 3.56
+      }
+    }
+  },
+  "MMM": {
+    "quarters": {
+      "2026-07-12": {
+        "label": "Q3 2026",
+        "rev_yoy": 1.3,
+        "gm": 39.71,
+        "eps_beat": 7.88
+      }
+    }
+  },
+  "AMT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.82,
+        "gm": 73.96,
+        "eps_beat": 17.04
+      }
+    }
+  },
+  "EMR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.93,
+        "gm": 52.67,
+        "eps_beat": 0.44
+      }
+    }
+  },
+  "CI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.64,
+        "gm": 9.15,
+        "eps_beat": 2.41
+      }
+    }
+  },
+  "ITW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.61,
+        "gm": 44.12,
+        "eps_beat": 3.76
+      }
+    }
+  },
+  "ECL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.04,
+        "gm": 44.37,
+        "eps_beat": 0.17
+      }
+    }
+  },
+  "NOC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.36,
+        "gm": 20.52,
+        "eps_beat": 1.28
+      }
+    }
+  },
+  "RCL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.33,
+        "gm": 50.91,
+        "eps_beat": 12.59
+      }
+    }
+  },
+  "ICE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 13.53,
+        "gm": 100.0,
+        "eps_beat": 3.86
+      }
+    }
+  },
+  "HLT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.98,
+        "gm": 78.5,
+        "eps_beat": 1.78
+      }
+    }
+  },
+  "AON": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.45,
+        "gm": 47.34,
+        "eps_beat": 1.97
+      }
+    }
+  },
+  "PSX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.93,
+        "gm": 12.52,
+        "eps_beat": 225.68
+      }
+    }
+  },
+  "MDLZ": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.24,
+        "gm": 28.77,
+        "eps_beat": 10.22
+      }
+    }
+  },
+  "INTU": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 10.37,
+        "gm": 80.79,
+        "eps_beat": 1.84
+      }
+    }
+  },
+  "FDX": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 12.5,
+        "gm": 27.32,
+        "eps_beat": 6.53
+      }
+    }
+  },
+  "CL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.41,
+        "gm": 60.06,
+        "eps_beat": 2.7
+      }
+    }
+  },
+  "NXPI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 12.2,
+        "gm": 55.63,
+        "eps_beat": 2.2
+      }
+    }
+  },
+  "AEP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.2,
+        "gm": 47.24,
+        "eps_beat": 4.61
+      }
+    }
+  },
+  "NSC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 0.17,
+        "gm": 45.85,
+        "eps_beat": 6.28
+      }
+    }
+  },
+  "TDG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 18.33,
+        "gm": 59.72,
+        "eps_beat": 4.03
+      }
+    }
+  },
+  "TRV": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 0.97,
+        "gm": 32.88,
+        "eps_beat": 8.93
+      }
+    }
+  },
+  "CTAS": {
+    "quarters": {
+      "2026-02-28": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.9,
+        "gm": 50.36,
+        "eps_beat": 0.06
+      }
+    }
+  },
+  "HON": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.44,
+        "gm": 36.92,
+        "eps_beat": 5.55
+      }
+    }
+  },
+  "ORLY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.24,
+        "gm": 51.63,
+        "eps_beat": 3.35
+      }
+    }
+  },
+  "ROST": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 20.57,
+        "gm": 32.74,
+        "eps_beat": 16.67
+      }
+    }
+  },
+  "KMI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 13.84,
+        "gm": 49.45,
+        "eps_beat": 22.1
+      }
+    }
+  },
+  "EOG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 15.68,
+        "gm": 61.99,
+        "eps_beat": 6.22
+      }
+    }
+  },
+  "SLB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.72,
+        "gm": 17.8,
+        "eps_beat": 1.13
+      }
+    }
+  },
+  "SPG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 19.29,
+        "gm": 81.58,
+        "eps_beat": -17.98
+      }
+    }
+  },
+  "MSI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.36,
+        "gm": 51.51,
+        "eps_beat": 3.83
+      }
+    }
+  },
+  "GM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -0.9,
+        "gm": 11.14,
+        "eps_beat": 40.19
+      }
+    }
+  },
+  "CRH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.09,
+        "gm": 36.09,
+        "eps_beat": 8.1
+      }
+    }
+  },
+  "HONA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.8,
+        "gm": 34.89,
+        "eps_beat": 0.0
+      }
+    }
+  },
+  "REGN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 19.04,
+        "gm": 43.88,
+        "eps_beat": 6.38
+      }
+    }
+  },
+  "APO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -8.98,
+        "gm": 35.22,
+        "eps_beat": 2.92
+      }
+    }
+  },
+  "URI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.15,
+        "gm": 38.39,
+        "eps_beat": 8.63
+      }
+    }
+  },
+  "RSG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.59,
+        "gm": 43.05,
+        "eps_beat": 3.77
+      }
+    }
+  },
+  "DLR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 16.16,
+        "gm": 55.34,
+        "eps_beat": 2.71
+      }
+    }
+  },
+  "APD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.76,
+        "gm": 31.98,
+        "eps_beat": 4.54
+      }
+    }
+  },
+  "WBD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -0.96,
+        "gm": 45.75,
+        "eps_beat": -1110.3
+      }
+    }
+  },
+  "BSX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.58,
+        "gm": 68.94,
+        "eps_beat": 1.62
+      }
+    }
+  },
+  "MPWR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 26.14,
+        "gm": 55.17,
+        "eps_beat": 4.05
+      }
+    }
+  },
+  "NKE": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": -1.1,
+        "gm": 42.91,
+        "eps_beat": 466.13
+      }
+    }
+  },
+  "PCAR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -8.94,
+        "gm": 13.58,
+        "eps_beat": -0.87
+      }
+    }
+  },
+  "CIEN": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 39.51,
+        "gm": 43.05,
+        "eps_beat": 12.34
+      }
+    }
+  },
+  "AJG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 27.66,
+        "gm": 42.93,
+        "eps_beat": 0.98
+      }
+    }
+  },
+  "GWW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.13,
+        "gm": 39.15,
+        "eps_beat": 14.08
+      }
+    }
+  },
+  "ALL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.0,
+        "gm": 34.43,
+        "eps_beat": 47.01
+      }
+    }
+  },
+  "TFC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.16,
+        "gm": 0.0,
+        "eps_beat": 9.4
+      }
+    }
+  },
+  "HPE": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 40.0,
+        "gm": 33.78,
+        "eps_beat": 48.03
+      }
+    }
+  },
+  "COHR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 20.55,
+        "gm": 36.99,
+        "eps_beat": 1.12
+      }
+    }
+  },
+  "LITE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 90.12,
+        "gm": 40.84,
+        "eps_beat": 4.62
+      }
+    }
+  },
+  "AFL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 27.66,
+        "gm": 50.05,
+        "eps_beat": -2.55
+      }
+    }
+  },
+  "FIX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 56.47,
+        "gm": 25.13,
+        "eps_beat": 54.44
+      }
+    }
+  },
+  "D": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 23.14,
+        "gm": 47.26,
+        "eps_beat": 4.37
+      }
+    }
+  },
+  "SRE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -3.87,
+        "gm": 42.46,
+        "eps_beat": -0.29
+      }
+    }
+  },
+  "TGT": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 6.7,
+        "gm": 28.14,
+        "eps_beat": 17.31
+      }
+    }
+  },
+  "COR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.85,
+        "gm": 3.8,
+        "eps_beat": 0.48
+      }
+    }
+  },
+  "O": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.16,
+        "gm": 92.6,
+        "eps_beat": -17.72
+      }
+    }
+  },
+  "MET": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 1.79,
+        "gm": 23.75,
+        "eps_beat": 6.65
+      }
+    }
+  },
+  "TRGP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -10.23,
+        "gm": 41.77,
+        "eps_beat": 7.4
+      }
+    }
+  },
+  "TEL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.51,
+        "gm": 36.07,
+        "eps_beat": 1.13
+      }
+    }
+  },
+  "CARR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.36,
+        "gm": 25.18,
+        "eps_beat": 12.03
+      }
+    }
+  },
+  "DAL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 12.92,
+        "gm": 18.7,
+        "eps_beat": 4.63
+      }
+    }
+  },
+  "CTVA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.05,
+        "gm": 48.56,
+        "eps_beat": 27.11
+      }
+    }
+  },
+  "BKR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.49,
+        "gm": 23.64,
+        "eps_beat": 17.94
+      }
+    }
+  },
+  "OKE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 19.58,
+        "gm": 29.64,
+        "eps_beat": 0.14
+      }
+    }
+  },
+  "TER": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 87.04,
+        "gm": 58.7,
+        "eps_beat": 20.93
+      }
+    }
+  },
+  "PSA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.92,
+        "gm": 74.77,
+        "eps_beat": 2.19
+      }
+    }
+  },
+  "F": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.38,
+        "gm": 7.06,
+        "eps_beat": 256.64
+      }
+    }
+  },
+  "CAH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.05,
+        "gm": 3.75,
+        "eps_beat": 13.7
+      }
+    }
+  },
+  "KEYS": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 31.47,
+        "gm": 62.14,
+        "eps_beat": 23.69
+      }
+    }
+  },
+  "LHX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.93,
+        "gm": 30.41,
+        "eps_beat": 12.99
+      }
+    }
+  },
+  "ETR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.97,
+        "gm": 46.98,
+        "eps_beat": 2.26
+      }
+    }
+  },
+  "AME": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.34,
+        "gm": 36.68,
+        "eps_beat": 3.56
+      }
+    }
+  },
+  "VST": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 43.4,
+        "gm": 38.64,
+        "eps_beat": -10.05
+      }
+    }
+  },
+  "FAST": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 12.37,
+        "gm": 44.89,
+        "eps_beat": 0.68
+      }
+    }
+  },
+  "EW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 16.7,
+        "gm": 77.87,
+        "eps_beat": 7.33
+      }
+    }
+  },
+  "OXY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -8.31,
+        "gm": 69.76,
+        "eps_beat": 80.35
+      }
+    }
+  },
+  "ROK": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.89,
+        "gm": 48.92,
+        "eps_beat": 14.55
+      }
+    }
+  },
+  "EBAY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 19.5,
+        "gm": 71.79,
+        "eps_beat": 5.03
+      }
+    }
+  },
+  "NUE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 21.28,
+        "gm": 14.06,
+        "eps_beat": 14.67
+      }
+    }
+  },
+  "EA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.87,
+        "gm": 78.97,
+        "eps_beat": -32.35
+      }
+    }
+  },
+  "FITB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 31.37,
+        "gm": 0.0,
+        "eps_beat": -32.16
+      }
+    }
+  },
+  "FANG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.44,
+        "gm": 72.25,
+        "eps_beat": 12.78
+      }
+    }
+  },
+  "AZO": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 8.44,
+        "gm": 51.75,
+        "eps_beat": 5.26
+      }
+    }
+  },
+  "XEL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.94,
+        "gm": 45.93,
+        "eps_beat": 0.23
+      }
+    }
+  },
+  "STT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 15.59,
+        "gm": 0.0,
+        "eps_beat": 7.46
+      }
+    }
+  },
+  "NDAQ": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 1.96,
+        "gm": 100.0,
+        "eps_beat": 2.84
+      }
+    }
+  },
+  "FLEX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 16.86,
+        "gm": 9.41,
+        "eps_beat": 6.07
+      }
+    }
+  },
+  "DVN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -14.49,
+        "gm": 46.93,
+        "eps_beat": -4.91
+      }
+    }
+  },
+  "MCHP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 35.11,
+        "gm": 57.73,
+        "eps_beat": 12.93
+      }
+    }
+  },
+  "EXC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.86,
+        "gm": 42.64,
+        "eps_beat": 2.6
+      }
+    }
+  },
+  "ODFL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -2.92,
+        "gm": 38.95,
+        "eps_beat": 8.46
+      }
+    }
+  },
+  "CVNA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 51.98,
+        "gm": 20.13,
+        "eps_beat": 6.16
+      }
+    }
+  },
+  "HUM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 23.47,
+        "gm": 14.01,
+        "eps_beat": 1.05
+      }
+    }
+  },
+  "GRMN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.23,
+        "gm": 59.14,
+        "eps_beat": 13.14
+      }
+    }
+  },
+  "XYZ": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.94,
+        "gm": 45.08,
+        "eps_beat": 25.55
+      }
+    }
+  },
+  "AXON": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 33.75,
+        "gm": 59.46,
+        "eps_beat": 0.8
+      }
+    }
+  },
+  "AMP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.52,
+        "gm": 56.6,
+        "eps_beat": 10.25
+      }
+    }
+  },
+  "CMG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.41,
+        "gm": 39.65,
+        "eps_beat": 1.4
+      }
+    }
+  },
+  "TTWO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.15,
+        "gm": 57.67,
+        "eps_beat": 43.47
+      }
+    }
+  },
+  "YUM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 15.22,
+        "gm": 45.66,
+        "eps_beat": 7.95
+      }
+    }
+  },
+  "IDXX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.26,
+        "gm": 62.05,
+        "eps_beat": 1.74
+      }
+    }
+  },
+  "WAB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 13.03,
+        "gm": 35.24,
+        "eps_beat": 7.55
+      }
+    }
+  },
+  "VTR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 22.01,
+        "gm": 40.49,
+        "eps_beat": -1.4
+      }
+    }
+  },
+  "MSCI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.08,
+        "gm": 82.86,
+        "eps_beat": 2.13
+      }
+    }
+  },
+  "ADSK": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 18.43,
+        "gm": 92.43,
+        "eps_beat": 5.15
+      }
+    }
+  },
+  "KDP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.38,
+        "gm": 53.78,
+        "eps_beat": 4.25
+      }
+    }
+  },
+  "DHI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -2.27,
+        "gm": 21.6,
+        "eps_beat": 5.57
+      }
+    }
+  },
+  "AIG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -2.33,
+        "gm": 35.53,
+        "eps_beat": 11.96
+      }
+    }
+  },
+  "IBKR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.55,
+        "gm": 93.02,
+        "eps_beat": 0.1
+      }
+    }
+  },
+  "COIN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -30.54,
+        "gm": 85.47,
+        "eps_beat": -3458.88
+      }
+    }
+  },
+  "BDX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.22,
+        "gm": 47.09,
+        "eps_beat": 4.51
+      }
+    }
+  },
+  "LYV": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 12.15,
+        "gm": 25.87,
+        "eps_beat": -485.68
+      }
+    }
+  },
+  "ED": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.19,
+        "gm": 53.19,
+        "eps_beat": -3.83
+      }
+    }
+  },
+  "UAL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.57,
+        "gm": 33.8,
+        "eps_beat": 9.98
+      }
+    }
+  },
+  "PYPL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.21,
+        "gm": 40.93,
+        "eps_beat": 5.59
+      }
+    }
+  },
+  "CBRE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 18.61,
+        "gm": 18.5,
+        "eps_beat": 42.05
+      }
+    }
+  },
+  "PEG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 19.43,
+        "gm": 35.36,
+        "eps_beat": 8.48
+      }
+    }
+  },
+  "SYY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.7,
+        "gm": 18.54,
+        "eps_beat": -0.39
+      }
+    }
+  },
+  "PRU": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.84,
+        "gm": 28.96,
+        "eps_beat": 16.48
+      }
+    }
+  },
+  "ADM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 1.56,
+        "gm": 6.3,
+        "eps_beat": 7.8
+      }
+    }
+  },
+  "VMC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.42,
+        "gm": 27.68,
+        "eps_beat": 22.32
+      }
+    }
+  },
+  "PAYX": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 12.5,
+        "gm": 67.2,
+        "eps_beat": 0.91
+      }
+    }
+  },
+  "HIG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.61,
+        "gm": 38.17,
+        "eps_beat": -8.83
+      }
+    }
+  },
+  "A": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 10.01,
+        "gm": 52.64,
+        "eps_beat": 5.8
+      }
+    }
+  },
+  "PCG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 15.01,
+        "gm": 39.35,
+        "eps_beat": 8.83
+      }
+    }
+  },
+  "WEC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.04,
+        "gm": 41.76,
+        "eps_beat": 6.49
+      }
+    }
+  },
+  "KVUE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.49,
+        "gm": 58.6,
+        "eps_beat": 23.03
+      }
+    }
+  },
+  "ON": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.68,
+        "gm": 42.66,
+        "eps_beat": 4.06
+      }
+    }
+  },
+  "KMB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.69,
+        "gm": 37.15,
+        "eps_beat": 2.24
+      }
+    }
+  },
+  "KR": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 2.22,
+        "gm": 23.98,
+        "eps_beat": -0.83
+      }
+    }
+  },
+  "WAT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 91.39,
+        "gm": 55.15,
+        "eps_beat": 16.99
+      }
+    }
+  },
+  "CCL": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 5.29,
+        "gm": 55.68,
+        "eps_beat": 21.08
+      }
+    }
+  },
+  "HBAN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 34.01,
+        "gm": 0.0,
+        "eps_beat": 4.99
+      }
+    }
+  },
+  "IRM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 21.58,
+        "gm": 55.02,
+        "eps_beat": 15.76
+      }
+    }
+  },
+  "ROP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.29,
+        "gm": 69.4,
+        "eps_beat": 3.49
+      }
+    }
+  },
+  "MTB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.42,
+        "gm": 0.0,
+        "eps_beat": 2.65
+      }
+    }
+  },
+  "ACGL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -4.7,
+        "gm": 39.37,
+        "eps_beat": 1.47
+      }
+    }
+  },
+  "HSY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.65,
+        "gm": 35.03,
+        "eps_beat": 14.7
+      }
+    }
+  },
+  "CCI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -4.81,
+        "gm": 73.82,
+        "eps_beat": 6.18
+      }
+    }
+  },
+  "EME": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 19.67,
+        "gm": 19.29,
+        "eps_beat": 15.85
+      }
+    }
+  },
+  "IQV": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.41,
+        "gm": 32.99,
+        "eps_beat": 2.96
+      }
+    }
+  },
+  "MLM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 17.21,
+        "gm": 29.75,
+        "eps_beat": 5.28
+      }
+    }
+  },
+  "JBL": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 11.79,
+        "gm": 9.23,
+        "eps_beat": 1.35
+      }
+    }
+  },
+  "WDAY": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 13.48,
+        "gm": 75.77,
+        "eps_beat": 5.68
+      }
+    }
+  },
+  "NTRS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 13.7,
+        "gm": 0.0,
+        "eps_beat": 16.14
+      }
+    }
+  },
+  "CNC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.13,
+        "gm": 10.56,
+        "eps_beat": 57.91
+      }
+    }
+  },
+  "NTAP": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 12.47,
+        "gm": 70.74,
+        "eps_beat": 7.22
+      }
+    }
+  },
+  "STLD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 19.13,
+        "gm": 14.04,
+        "eps_beat": -0.19
+      }
+    }
+  },
+  "RJF": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 13.35,
+        "gm": 93.03,
+        "eps_beat": 0.54
+      }
+    }
+  },
+  "EXPE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.66,
+        "gm": 90.27,
+        "eps_beat": 42.34
+      }
+    }
+  },
+  "ZTS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.91,
+        "gm": 71.84,
+        "eps_beat": -5.28
+      }
+    }
+  },
+  "DTE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 15.79,
+        "gm": 28.69,
+        "eps_beat": -4.14
+      }
+    }
+  },
+  "AEE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.77,
+        "gm": 50.45,
+        "eps_beat": 8.16
+      }
+    }
+  },
+  "LVS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 25.26,
+        "gm": 80.09,
+        "eps_beat": 20.05
+      }
+    }
+  },
+  "VEEV": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 16.32,
+        "gm": 75.02,
+        "eps_beat": 4.91
+      }
+    }
+  },
+  "IR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.6,
+        "gm": 43.22,
+        "eps_beat": 4.03
+      }
+    }
+  },
+  "EQT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 49.54,
+        "gm": 80.97,
+        "eps_beat": 11.22
+      }
+    }
+  },
+  "EXR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.39,
+        "gm": 74.83,
+        "eps_beat": 3.4
+      }
+    }
+  },
+  "CASY": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 14.5,
+        "gm": 24.61,
+        "eps_beat": 32.11
+      }
+    }
+  },
+  "Q": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 17.62,
+        "gm": 46.09,
+        "eps_beat": 17.39
+      }
+    }
+  },
+  "EL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.56,
+        "gm": 74.65,
+        "eps_beat": 40.2
+      }
+    }
+  },
+  "CFG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 12.04,
+        "gm": 0.0,
+        "eps_beat": 3.73
+      }
+    }
+  },
+  "NRG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 19.46,
+        "gm": 16.45,
+        "eps_beat": -14.04
+      }
+    }
+  },
+  "RMD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.81,
+        "gm": 62.18,
+        "eps_beat": 2.15
+      }
+    }
+  },
+  "KHC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 0.8,
+        "gm": 33.97,
+        "eps_beat": 15.38
+      }
+    }
+  },
+  "GEHC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.41,
+        "gm": 39.14,
+        "eps_beat": -5.71
+      }
+    }
+  },
+  "ATO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 0.61,
+        "gm": 60.99,
+        "eps_beat": 1.84
+      }
+    }
+  },
+  "BIIB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 1.93,
+        "gm": 78.72,
+        "eps_beat": 23.61
+      }
+    }
+  },
+  "TDY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.6,
+        "gm": 42.87,
+        "eps_beat": 0.0
+      }
+    }
+  },
+  "FICO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 38.69,
+        "gm": 84.17,
+        "eps_beat": 13.91
+      }
+    }
+  },
+  "DOV": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.05,
+        "gm": 40.04,
+        "eps_beat": 0.42
+      }
+    }
+  },
+  "EIX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.66,
+        "gm": 58.68,
+        "eps_beat": 7.42
+      }
+    }
+  },
+  "DXCM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 15.05,
+        "gm": 61.5,
+        "eps_beat": 18.99
+      }
+    }
+  },
+  "XYL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.71,
+        "gm": 38.61,
+        "eps_beat": 3.3
+      }
+    }
+  },
+  "HAL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -0.28,
+        "gm": 15.28,
+        "eps_beat": 10.42
+      }
+    }
+  },
+  "VICI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.49,
+        "gm": 99.14,
+        "eps_beat": 15.01
+      }
+    }
+  },
+  "CNP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 1.88,
+        "gm": 45.92,
+        "eps_beat": 1.1
+      }
+    }
+  },
+  "TPR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 21.2,
+        "gm": 76.18,
+        "eps_beat": 27.77
+      }
+    }
+  },
+  "ES": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.37,
+        "gm": 53.49,
+        "eps_beat": 6.21
+      }
+    }
+  },
+  "CBOE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.51,
+        "gm": 54.11,
+        "eps_beat": 9.66
+      }
+    }
+  },
+  "OTIS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.45,
+        "gm": 30.55,
+        "eps_beat": -0.85
+      }
+    }
+  },
+  "CINF": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.57,
+        "gm": 27.94,
+        "eps_beat": 8.24
+      }
+    }
+  },
+  "FE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.61,
+        "gm": 68.42,
+        "eps_beat": 0.63
+      }
+    }
+  },
+  "ARES": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 28.25,
+        "gm": 37.56,
+        "eps_beat": -6.57
+      }
+    }
+  },
+  "TPL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 20.84,
+        "gm": 93.24,
+        "eps_beat": 2.47
+      }
+    }
+  },
+  "WTW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.5,
+        "gm": 42.41,
+        "eps_beat": 1.8
+      }
+    }
+  },
+  "AVB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.27,
+        "gm": 62.73,
+        "eps_beat": -10.55
+      }
+    }
+  },
+  "MRNA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 263.55,
+        "gm": -69.89,
+        "eps_beat": 70.18
+      }
+    }
+  },
+  "PPL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.78,
+        "gm": 43.29,
+        "eps_beat": 2.08
+      }
+    }
+  },
+  "WRB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.08,
+        "gm": 43.65,
+        "eps_beat": 14.13
+      }
+    }
+  },
+  "RF": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.99,
+        "gm": 0.0,
+        "eps_beat": 4.36
+      }
+    }
+  },
+  "JBHT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.62,
+        "gm": 18.86,
+        "eps_beat": 3.09
+      }
+    }
+  },
+  "DG": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 3.36,
+        "gm": 30.83,
+        "eps_beat": 6.22
+      }
+    }
+  },
+  "MTD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.17,
+        "gm": 59.19,
+        "eps_beat": 2.33
+      }
+    }
+  },
+  "WSM": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 4.35,
+        "gm": 46.06,
+        "eps_beat": 7.34
+      }
+    }
+  },
+  "PPG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.68,
+        "gm": 41.69,
+        "eps_beat": 3.65
+      }
+    }
+  },
+  "HUBB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.1,
+        "gm": 35.69,
+        "eps_beat": 1.68
+      }
+    }
+  },
+  "EQR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.5,
+        "gm": 62.77,
+        "eps_beat": -20.08
+      }
+    }
+  },
+  "AWK": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.69,
+        "gm": 60.83,
+        "eps_beat": -7.4
+      }
+    }
+  },
+  "CPRT": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 2.09,
+        "gm": 47.52,
+        "eps_beat": 5.71
+      }
+    }
+  },
+  "TROW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.28,
+        "gm": 52.0,
+        "eps_beat": 7.39
+      }
+    }
+  },
+  "KEY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.73,
+        "gm": 0.0,
+        "eps_beat": 8.02
+      }
+    }
+  },
+  "WST": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 21.05,
+        "gm": 36.28,
+        "eps_beat": 27.07
+      }
+    }
+  },
+  "VRSN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.61,
+        "gm": 88.35,
+        "eps_beat": 3.05
+      }
+    }
+  },
+  "FSLR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 23.64,
+        "gm": 41.74,
+        "eps_beat": 8.95
+      }
+    }
+  },
+  "SYF": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -0.54,
+        "gm": 0.0,
+        "eps_beat": 5.09
+      }
+    }
+  },
+  "VRSK": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.93,
+        "gm": 69.98,
+        "eps_beat": 4.67
+      }
+    }
+  },
+  "FFIV": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.02,
+        "gm": 81.54,
+        "eps_beat": 12.86
+      }
+    }
+  },
+  "PFG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -4.51,
+        "gm": 47.61,
+        "eps_beat": 2.94
+      }
+    }
+  },
+  "DLTR": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 7.24,
+        "gm": 36.99,
+        "eps_beat": 12.89
+      }
+    }
+  },
+  "PHM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -12.44,
+        "gm": 26.1,
+        "eps_beat": -1.15
+      }
+    }
+  },
+  "LUV": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 12.77,
+        "gm": 23.01,
+        "eps_beat": -5.03
+      }
+    }
+  },
+  "L": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 1.4,
+        "gm": 36.04,
+        "eps_beat": 52.52
+      }
+    }
+  },
+  "RL": {
+    "quarters": {
+      "2026-07-12": {
+        "label": "Q3 2026",
+        "rev_yoy": 16.6,
+        "gm": 69.86,
+        "eps_beat": 10.07
+      }
+    }
+  },
+  "DRI": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 13.7,
+        "gm": 21.67,
+        "eps_beat": 0.64
+      }
+    }
+  },
+  "OMC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 69.17,
+        "gm": 18.43,
+        "eps_beat": 3.13
+      }
+    }
+  },
+  "INCY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 20.87,
+        "gm": 52.77,
+        "eps_beat": 35.12
+      }
+    }
+  },
+  "CMS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.57,
+        "gm": 40.55,
+        "eps_beat": 2.71
+      }
+    }
+  },
+  "SW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 0.73,
+        "gm": 19.03,
+        "eps_beat": -17.35
+      }
+    }
+  },
+  "CPAY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 25.39,
+        "gm": 79.72,
+        "eps_beat": 6.03
+      }
+    }
+  },
+  "DGX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.16,
+        "gm": 33.28,
+        "eps_beat": 5.61
+      }
+    }
+  },
+  "BRO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 35.74,
+        "gm": 53.37,
+        "eps_beat": 2.3
+      }
+    }
+  },
+  "STZ": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": -3.27,
+        "gm": 52.72,
+        "eps_beat": 7.13
+      }
+    }
+  },
+  "CHD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 0.15,
+        "gm": 45.47,
+        "eps_beat": 2.23
+      }
+    }
+  },
+  "CHRW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -0.84,
+        "gm": 8.57,
+        "eps_beat": 9.64
+      }
+    }
+  },
+  "VLTO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.76,
+        "gm": 59.86,
+        "eps_beat": 6.41
+      }
+    }
+  },
+  "LH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.75,
+        "gm": 28.83,
+        "eps_beat": 3.26
+      }
+    }
+  },
+  "EXPD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.37,
+        "gm": 13.62,
+        "eps_beat": 27.77
+      }
+    }
+  },
+  "NI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.24,
+        "gm": 50.7,
+        "eps_beat": 1.36
+      }
+    }
+  },
+  "FDXF": {
+    "quarters": {
+      "2025-11-30": {
+        "label": "Q4 2025",
+        "rev_yoy": -4.7,
+        "gm": 29.68,
+        "eps_beat": 0.0
+      }
+    }
+  },
+  "BG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 87.76,
+        "gm": 4.44,
+        "eps_beat": 109.39
+      }
+    }
+  },
+  "HPQ": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 8.99,
+        "gm": 20.32,
+        "eps_beat": 20.26
+      }
+    }
+  },
+  "FIS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 30.13,
+        "gm": 36.28,
+        "eps_beat": 5.68
+      }
+    }
+  },
+  "ROL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.2,
+        "gm": 52.6,
+        "eps_beat": 1.32
+      }
+    }
+  },
+  "STE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.29,
+        "gm": 44.24,
+        "eps_beat": -0.65
+      }
+    }
+  },
+  "DOW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -6.11,
+        "gm": 6.25,
+        "eps_beat": 51.7
+      }
+    }
+  },
+  "EXE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 100.27,
+        "gm": 47.95,
+        "eps_beat": 5.37
+      }
+    }
+  },
+  "SNA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.24,
+        "gm": 51.62,
+        "eps_beat": -1.16
+      }
+    }
+  },
+  "GPN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 63.14,
+        "gm": 67.4,
+        "eps_beat": 5.43
+      }
+    }
+  },
+  "PKG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.59,
+        "gm": 21.75,
+        "eps_beat": 12.54
+      }
+    }
+  },
+  "TSN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.43,
+        "gm": 6.38,
+        "eps_beat": 11.6
+      }
+    }
+  },
+  "LEN": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": -5.22,
+        "gm": 16.36,
+        "eps_beat": 6.15
+      }
+    }
+  },
+  "ULTA": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 11.08,
+        "gm": 43.19,
+        "eps_beat": 12.28
+      }
+    }
+  },
+  "SBAC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.9,
+        "gm": 74.19,
+        "eps_beat": -0.28
+      }
+    }
+  },
+  "CTSH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.83,
+        "gm": 33.51,
+        "eps_beat": 4.98
+      }
+    }
+  },
+  "IP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 13.43,
+        "gm": 29.69,
+        "eps_beat": 5.41
+      }
+    }
+  },
+  "AMCR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 77.44,
+        "gm": 19.14,
+        "eps_beat": 0.55
+      }
+    }
+  },
+  "EFX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.35,
+        "gm": 56.12,
+        "eps_beat": 9.7
+      }
+    }
+  },
+  "IFF": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -3.59,
+        "gm": 36.35,
+        "eps_beat": 16.51
+      }
+    }
+  },
+  "EVRG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.03,
+        "gm": 52.33,
+        "eps_beat": 13.81
+      }
+    }
+  },
+  "LNT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.96,
+        "gm": 45.22,
+        "eps_beat": 2.85
+      }
+    }
+  },
+  "GIS": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 1.17,
+        "gm": 33.73,
+        "eps_beat": 19.21
+      }
+    }
+  },
+  "LII": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.83,
+        "gm": 33.19,
+        "eps_beat": 5.28
+      }
+    }
+  },
+  "FTV": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.68,
+        "gm": 63.26,
+        "eps_beat": 8.89
+      }
+    }
+  },
+  "VTRS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.07,
+        "gm": 39.82,
+        "eps_beat": 17.54
+      }
+    }
+  },
+  "ESS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.34,
+        "gm": 68.88,
+        "eps_beat": 15.55
+      }
+    }
+  },
+  "CDW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.25,
+        "gm": 21.57,
+        "eps_beat": -0.26
+      }
+    }
+  },
+  "AKAM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.76,
+        "gm": 58.28,
+        "eps_beat": 0.35
+      }
+    }
+  },
+  "SMCI": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 122.68,
+        "gm": 8.39,
+        "eps_beat": 34.51
+      }
+    }
+  },
+  "LYB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -6.25,
+        "gm": 9.23,
+        "eps_beat": 76.13
+      }
+    }
+  },
+  "DD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.28,
+        "gm": 35.01,
+        "eps_beat": 13.58
+      }
+    }
+  },
+  "CF": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 19.42,
+        "gm": 39.12,
+        "eps_beat": 8.66
+      }
+    }
+  },
+  "ZBH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.3,
+        "gm": 70.18,
+        "eps_beat": 12.21
+      }
+    }
+  },
+  "INVH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.84,
+        "gm": 57.18,
+        "eps_beat": -14.31
+      }
+    }
+  },
+  "NVR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -21.69,
+        "gm": 22.49,
+        "eps_beat": -14.44
+      }
+    }
+  },
+  "BBY": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 1.93,
+        "gm": 22.52,
+        "eps_beat": 4.32
+      }
+    }
+  },
+  "BEN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.69,
+        "gm": 37.36,
+        "eps_beat": 28.64
+      }
+    }
+  },
+  "GPC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.8,
+        "gm": 37.52,
+        "eps_beat": 1.26
+      }
+    }
+  },
+  "BR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.83,
+        "gm": 31.31,
+        "eps_beat": 4.45
+      }
+    }
+  },
+  "WY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -2.04,
+        "gm": 14.68,
+        "eps_beat": 119.91
+      }
+    }
+  },
+  "KIM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.0,
+        "gm": 68.96,
+        "eps_beat": 7.45
+      }
+    }
+  },
+  "IEX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.92,
+        "gm": 44.44,
+        "eps_beat": 12.8
+      }
+    }
+  },
+  "BALL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 16.34,
+        "gm": 19.17,
+        "eps_beat": 11.31
+      }
+    }
+  },
+  "CHTR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -1.0,
+        "gm": 55.35,
+        "eps_beat": -9.05
+      }
+    }
+  },
+  "NDSN": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 8.48,
+        "gm": 55.22,
+        "eps_beat": 1.48
+      }
+    }
+  },
+  "TSCO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.61,
+        "gm": 36.42,
+        "eps_beat": -9.36
+      }
+    }
+  },
+  "HST": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.2,
+        "gm": 28.98,
+        "eps_beat": 116.0
+      }
+    }
+  },
+  "TXT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.77,
+        "gm": 17.84,
+        "eps_beat": 11.26
+      }
+    }
+  },
+  "MAA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 0.81,
+        "gm": 58.5,
+        "eps_beat": 26.45
+      }
+    }
+  },
+  "MAS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.5,
+        "gm": 35.68,
+        "eps_beat": 18.62
+      }
+    }
+  },
+  "GEN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 27.03,
+        "gm": 78.46,
+        "eps_beat": 3.4
+      }
+    }
+  },
+  "DVA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.96,
+        "gm": 32.45,
+        "eps_beat": 23.18
+      }
+    }
+  },
+  "DOC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 7.12,
+        "gm": 58.33,
+        "eps_beat": 364.73
+      }
+    }
+  },
+  "ALB": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 32.67,
+        "gm": 18.53,
+        "eps_beat": 124.6
+      }
+    }
+  },
+  "J": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 26.95,
+        "gm": 23.42,
+        "eps_beat": 7.09
+      }
+    }
+  },
+  "DECK": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.55,
+        "gm": 57.7,
+        "eps_beat": 15.21
+      }
+    }
+  },
+  "EG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -6.8,
+        "gm": 15.49,
+        "eps_beat": 15.23
+      }
+    }
+  },
+  "REG": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.28,
+        "gm": 71.7,
+        "eps_beat": 9.38
+      }
+    }
+  },
+  "PTC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 21.68,
+        "gm": 84.71,
+        "eps_beat": 27.86
+      }
+    }
+  },
+  "MKC": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 16.7,
+        "gm": 38.85,
+        "eps_beat": 14.8
+      }
+    }
+  },
+  "GL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.35,
+        "gm": 33.73,
+        "eps_beat": -1.35
+      }
+    }
+  },
+  "TKO": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 25.86,
+        "gm": 59.12,
+        "eps_beat": -32.11
+      }
+    }
+  },
+  "AIZ": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.26,
+        "gm": 12.74,
+        "eps_beat": 11.71
+      }
+    }
+  },
+  "COO": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 7.9,
+        "gm": 65.55,
+        "eps_beat": 10.52
+      }
+    }
+  },
+  "GNRC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 12.44,
+        "gm": 38.14,
+        "eps_beat": 35.49
+      }
+    }
+  },
+  "SWK": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.72,
+        "gm": 30.62,
+        "eps_beat": 34.6
+      }
+    }
+  },
+  "HRL": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 2.55,
+        "gm": 15.78,
+        "eps_beat": 12.87
+      }
+    }
+  },
+  "LULU": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 4.26,
+        "gm": 55.7,
+        "eps_beat": 0.38
+      }
+    }
+  },
+  "LDOS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.65,
+        "gm": 17.91,
+        "eps_beat": 7.56
+      }
+    }
+  },
+  "SOLV": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -3.09,
+        "gm": 53.66,
+        "eps_beat": 9.33
+      }
+    }
+  },
+  "ERIE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 1.24,
+        "gm": 17.91,
+        "eps_beat": -5.26
+      }
+    }
+  },
+  "PNW": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.36,
+        "gm": 43.01,
+        "eps_beat": 15889.47
+      }
+    }
+  },
+  "ZBRA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.3,
+        "gm": 48.18,
+        "eps_beat": 11.88
+      }
+    }
+  },
+  "UDR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 0.92,
+        "gm": 66.62,
+        "eps_beat": 269.69
+      }
+    }
+  },
+  "ALGN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.21,
+        "gm": 69.91,
+        "eps_beat": 12.84
+      }
+    }
+  },
+  "IVZ": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.08,
+        "gm": 28.91,
+        "eps_beat": -1.21
+      }
+    }
+  },
+  "APTV": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 5.41,
+        "gm": 18.92,
+        "eps_beat": 7.91
+      }
+    }
+  },
+  "TYL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.55,
+        "gm": 46.75,
+        "eps_beat": 2.73
+      }
+    }
+  },
+  "RVTY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.97,
+        "gm": 54.32,
+        "eps_beat": 4.47
+      }
+    }
+  },
+  "PNR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.6,
+        "gm": 41.22,
+        "eps_beat": 4.5
+      }
+    }
+  },
+  "AVY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.99,
+        "gm": 28.75,
+        "eps_beat": 1.81
+      }
+    }
+  },
+  "BF-B": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 2.01,
+        "gm": 60.54,
+        "eps_beat": -62.65
+      }
+    }
+  },
+  "MGM": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 4.15,
+        "gm": 44.16,
+        "eps_beat": -4.38
+      }
+    }
+  },
+  "SJM": {
+    "quarters": {
+      "2026-04-30": {
+        "label": "Q2 2026",
+        "rev_yoy": 5.8,
+        "gm": 34.26,
+        "eps_beat": 5.01
+      }
+    }
+  },
+  "APA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -11.72,
+        "gm": 72.27,
+        "eps_beat": 20.9
+      }
+    }
+  },
+  "GDDY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.08,
+        "gm": 63.77,
+        "eps_beat": 2.69
+      }
+    }
+  },
+  "ALLE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.74,
+        "gm": 44.97,
+        "eps_beat": -5.09
+      }
+    }
+  },
+  "BAX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.9,
+        "gm": 34.65,
+        "eps_beat": 15.93
+      }
+    }
+  },
+  "CLX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 0.12,
+        "gm": 43.85,
+        "eps_beat": 6.16
+      }
+    }
+  },
+  "CSGP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 22.54,
+        "gm": 78.63,
+        "eps_beat": 24.8
+      }
+    }
+  },
+  "HII": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 13.35,
+        "gm": 12.45,
+        "eps_beat": 1.68
+      }
+    }
+  },
+  "CRL": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 1.19,
+        "gm": 34.46,
+        "eps_beat": 5.42
+      }
+    }
+  },
+  "CPT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -0.46,
+        "gm": 61.62,
+        "eps_beat": -196.43
+      }
+    }
+  },
+  "HAS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 12.75,
+        "gm": 63.66,
+        "eps_beat": 29.52
+      }
+    }
+  },
+  "PODD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 33.87,
+        "gm": 71.01,
+        "eps_beat": 19.26
+      }
+    }
+  },
+  "TECH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -1.51,
+        "gm": 66.4,
+        "eps_beat": -0.82
+      }
+    }
+  },
+  "FOXA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -8.62,
+        "gm": 36.84,
+        "eps_beat": 36.35
+      }
+    }
+  },
+  "FOX": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -8.62,
+        "gm": 36.84,
+        "eps_beat": 22.22
+      }
+    }
+  },
+  "JKHY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.74,
+        "gm": 44.06,
+        "eps_beat": 10.37
+      }
+    }
+  },
+  "BXP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 0.8,
+        "gm": 56.13,
+        "eps_beat": 97.57
+      }
+    }
+  },
+  "AES": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.68,
+        "gm": 19.3,
+        "eps_beat": 108.27
+      }
+    }
+  },
+  "PSKY": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -7.98,
+        "gm": 32.56,
+        "eps_beat": 51.38
+      }
+    }
+  },
+  "FRT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 10.33,
+        "gm": 67.99,
+        "eps_beat": 165.2
+      }
+    }
+  },
+  "WYNN": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.2,
+        "gm": 68.11,
+        "eps_beat": 5.5
+      }
+    }
+  },
+  "DPZ": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 3.47,
+        "gm": 28.7,
+        "eps_beat": -3.32
+      }
+    }
+  },
+  "NWSA": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.76,
+        "gm": 57.17,
+        "eps_beat": 5.46
+      }
+    }
+  },
+  "HSIC": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 6.31,
+        "gm": 31.19,
+        "eps_beat": 8.44
+      }
+    }
+  },
+  "UHS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.65,
+        "gm": 44.23,
+        "eps_beat": 2.95
+      }
+    }
+  },
+  "TTD": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 11.82,
+        "gm": 77.83,
+        "eps_beat": -12.39
+      }
+    }
+  },
+  "SWKS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -1.0,
+        "gm": 41.08,
+        "eps_beat": 10.1
+      }
+    }
+  },
+  "NCLH": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 9.57,
+        "gm": 43.05,
+        "eps_beat": 61.25
+      }
+    }
+  },
+  "IT": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -1.5,
+        "gm": 68.99,
+        "eps_beat": 13.64
+      }
+    }
+  },
+  "FDS": {
+    "quarters": {
+      "2026-05-31": {
+        "label": "Q2 2026",
+        "rev_yoy": 6.39,
+        "gm": 51.38,
+        "eps_beat": 1.76
+      }
+    }
+  },
+  "ARE": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -12.13,
+        "gm": 68.59,
+        "eps_beat": 1359.96
+      }
+    }
+  },
+  "AOS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -1.9,
+        "gm": 38.77,
+        "eps_beat": -9.91
+      }
+    }
+  },
+  "BLDR": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": -10.13,
+        "gm": 29.89,
+        "eps_beat": -27.61
+      }
+    }
+  },
+  "TAP": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 2.04,
+        "gm": 38.62,
+        "eps_beat": 70.58
+      }
+    }
+  },
+  "MOS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 14.39,
+        "gm": 13.31,
+        "eps_beat": -77.32
+      }
+    }
+  },
+  "NWS": {
+    "quarters": {
+      "2026-03-31": {
+        "label": "Q1 2026",
+        "rev_yoy": 8.76,
+        "gm": 57.17,
+        "eps_beat": 5.46
+      }
+    }
+  },
+  "SATS": {
+    "quarters": {
+      "2026-07-12": {
+        "label": "Q3 2026",
+        "rev_yoy": -5.2,
+        "gm": 27.08,
+        "eps_beat": 0.0
+      }
+    }
+  }
+}
