@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
 """批量补全标普500成分股基本面，供 ai-berkshire stock_screener 的 6 维价值验证使用。
 
-数据来源：DSA 现有 ``data_provider/yfinance_fundamental_adapter``（营收同比 / 毛利率 / ROE）；
-EPS 超预期尽力从 yfinance earnings 数据补充，拿不到则记 0（不伪造超预期）。
+数据来源：yfinance 季度利润表（多季度：每季独立算毛利率，有去年同季时算营收同比），
+使跨季度的「营收加速 / 毛利率扩张 / 毛利连续改善」校验立即生效；多季路径失败时回退
+DSA ``data_provider/yfinance_fundamental_adapter`` 的单季度（fail-open）。
+EPS 超预期尽力从 yfinance earnings 数据按财报日对齐补充，拿不到则记 0（不伪造超预期）。
 
 产物：
 - ``data/universe/sp500_fundamentals.json``：DSA 侧提交的基本面快照（screener 读取格式：
@@ -31,7 +33,7 @@ import sys
 import time
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Optional
+from typing import Any, Dict, List, Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
@@ -50,37 +52,144 @@ def _quarter_label(report_date: Optional[str]) -> str:
     return f"Q{(dt.month - 1) // 3 + 1} {dt.year}"
 
 
-def fetch_eps_beat(symbol: str) -> Optional[float]:
-    """尽力从 yfinance earnings 数据取最近一期已公布 EPS 超预期（%）；失败返回 None。
+# yfinance 季度利润表可能的行标签（不同版本/公司命名有差异）
+_REVENUE_ROWS = ("Total Revenue", "Operating Revenue", "TotalRevenue")
+_GROSS_PROFIT_ROWS = ("Gross Profit", "GrossProfit")
+_COGS_ROWS = ("Cost Of Revenue", "Cost of Revenue", "CostOfRevenue", "Reconciled Cost Of Revenue")
+
+
+def fetch_eps_beat_map(symbol: str) -> Dict[str, float]:
+    """尽力从 yfinance earnings 数据取「财报日 -> EPS 超预期(%)」映射；失败返回空 dict。
 
     yfinance 不在 fundamental 适配层暴露 EPS 超预期，这里作为价值验证 6 维之一
-    的补充数据单独尽力获取；拿不到时上层记 0（不伪造超预期）。
+    的补充数据单独尽力获取；缺失时上层记 0（不伪造超预期）。
     """
+    out: Dict[str, float] = {}
     try:
         import yfinance as yf  # noqa: PLC0415
 
         ticker = yf.Ticker(symbol)
         if not hasattr(ticker, "get_earnings_dates"):
-            return None
-        frame = ticker.get_earnings_dates(limit=8)
+            return out
+        frame = ticker.get_earnings_dates(limit=16)
         if frame is None or frame.empty:
-            return None
+            return out
         col = next(
             (c for c in frame.columns if "surprise" in str(c).lower() and "%" in str(c)),
             None,
         ) or next((c for c in frame.columns if "surprise" in str(c).lower()), None)
         if col is None:
-            return None
-        series = frame[col].dropna()  # 只取已公布（有实际值）的期次
-        if series.empty:
-            return None
-        return round(float(series.iloc[0]), 2)
+            return out
+        for idx, value in frame[col].dropna().items():  # 只取已公布（有实际值）的期次
+            try:
+                out[str(idx.date())] = round(float(value), 2)
+            except Exception:  # noqa: BLE001
+                continue
     except Exception:  # noqa: BLE001 - EPS 超预期为可选增强，失败 fail-open
-        return None
+        return {}
+    return out
 
 
-def build_quarter(adapter: Any, symbol: str) -> Optional[dict]:
-    """用 DSA 基本面适配层组装单季记录；关键字段缺失返回 None（fail-open 跳过）。"""
+def _nearest_eps_beat(eps_map: Dict[str, float], report_date: str, tolerance_days: int = 55) -> float:
+    """把财报日对齐到最近的 EPS 超预期期次（容差内）；无匹配记 0（不伪造）。"""
+    if not eps_map:
+        return 0.0
+    try:
+        target = datetime.strptime(report_date[:10], "%Y-%m-%d").date()
+    except ValueError:
+        return 0.0
+    best, best_gap = 0.0, None
+    for date_str, surprise in eps_map.items():
+        try:
+            gap = abs((datetime.strptime(date_str, "%Y-%m-%d").date() - target).days)
+        except ValueError:
+            continue
+        if gap <= tolerance_days and (best_gap is None or gap < best_gap):
+            best, best_gap = surprise, gap
+    return best
+
+
+def build_quarters(adapter: Any, symbol: str) -> List[dict]:
+    """组装该标的的多季度基本面记录 [{report_date, record}]，按报告日升序。
+
+    优先用 yfinance 季度利润表拿多季度（每季独立算毛利率；营收同比在有去年同季时算），
+    使跨季度的「营收加速 / 毛利率扩张 / 毛利连续改善」校验能立即生效；
+    多季路径失败或产不出有效季度时，回退到 DSA 基本面适配层的单季度（fail-open，不regress）。
+    只写营收同比与毛利率都可得的季度（screener 比较 None 会抛错）。
+    """
+    quarters = _build_quarters_from_yfinance(symbol)
+    if quarters:
+        return quarters
+    single = _build_quarter_from_adapter(adapter, symbol)
+    return [single] if single else []
+
+
+def _build_quarters_from_yfinance(symbol: str) -> List[dict]:
+    try:
+        import pandas as pd  # noqa: PLC0415
+        import yfinance as yf  # noqa: PLC0415
+
+        income = yf.Ticker(symbol).quarterly_income_stmt
+        if income is None or getattr(income, "empty", True):
+            return []
+
+        def _row(labels):
+            for label in labels:
+                if label in income.index:
+                    return income.loc[label]
+            return None
+
+        revenue_row = _row(_REVENUE_ROWS)
+        if revenue_row is None:
+            return []
+        gross_row = _row(_GROSS_PROFIT_ROWS)
+        cogs_row = _row(_COGS_ROWS) if gross_row is None else None
+
+        # 列为报告期（Timestamp），按时间降序排列，便于用 i+4 定位去年同季
+        cols = [c for c in income.columns if pd.notna(pd.to_datetime(c, errors="coerce"))]
+        cols = sorted(cols, key=lambda c: pd.to_datetime(c), reverse=True)
+
+        eps_map = fetch_eps_beat_map(symbol)
+        results: List[dict] = []
+        for i, col in enumerate(cols):
+            revenue = _num(revenue_row.get(col))
+            if not revenue:
+                continue
+            if gross_row is not None:
+                gross = _num(gross_row.get(col))
+            else:
+                cogs = _num(cogs_row.get(col)) if cogs_row is not None else None
+                gross = (revenue - cogs) if cogs is not None else None
+            if gross is None or revenue == 0:
+                continue
+            gm = gross / revenue * 100
+            # 营收同比：需要去年同季（降序下为 i+4 列）
+            if i + 4 >= len(cols):
+                continue
+            prev_year_rev = _num(revenue_row.get(cols[i + 4]))
+            if not prev_year_rev:
+                continue
+            rev_yoy = (revenue / prev_year_rev - 1) * 100
+            report_date = pd.to_datetime(col).date().isoformat()
+            results.append(
+                {
+                    "report_date": report_date,
+                    "record": {
+                        "label": _quarter_label(report_date),
+                        "rev_yoy": round(rev_yoy, 2),
+                        "gm": round(gm, 2),
+                        "eps_beat": _nearest_eps_beat(eps_map, report_date),
+                    },
+                }
+            )
+        results.sort(key=lambda item: item["report_date"])
+        return results
+    except Exception:  # noqa: BLE001 - 多季路径失败回退单季，不中断整批
+        return []
+
+
+def _build_quarter_from_adapter(adapter: Any, symbol: str) -> Optional[dict]:
+    """回退路径：用 DSA 基本面适配层组装单季记录；关键字段缺失返回 None。"""
     bundle = adapter.get_fundamental_bundle(symbol)
     growth = bundle.get("growth") or {}
     rev_yoy = growth.get("revenue_yoy")
@@ -89,16 +198,25 @@ def build_quarter(adapter: Any, symbol: str) -> Optional[dict]:
         return None
     report = (bundle.get("earnings") or {}).get("financial_report") or {}
     report_date = (report.get("report_date") or datetime.now(timezone.utc).date().isoformat())[:10]
-    eps_beat = fetch_eps_beat(symbol)
     return {
         "report_date": report_date,
         "record": {
             "label": _quarter_label(report_date),
             "rev_yoy": round(float(rev_yoy), 2),
             "gm": round(float(gross_margin), 2),
-            "eps_beat": round(float(eps_beat), 2) if eps_beat is not None else 0.0,
+            "eps_beat": _nearest_eps_beat(fetch_eps_beat_map(symbol), report_date),
         },
     }
+
+
+def _num(value: Any) -> Optional[float]:
+    try:
+        import math
+
+        result = float(value)
+        return result if math.isfinite(result) else None
+    except (TypeError, ValueError):
+        return None
 
 
 def _load_snapshot(path: Path) -> Dict[str, Any]:
@@ -176,22 +294,25 @@ def main() -> int:
                 except ValueError:
                     pass
         try:
-            quarter = build_quarter(adapter, symbol)
+            quarters = build_quarters(adapter, symbol)
         except Exception as exc:  # noqa: BLE001 - 单只失败 fail-open
             failed += 1
             print(f"[{index}/{total}] {symbol:<8} 失败(fail-open): {type(exc).__name__}: {exc}")
             continue
-        if quarter is None:
+        if not quarters:
             failed += 1
             print(f"[{index}/{total}] {symbol:<8} 关键字段缺失，跳过")
             continue
-        entry.setdefault("quarters", {})[quarter["report_date"]] = quarter["record"]
+        bucket = entry.setdefault("quarters", {})
+        for quarter in quarters:  # 并集合并多季度，累积跨季度历史
+            bucket[quarter["report_date"]] = quarter["record"]
         funds[symbol] = entry
         updated += 1
-        rec = quarter["record"]
+        latest = quarters[-1]["record"]
         print(
-            f"[{index}/{total}] {symbol:<8} {quarter['report_date']} "
-            f"营收{rec['rev_yoy']}% 毛利{rec['gm']}% EPS超预期{rec['eps_beat']}%"
+            f"[{index}/{total}] {symbol:<8} {quarters[-1]['report_date']} "
+            f"营收{latest['rev_yoy']}% 毛利{latest['gm']}% EPS超预期{latest['eps_beat']}%"
+            f"（本次 {len(quarters)} 季）"
         )
         if args.sleep > 0:
             time.sleep(args.sleep)
