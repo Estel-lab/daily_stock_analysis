@@ -1,0 +1,112 @@
+symbol,name,sector
+AAPL,Apple Inc.,Information Technology
+ABBV,AbbVie Inc.,Health Care
+ABT,Abbott Laboratories,Health Care
+ACN,Accenture plc,Information Technology
+ADBE,Adobe Inc.,Information Technology
+ADI,Analog Devices,Information Technology
+ADP,Automatic Data Processing,Industrials
+AMAT,Applied Materials,Information Technology
+AMD,Advanced Micro Devices,Information Technology
+AMGN,Amgen Inc.,Health Care
+AMT,American Tower,Real Estate
+AMZN,Amazon.com Inc.,Consumer Discretionary
+AON,Aon plc,Financials
+AVGO,Broadcom Inc.,Information Technology
+AXP,American Express,Financials
+BA,Boeing Company,Industrials
+BAC,Bank of America,Financials
+BK,Bank of New York Mellon,Financials
+BKNG,Booking Holdings,Consumer Discretionary
+BLK,BlackRock Inc.,Financials
+BMY,Bristol-Myers Squibb,Health Care
+BRK-B,Berkshire Hathaway,Financials
+BSX,Boston Scientific,Health Care
+C,Citigroup Inc.,Financials
+CAT,Caterpillar Inc.,Industrials
+CB,Chubb Limited,Financials
+CI,Cigna Group,Health Care
+CL,Colgate-Palmolive,Consumer Staples
+CMCSA,Comcast Corporation,Communication Services
+COF,Capital One Financial,Financials
+COP,ConocoPhillips,Energy
+COST,Costco Wholesale,Consumer Staples
+CRM,Salesforce Inc.,Information Technology
+CSCO,Cisco Systems,Information Technology
+CVS,CVS Health,Health Care
+CVX,Chevron Corporation,Energy
+DE,Deere & Company,Industrials
+DHR,Danaher Corporation,Health Care
+DIS,Walt Disney Company,Communication Services
+DUK,Duke Energy,Utilities
+ELV,Elevance Health,Health Care
+EOG,EOG Resources,Energy
+EQIX,Equinix Inc.,Real Estate
+ETN,Eaton Corporation,Industrials
+F,Ford Motor Company,Consumer Discretionary
+FDX,FedEx Corporation,Industrials
+GD,General Dynamics,Industrials
+GE,GE Aerospace,Industrials
+GILD,Gilead Sciences,Health Care
+GM,General Motors,Consumer Discretionary
+GOOG,Alphabet Inc. Class C,Communication Services
+GOOGL,Alphabet Inc. Class A,Communication Services
+GS,Goldman Sachs Group,Financials
+HD,Home Depot,Consumer Discretionary
+HON,Honeywell International,Industrials
+IBM,International Business Machines,Information Technology
+ICE,Intercontinental Exchange,Financials
+INTC,Intel Corporation,Information Technology
+INTU,Intuit Inc.,Information Technology
+ISRG,Intuitive Surgical,Health Care
+JNJ,Johnson & Johnson,Health Care
+JPM,JPMorgan Chase,Financials
+KO,Coca-Cola Company,Consumer Staples
+LIN,Linde plc,Materials
+LLY,Eli Lilly and Company,Health Care
+LMT,Lockheed Martin,Industrials
+LOW,Lowe's Companies,Consumer Discretionary
+MA,Mastercard Inc.,Financials
+MCD,McDonald's Corporation,Consumer Discretionary
+MDT,Medtronic plc,Health Care
+MET,MetLife Inc.,Financials
+META,Meta Platforms,Communication Services
+MMC,Marsh & McLennan,Financials
+MMM,3M Company,Industrials
+MO,Altria Group,Consumer Staples
+MRK,Merck & Co.,Health Care
+MS,Morgan Stanley,Financials
+MSFT,Microsoft Corporation,Information Technology
+MU,Micron Technology,Information Technology
+NEE,NextEra Energy,Utilities
+NFLX,Netflix Inc.,Communication Services
+NKE,Nike Inc.,Consumer Discretionary
+NOW,ServiceNow Inc.,Information Technology
+NVDA,NVIDIA Corporation,Information Technology
+ORCL,Oracle Corporation,Information Technology
+PEP,PepsiCo Inc.,Consumer Staples
+PFE,Pfizer Inc.,Health Care
+PG,Procter & Gamble,Consumer Staples
+PGR,Progressive Corporation,Financials
+PLD,Prologis Inc.,Real Estate
+PM,Philip Morris International,Consumer Staples
+QCOM,Qualcomm Inc.,Information Technology
+RTX,RTX Corporation,Industrials
+SBUX,Starbucks Corporation,Consumer Discretionary
+SCHW,Charles Schwab,Financials
+SO,Southern Company,Utilities
+SPGI,S&P Global,Financials
+T,AT&T Inc.,Communication Services
+TJX,TJX Companies,Consumer Discretionary
+TMO,Thermo Fisher Scientific,Health Care
+TSLA,Tesla Inc.,Consumer Discretionary
+TXN,Texas Instruments,Information Technology
+UNH,UnitedHealth Group,Health Care
+UNP,Union Pacific,Industrials
+UPS,United Parcel Service,Industrials
+USB,U.S. Bancorp,Financials
+V,Visa Inc.,Financials
+VZ,Verizon Communications,Communication Services
+WFC,Wells Fargo,Financials
+WMT,Walmart Inc.,Consumer Staples
+XOM,Exxon Mobil Corporation,Energy
