@@ -12,7 +12,12 @@
 
 环境变量：
 - AI_BERKSHIRE_DIR: ai-berkshire 仓库检出路径（默认 ./ai-berkshire）
-- SCREENER_STOCKS: 覆盖扫描标的（逗号/空格分隔，DSA 代码格式）；为空时用 STOCK_LIST
+- SCREENER_STOCKS: 覆盖扫描标的（逗号/空格分隔，DSA 代码格式）；优先级最高
+- SCREENER_UNIVERSE: 扫描范围。留空=用 STOCK_LIST；sp500=扫标普500成分股
+  （读 data/universe/sp500.csv，见 scripts/refresh_sp500.py / populate_sp500_fundamentals.py）
+- SCREENER_UNIVERSE_LIMIT: 扫描标的上限（默认 0=不限；用于全市场扫描时的限速护栏）
+  标普500 universe 按市值权重降序，故该上限即「扫描市值最大的前 N 只」
+- SCREENER_TOP_N: 只推分数最高的前 N 只买入信号（默认 0=不限；按 信号分级→价值得分 排序）
 - SCREENER_NOTIFY_EMPTY: 无信号时也推送（默认 false）
 - SCREENER_HISTORY_FILE: 信号历史 jsonl 路径（默认 data/screener_signals.jsonl）
 - SCREENER_REVIEW: true 时强制附加历史信号复盘段（默认仅周一附加）
@@ -37,6 +42,7 @@ from typing import Dict, List, Optional, Tuple
 
 PROJECT_ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(PROJECT_ROOT))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from src.services.stock_list_parser import split_stock_list  # noqa: E402
 
@@ -98,14 +104,71 @@ def load_screener(berkshire_dir: Path):
     return stock_screener
 
 
+def sync_sp500_fundamentals(berkshire_dir: Path) -> None:
+    """把 DSA 侧标普500基本面快照 merge 进 screener 的 fundamentals.json。
+
+    CI 每次全新检出 ai-berkshire，其 fundamentals.json 只含人工维护的自选股；
+    标普500 的基本面由 DSA 快照（scripts/populate_sp500_fundamentals.py 生成并提交）
+    在扫描前合并进来（并集，不覆盖自选股），使 6 维价值验证可用。
+    缺快照时 fail-open：价值验证退化为仅动量（信号多为 WATCH）。
+    """
+    from sp500_universe import fundamentals_snapshot_file  # noqa: PLC0415
+
+    snapshot = fundamentals_snapshot_file()
+    if not snapshot.exists():
+        print(f"未找到标普500基本面快照 {snapshot}，价值验证退化为仅动量（fail-open）")
+        return
+    try:
+        snap = json.loads(snapshot.read_text(encoding="utf-8"))
+    except Exception as exc:  # noqa: BLE001 - 快照损坏不应中断选股
+        print(f"标普500基本面快照解析失败（fail-open）：{type(exc).__name__}: {exc}")
+        return
+
+    fund_file = berkshire_dir / "data" / "fundamentals.json"
+    try:
+        existing = json.loads(fund_file.read_text(encoding="utf-8")) if fund_file.exists() else {}
+    except Exception:  # noqa: BLE001
+        existing = {}
+    for symbol, entry in snap.items():
+        current = existing.get(symbol) or {"quarters": {}}
+        current.setdefault("quarters", {}).update(entry.get("quarters", {}))
+        existing[symbol] = current
+    fund_file.parent.mkdir(parents=True, exist_ok=True)
+    fund_file.write_text(json.dumps(existing, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"已合并 {len(snap)} 只标普500基本面到 screener 缓存")
+
+
+def resolve_universe_codes() -> Tuple[List[str], str]:
+    """按优先级解析扫描范围的原始代码列表。
+
+    优先级：SCREENER_STOCKS（显式覆盖） > SCREENER_UNIVERSE=sp500（读成分文件） > STOCK_LIST。
+
+    Returns:
+        (原始代码列表, 来源标签)
+    """
+    explicit = os.getenv("SCREENER_STOCKS")
+    if explicit:
+        return split_stock_list(explicit), "SCREENER_STOCKS"
+
+    universe = (os.getenv("SCREENER_UNIVERSE") or "").strip().lower()
+    if universe == "sp500":
+        from sp500_universe import load_sp500_tickers  # noqa: PLC0415
+
+        return load_sp500_tickers(), "sp500"
+
+    return split_stock_list(os.getenv("STOCK_LIST") or ""), "STOCK_LIST"
+
+
 def resolve_tickers() -> Tuple[List[Tuple[str, str]], List[Tuple[str, str]]]:
     """解析扫描标的。
 
     Returns:
         (可扫描的 [(原始代码, yahoo代码)], 跳过的 [(原始代码, 原因)])
     """
-    raw_value = os.getenv("SCREENER_STOCKS") or os.getenv("STOCK_LIST") or ""
-    codes = split_stock_list(raw_value)
+    codes, _source = resolve_universe_codes()
+    limit_raw = os.getenv("SCREENER_UNIVERSE_LIMIT", "").strip()
+    if limit_raw.isdigit() and int(limit_raw) > 0:
+        codes = codes[: int(limit_raw)]
     scannable: List[Tuple[str, str]] = []
     skipped: List[Tuple[str, str]] = []
     seen = set()
@@ -273,6 +336,27 @@ def apply_market_light(
     return kept_buy, watch_signals, notes
 
 
+def cap_buy_signals(buy_signals: List[dict], top_n_raw: str) -> Tuple[List[dict], int]:
+    """按 信号分级 → 价值得分 排序，保留分数最高的前 N 只买入信号。
+
+    top_n_raw 非正整数或为空时不截断（返回原列表）。用于「只推前 N 只最值得关注」的场景。
+
+    Returns:
+        (截断后的买入信号, 被截断的数量)
+    """
+    top_n = int(top_n_raw) if str(top_n_raw).strip().isdigit() else 0
+    if top_n <= 0 or len(buy_signals) <= top_n:
+        return buy_signals, 0
+    ranked = sorted(
+        buy_signals,
+        key=lambda r: (
+            GRADE_ORDER.get(r["grade"], 9),
+            -((r.get("value") or {}).get("score") or 0),
+        ),
+    )
+    return ranked[:top_n], len(buy_signals) - top_n
+
+
 def default_history_path() -> Path:
     return Path(
         os.getenv("SCREENER_HISTORY_FILE", PROJECT_ROOT / "data" / "screener_signals.jsonl")
@@ -393,7 +477,17 @@ def main() -> int:
     berkshire_dir = Path(os.getenv("AI_BERKSHIRE_DIR", PROJECT_ROOT / "ai-berkshire"))
     screener = load_screener(berkshire_dir)
 
-    scannable, skipped = resolve_tickers()
+    # 标普500 全市场扫描：先把 DSA 侧基本面快照合并进 screener 缓存，再扫描
+    if (os.getenv("SCREENER_UNIVERSE") or "").strip().lower() == "sp500" and not os.getenv(
+        "SCREENER_STOCKS"
+    ):
+        sync_sp500_fundamentals(berkshire_dir)
+
+    try:
+        scannable, skipped = resolve_tickers()
+    except FileNotFoundError as exc:
+        print(f"选股 universe 配置错误：{exc}", file=sys.stderr)
+        return 1
     if not scannable:
         print("未配置可扫描标的（SCREENER_STOCKS / STOCK_LIST 均为空或全部无法映射），退出")
         for code, reason in skipped:
@@ -427,6 +521,14 @@ def main() -> int:
     buy_signals, watch_signals, light_notes = apply_market_light(
         buy_signals, watch_signals, lights
     )
+
+    # 只推分数最高的前 N 只买入信号（SCREENER_TOP_N，默认 0=不限）
+    buy_signals, top_n_truncated = cap_buy_signals(buy_signals, os.getenv("SCREENER_TOP_N", ""))
+    if top_n_truncated:
+        light_notes.append(
+            f"📌 仅展示分数最高的前 {len(buy_signals)} 只买入信号"
+            f"（另有 {top_n_truncated} 只较低分信号未列出）"
+        )
 
     output_dir = PROJECT_ROOT / "reports" / "screener"
     output_dir.mkdir(parents=True, exist_ok=True)

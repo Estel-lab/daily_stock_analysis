@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [新功能] 选股筛支持标普500全市场扫描：`SCREENER_UNIVERSE=sp500` 时对标普500成分股跑动量+价值验证并经通知层推送依据；成分快照 `data/universe/sp500.csv` 按市值权重降序，`SCREENER_UNIVERSE_LIMIT` 即「扫市值最大的前 N 只」，`SCREENER_TOP_N` 只推分数最高的前 N 只买入信号；新增 `scripts/refresh_sp500.py`（slickcharts 成分刷新）、`scripts/populate_sp500_fundamentals.py`（复用 yfinance 基本面适配层批量补全价值验证数据，单只失败 fail-open）、`03-sp500-fundamentals.yml`（每 2 天刷新并提交 `data/universe/` 快照）；缺快照时价值验证退化为仅动量，不设 `SCREENER_UNIVERSE` 时行为不变；文档见 `docs/screener.md`。
 - [新功能] 选股筛联动大盘红绿灯：红灯市场的 BUY 信号自动降级为观察（不给仓位建议、不触发自动深研），推送头部显示各市场灯色，信号历史记录原始分级与市场供分层复盘；回测依据为熊市中动量信号 20 日胜率仅 22%（ai-berkshire `reports/选股筛回测-20260710.md`）；`SCREENER_MARKET_LIGHT_ENABLED=false` 可关闭，获取失败 fail-open；定时推送与 bot `/screen` 同语义。
 - [新功能] 新增 MCP Server（`scripts/mcp_server.py`，可选依赖 `pip install mcp`）：把 Agent 工具注册表（18 个只读行情/分析/搜索工具）暴露为 MCP 协议，供 Claude Code 等客户端直接消费 DSA 数据层；`DSA_MCP_TOOLS` 可配置白名单，文档见 `docs/mcp-server.md`。
 - [新功能] 新增投研周报：每周一北京时间 07:00 推送（`02-weekly-report.yml` + `scripts/weekly_report.py`），含本周个股分析摘要（最新评分排序、周内评分变化）、本周选股筛信号统计、下周自选股财报日历；全部复用已有服务，历史库为空时对应段自动省略。

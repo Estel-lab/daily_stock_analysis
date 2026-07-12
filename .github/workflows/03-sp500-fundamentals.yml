@@ -1,0 +1,79 @@
+name: 标普500 成分与基本面刷新
+
+on:
+  # 每 2 天 UTC 20:00（北京时间次日 04:00）刷新，避开每日分析与选股窗口
+  # 注：*/2 按每月日期计，月末到月初可能出现 1 天间隔（标准 cron 近似）
+  schedule:
+    - cron: '0 20 */2 * *'
+
+  workflow_dispatch:
+    inputs:
+      force:
+        description: '忽略增量，全量重算基本面'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: sp500-fundamentals
+  cancel-in-progress: false
+
+# contents: write 用于提交刷新后的 data/universe/sp500.csv 与 sp500_fundamentals.json
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+
+    steps:
+      - name: 检出 DSA
+        uses: actions/checkout@v5
+
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 安装依赖
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 刷新标普500成分股
+        run: |
+          # 抓取失败时保留仓库内已提交快照（seed 或上次成功结果），不阻断基本面补全
+          python scripts/refresh_sp500.py || echo "成分刷新失败，沿用已提交的成分快照"
+
+      - name: 批量补全基本面
+        run: |
+          FORCE_FLAG=""
+          if [ "${{ github.event.inputs.force }}" = "true" ]; then
+            FORCE_FLAG="--force"
+          fi
+          python scripts/populate_sp500_fundamentals.py --sleep 0.3 $FORCE_FLAG
+
+      - name: 提交成分与基本面快照
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/universe/sp500.csv data/universe/sp500_fundamentals.json
+          if git diff --cached --quiet; then
+            echo "无变化，跳过提交"
+            exit 0
+          fi
+          git commit -m "chore: refresh S&P 500 universe and fundamentals $(date -u +%Y-%m-%d)"
+          git pull --rebase origin "${GITHUB_REF_NAME}" || true
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      - name: 失败告警
+        if: failure()
+        env:
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          FEISHU_WEBHOOK_SECRET: ${{ secrets.FEISHU_WEBHOOK_SECRET }}
+          WECHAT_WEBHOOK_URL: ${{ secrets.WECHAT_WEBHOOK_URL }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python3 scripts/notify_workflow_failure.py

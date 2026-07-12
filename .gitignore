@@ -91,3 +91,8 @@ docs/specs/
 
 # screener 信号历史（append-only，供复盘胜率统计，由 01-screener workflow 提交）
 !/data/screener_signals.jsonl
+
+# 标普500选股 universe 与基本面快照（由 refresh_sp500 / populate_sp500_fundamentals 生成并提交）
+!/data/universe/
+!/data/universe/sp500.csv
+!/data/universe/sp500_fundamentals.json

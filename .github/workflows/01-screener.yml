@@ -11,6 +11,10 @@ on:
         description: '扫描标的（逗号分隔，DSA 代码格式；留空用 STOCK_LIST）'
         required: false
         default: ''
+      universe:
+        description: '扫描范围（留空=STOCK_LIST；sp500=标普500成分股）'
+        required: false
+        default: ''
       notify_empty:
         description: '无信号时也推送'
         required: false
@@ -59,6 +63,12 @@ jobs:
         env:
           AI_BERKSHIRE_DIR: ${{ github.workspace }}/ai-berkshire
           SCREENER_STOCKS: ${{ github.event.inputs.stocks }}
+          # 扫描范围：留空=STOCK_LIST；sp500=标普500成分股（读 data/universe/sp500.csv，按市值权重排序）
+          SCREENER_UNIVERSE: ${{ github.event.inputs.universe || vars.SCREENER_UNIVERSE }}
+          # 全市场扫描限速护栏：标的上限；标普500 按市值权重排序，故即「扫市值最大的前 N 只」
+          SCREENER_UNIVERSE_LIMIT: ${{ vars.SCREENER_UNIVERSE_LIMIT || '350' }}
+          # 只推分数最高的前 N 只买入信号（0=不限）
+          SCREENER_TOP_N: ${{ vars.SCREENER_TOP_N || '10' }}
           SCREENER_NOTIFY_EMPTY: ${{ github.event.inputs.notify_empty || vars.SCREENER_NOTIFY_EMPTY || 'false' }}
           STOCK_LIST_CONFIG: ${{ vars.STOCK_LIST || secrets.STOCK_LIST }}
 
