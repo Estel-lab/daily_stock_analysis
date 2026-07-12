@@ -22,9 +22,10 @@ DSA 侧 `scripts/screener_notify.py` 只做编排、universe 供给与推送。
 | 扫标普500全市场 | `SCREENER_UNIVERSE=sp500` |
 | 临时指定标的 | `SCREENER_STOCKS=NVDA,AAPL` |
 
-标普500 成分股读 `data/universe/sp500.csv`。仓库内含 bootstrap 种子；完整最新成分由
-`scripts/refresh_sp500.py`（抓维基百科公开成分表）刷新。`SCREENER_UNIVERSE_LIMIT` 可设扫描上限
-（限速护栏，默认不限）。
+标普500 成分股读 `data/universe/sp500.csv`，**按市值权重降序**（rank 1 = 市值最大），
+由 `scripts/refresh_sp500.py`（抓 slickcharts 公开成分表）刷新。因为按权重排序，
+`SCREENER_UNIVERSE_LIMIT=N` 即「扫描市值最大的前 N 只」（限速护栏，默认不限）。
+`SCREENER_TOP_N=N` 则只推分数最高的前 N 只买入信号（按 信号分级→价值得分 排序）。
 
 ## 标普500 基本面补全
 
@@ -55,8 +56,8 @@ python scripts/populate_sp500_fundamentals.py --limit 20 # 抽样验证
 
 | 工作流 | 触发 | 作用 |
 |---|---|---|
-| `01-screener.yml` | 交易日美股收盘后 / 手动 | 扫描并推送；仓库变量 `SCREENER_UNIVERSE=sp500` 或手动输入 `universe=sp500` 时扫标普500 |
-| `03-sp500-fundamentals.yml` | 每周六 / 手动 | 刷新成分 + 批量补全基本面，提交 `data/universe/` 快照 |
+| `01-screener.yml` | 交易日美股收盘后 / 手动 | 扫描并推送；仓库变量 `SCREENER_UNIVERSE=sp500` 或手动输入 `universe=sp500` 时扫标普500。默认 `SCREENER_UNIVERSE_LIMIT=350`（扫市值最大的前 350）、`SCREENER_TOP_N=10`（推前 10），仓库变量可覆盖 |
+| `03-sp500-fundamentals.yml` | 每 2 天 / 手动 | 刷新成分 + 批量补全基本面，提交 `data/universe/` 快照 |
 
 每日选股只读已提交的基本面快照（轻），周级刷新负责重的 500 次数据拉取，二者解耦。
 

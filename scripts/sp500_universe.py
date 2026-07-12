@@ -5,8 +5,9 @@
 （基本面批量补全）共用，避免两处各写一份 universe 解析。
 
 约定：
-- 成分股快照默认在 ``data/universe/sp500.csv``（由 ``scripts/refresh_sp500.py`` 生成/刷新）；
-  运行时只读该文件，离线安全；成分变动慢（一年数次），按周级刷新即可。
+- 成分股快照默认在 ``data/universe/sp500.csv``（由 ``scripts/refresh_sp500.py`` 生成/刷新），
+  **按市值权重降序**（rank 1 = 市值最大）；运行时只读该文件，离线安全。
+  据此 ``SCREENER_UNIVERSE_LIMIT=N`` 截断即「扫描市值最大的前 N 只」。
 - 基本面快照默认在 ``data/universe/sp500_fundamentals.json``
   （由 ``scripts/populate_sp500_fundamentals.py`` 生成，screener 读取格式）。
 - 代码统一规整为 Yahoo/yfinance 兼容写法（如 ``BRK.B`` -> ``BRK-B``），

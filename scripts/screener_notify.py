@@ -16,6 +16,8 @@
 - SCREENER_UNIVERSE: 扫描范围。留空=用 STOCK_LIST；sp500=扫标普500成分股
   （读 data/universe/sp500.csv，见 scripts/refresh_sp500.py / populate_sp500_fundamentals.py）
 - SCREENER_UNIVERSE_LIMIT: 扫描标的上限（默认 0=不限；用于全市场扫描时的限速护栏）
+  标普500 universe 按市值权重降序，故该上限即「扫描市值最大的前 N 只」
+- SCREENER_TOP_N: 只推分数最高的前 N 只买入信号（默认 0=不限；按 信号分级→价值得分 排序）
 - SCREENER_NOTIFY_EMPTY: 无信号时也推送（默认 false）
 - SCREENER_HISTORY_FILE: 信号历史 jsonl 路径（默认 data/screener_signals.jsonl）
 - SCREENER_REVIEW: true 时强制附加历史信号复盘段（默认仅周一附加）
@@ -334,6 +336,27 @@ def apply_market_light(
     return kept_buy, watch_signals, notes
 
 
+def cap_buy_signals(buy_signals: List[dict], top_n_raw: str) -> Tuple[List[dict], int]:
+    """按 信号分级 → 价值得分 排序，保留分数最高的前 N 只买入信号。
+
+    top_n_raw 非正整数或为空时不截断（返回原列表）。用于「只推前 N 只最值得关注」的场景。
+
+    Returns:
+        (截断后的买入信号, 被截断的数量)
+    """
+    top_n = int(top_n_raw) if str(top_n_raw).strip().isdigit() else 0
+    if top_n <= 0 or len(buy_signals) <= top_n:
+        return buy_signals, 0
+    ranked = sorted(
+        buy_signals,
+        key=lambda r: (
+            GRADE_ORDER.get(r["grade"], 9),
+            -((r.get("value") or {}).get("score") or 0),
+        ),
+    )
+    return ranked[:top_n], len(buy_signals) - top_n
+
+
 def default_history_path() -> Path:
     return Path(
         os.getenv("SCREENER_HISTORY_FILE", PROJECT_ROOT / "data" / "screener_signals.jsonl")
@@ -498,6 +521,14 @@ def main() -> int:
     buy_signals, watch_signals, light_notes = apply_market_light(
         buy_signals, watch_signals, lights
     )
+
+    # 只推分数最高的前 N 只买入信号（SCREENER_TOP_N，默认 0=不限）
+    buy_signals, top_n_truncated = cap_buy_signals(buy_signals, os.getenv("SCREENER_TOP_N", ""))
+    if top_n_truncated:
+        light_notes.append(
+            f"📌 仅展示分数最高的前 {len(buy_signals)} 只买入信号"
+            f"（另有 {top_n_truncated} 只较低分信号未列出）"
+        )
 
     output_dir = PROJECT_ROOT / "reports" / "screener"
     output_dir.mkdir(parents=True, exist_ok=True)
