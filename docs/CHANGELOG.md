@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [新功能] 新增晨星价值漏斗选股 `scripts/morningstar_screen.py` 与 `04-morningstar-funnel.yml`：复用 ai-berkshire `morningstar_fair_value` 抓晨星公允价值/星级/护城河，按潜在涨幅+护城河+星级过滤排序，推送「被低估+有护城河」Top-N（不依赖动量，天天有结果）并写出终选清单；仓库变量 `MORNINGSTAR_DEEP_ANALYSIS=true` 时对终选复用 `00-daily-analysis` 跑四大师深度分析；阈值 `MS_MIN_UPSIDE`/`MS_MIN_STARS`/`MS_MOATS`/`MS_TOP_N`/`MS_FINALISTS`/`MS_MAX_PAGES` 可配置，抓取失败 fail-open；文档见 `docs/screener.md`。
+- [改进] 标普500 基本面补全改为多季度：`populate_sp500_fundamentals` 读 yfinance 季度利润表一次产出多季（每季独立算毛利率、有去年同季时算营收同比），使价值验证的营收加速/毛利率扩张/毛利连续改善跨季度校验首跑即生效；多季路径失败回退单季（fail-open），EPS 超预期按财报日对齐。
 - [新功能] 选股筛支持标普500全市场扫描：`SCREENER_UNIVERSE=sp500` 时对标普500成分股跑动量+价值验证并经通知层推送依据；成分快照 `data/universe/sp500.csv` 按市值权重降序，`SCREENER_UNIVERSE_LIMIT` 即「扫市值最大的前 N 只」，`SCREENER_TOP_N` 只推分数最高的前 N 只买入信号；新增 `scripts/refresh_sp500.py`（slickcharts 成分刷新）、`scripts/populate_sp500_fundamentals.py`（复用 yfinance 基本面适配层批量补全价值验证数据，单只失败 fail-open）、`03-sp500-fundamentals.yml`（每 2 天刷新并提交 `data/universe/` 快照）；缺快照时价值验证退化为仅动量，不设 `SCREENER_UNIVERSE` 时行为不变；文档见 `docs/screener.md`。
 - [新功能] 选股筛联动大盘红绿灯：红灯市场的 BUY 信号自动降级为观察（不给仓位建议、不触发自动深研），推送头部显示各市场灯色，信号历史记录原始分级与市场供分层复盘；回测依据为熊市中动量信号 20 日胜率仅 22%（ai-berkshire `reports/选股筛回测-20260710.md`）；`SCREENER_MARKET_LIGHT_ENABLED=false` 可关闭，获取失败 fail-open；定时推送与 bot `/screen` 同语义。
 - [新功能] 新增 MCP Server（`scripts/mcp_server.py`，可选依赖 `pip install mcp`）：把 Agent 工具注册表（18 个只读行情/分析/搜索工具）暴露为 MCP 协议，供 Claude Code 等客户端直接消费 DSA 数据层；`DSA_MCP_TOOLS` 可配置白名单，文档见 `docs/mcp-server.md`。
