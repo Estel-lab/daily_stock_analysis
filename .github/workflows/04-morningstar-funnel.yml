@@ -1,0 +1,137 @@
+name: 晨星价值漏斗选股
+
+on:
+  # 每 2 天美股收盘后（UTC 22:30，北京时间次日 06:30），与选股筛(22:00)错开
+  schedule:
+    - cron: '30 22 */2 * *'
+
+  workflow_dispatch:
+    inputs:
+      deep_analysis:
+        description: '对终选标的触发四大师深度分析（消耗 LLM 配额）'
+        required: false
+        default: false
+        type: boolean
+
+concurrency:
+  group: morningstar-funnel
+  cancel-in-progress: false
+
+# actions: write 用于对终选标的触发四大师深度分析工作流（workflow_dispatch）
+permissions:
+  contents: read
+  actions: write
+
+jobs:
+  screen:
+    runs-on: ubuntu-latest
+    environment: STOCK_LIST
+    timeout-minutes: 20
+
+    steps:
+      - name: 检出 DSA
+        uses: actions/checkout@v5
+
+      - name: 检出 ai-berkshire（morningstar_fair_value 抓取逻辑）
+        uses: actions/checkout@v5
+        with:
+          repository: Estel-lab/ai-berkshire
+          path: ai-berkshire
+          token: ${{ secrets.AI_BERKSHIRE_TOKEN || github.token }}
+
+      - name: 设置 Python 环境
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: 安装依赖
+        run: |
+          pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: 执行晨星质量筛并推送
+        env:
+          AI_BERKSHIRE_DIR: ${{ github.workspace }}/ai-berkshire
+          MS_MIN_UPSIDE: ${{ vars.MS_MIN_UPSIDE }}
+          MS_MIN_STARS: ${{ vars.MS_MIN_STARS }}
+          MS_MOATS: ${{ vars.MS_MOATS }}
+          MS_TOP_N: ${{ vars.MS_TOP_N }}
+          MS_FINALISTS: ${{ vars.MS_FINALISTS }}
+
+          # 通知渠道（与每日分析/选股筛共用同一套 Secrets，配置任意一个即可）
+          WECHAT_WEBHOOK_URL: ${{ secrets.WECHAT_WEBHOOK_URL }}
+          WECHAT_MSG_TYPE: ${{ vars.WECHAT_MSG_TYPE || secrets.WECHAT_MSG_TYPE || 'markdown' }}
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          FEISHU_WEBHOOK_SECRET: ${{ secrets.FEISHU_WEBHOOK_SECRET }}
+          FEISHU_WEBHOOK_KEYWORD: ${{ vars.FEISHU_WEBHOOK_KEYWORD || secrets.FEISHU_WEBHOOK_KEYWORD }}
+          DINGTALK_WEBHOOK_URL: ${{ secrets.DINGTALK_WEBHOOK_URL }}
+          DINGTALK_SECRET: ${{ secrets.DINGTALK_SECRET }}
+          TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+          TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
+          TELEGRAM_MESSAGE_THREAD_ID: ${{ secrets.TELEGRAM_MESSAGE_THREAD_ID }}
+          EMAIL_SENDER: ${{ vars.EMAIL_SENDER || secrets.EMAIL_SENDER }}
+          EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+          EMAIL_RECEIVERS: ${{ vars.EMAIL_RECEIVERS || secrets.EMAIL_RECEIVERS }}
+          PUSHOVER_USER_KEY: ${{ secrets.PUSHOVER_USER_KEY }}
+          PUSHOVER_API_TOKEN: ${{ secrets.PUSHOVER_API_TOKEN }}
+          NTFY_URL: ${{ secrets.NTFY_URL }}
+          NTFY_TOKEN: ${{ secrets.NTFY_TOKEN }}
+          GOTIFY_URL: ${{ secrets.GOTIFY_URL }}
+          GOTIFY_TOKEN: ${{ secrets.GOTIFY_TOKEN }}
+          PUSHPLUS_TOKEN: ${{ secrets.PUSHPLUS_TOKEN }}
+          PUSHPLUS_TOPIC: ${{ vars.PUSHPLUS_TOPIC || secrets.PUSHPLUS_TOPIC }}
+          CUSTOM_WEBHOOK_URLS: ${{ secrets.CUSTOM_WEBHOOK_URLS }}
+          CUSTOM_WEBHOOK_BEARER_TOKEN: ${{ secrets.CUSTOM_WEBHOOK_BEARER_TOKEN }}
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          DISCORD_BOT_TOKEN: ${{ secrets.DISCORD_BOT_TOKEN }}
+          DISCORD_MAIN_CHANNEL_ID: ${{ secrets.DISCORD_MAIN_CHANNEL_ID }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+          SLACK_CHANNEL_ID: ${{ secrets.SLACK_CHANNEL_ID }}
+          SERVERCHAN3_SENDKEY: ${{ secrets.SERVERCHAN3_SENDKEY }}
+          ASTRBOT_URL: ${{ secrets.ASTRBOT_URL }}
+          ASTRBOT_TOKEN: ${{ secrets.ASTRBOT_TOKEN }}
+          NOTIFICATION_ALERT_CHANNELS: ${{ vars.NOTIFICATION_ALERT_CHANNELS || secrets.NOTIFICATION_ALERT_CHANNELS }}
+          LOG_LEVEL: INFO
+        run: python scripts/morningstar_screen.py
+
+      - name: 上传结果快照
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: morningstar-results
+          path: reports/morningstar/
+          if-no-files-found: ignore
+
+      # 终选四大师深度分析（opt-in）：复用每日分析工作流，对终选标的跑 DSA LLM 分析
+      # （四大师策略默认激活，产出估值/护城河/风险视角）。手动输入或仓库变量开启。
+      - name: 终选触发四大师深度分析
+        if: >-
+          github.event.inputs.deep_analysis == 'true' ||
+          vars.MORNINGSTAR_DEEP_ANALYSIS == 'true'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          FINALISTS_FILE=reports/morningstar/finalists.txt
+          if [ ! -s "$FINALISTS_FILE" ]; then
+            echo "无终选标的，跳过深度分析"
+            exit 0
+          fi
+          STOCKS=$(cat "$FINALISTS_FILE")
+          echo "🎯 触发四大师深度分析: $STOCKS"
+          curl -sS --fail -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY}/actions/workflows/00-daily-analysis.yml/dispatches" \
+            -d "{\"ref\":\"${GITHUB_REF_NAME}\",\"inputs\":{\"mode\":\"stocks-only\",\"force_run\":\"true\",\"stocks\":\"${STOCKS}\"}}"
+
+      - name: 失败告警
+        if: failure()
+        env:
+          FEISHU_WEBHOOK_URL: ${{ secrets.FEISHU_WEBHOOK_URL }}
+          FEISHU_WEBHOOK_SECRET: ${{ secrets.FEISHU_WEBHOOK_SECRET }}
+          WECHAT_WEBHOOK_URL: ${{ secrets.WECHAT_WEBHOOK_URL }}
+          WORKFLOW_NAME: ${{ github.workflow }}
+          RUN_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: python3 scripts/notify_workflow_failure.py

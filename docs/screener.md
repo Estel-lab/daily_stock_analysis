@@ -70,7 +70,27 @@ python scripts/populate_sp500_fundamentals.py --limit 20 # 抽样验证
   选股可用 `SCREENER_UNIVERSE_LIMIT` 设上限。
 - 所有信号仅供研究参考，不构成投资建议。
 
+## 晨星价值漏斗（不依赖动量，天天有结果）
+
+动量+价值选股筛是**突破型**，没有突破的日子不出信号。若想要「每天给一批最值得关注的被低估好公司」，
+用 `scripts/morningstar_screen.py`（价值优先漏斗），复用 ai-berkshire `tools/morningstar_fair_value.py`
+抓晨星公允价值/星级/护城河：
+
+```
+① 质量筛   全美股公允价值 → 护城河/星级/潜在涨幅过滤 → 「被低估+有护城河」Top-N（推送）
+② 精选     按 护城河→潜在涨幅 排序、行业分散取终选 N 家（写 reports/morningstar/finalists.txt）
+③④ 深度    对终选触发 DSA 四大师深度分析（估值/护城河/风险/商业模式视角）→ 推送
+```
+
+- 阈值可配：`MS_MIN_UPSIDE`（默认 15%）、`MS_MIN_STARS`（默认 4）、`MS_MOATS`（默认 `Wide,Narrow`）、
+  `MS_TOP_N`（默认 15）、`MS_FINALISTS`（默认 3）、`MS_MAX_PAGES`（限速护栏）。
+- 工作流 `04-morningstar-funnel.yml`（每 2 天 / 手动）跑 ①②并推送；仓库变量
+  `MORNINGSTAR_DEEP_ANALYSIS=true`（或手动输入 `deep_analysis=true`）时，对终选标的复用
+  `00-daily-analysis.yml` 跑四大师深度分析（③④），消耗 LLM 配额。
+- 本地：`python scripts/morningstar_screen.py --dry-run`。
+- 数据源为晨星筛选器 API（第三方，可能限流/变更）；抓取失败 fail-open，不中断。
+
 ## 回滚
 
-不设 `SCREENER_UNIVERSE`（或置空）即回到原自选股扫描；标普500 相关全是旁路脚本与独立工作流，
+不设 `SCREENER_UNIVERSE`（或置空）即回到原自选股扫描；标普500 与晨星漏斗相关全是旁路脚本与独立工作流，
 不改动 DSA 主分析流水线、通知层与数据源。
