@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/).
 > For user-friendly release highlights, see the [GitHub Releases](https://github.com/ZhuLinsen/daily_stock_analysis/releases) page.
 
 ## [Unreleased]
+- [修复] 晨星价值漏斗 `MS_MOATS` 等配置空字符串未回退默认：workflow 以 `${{ vars.MS_* }}` 传入，仓库变量未设时为空串而非未设置，导致 `MS_MOATS=""` 解析成空集合把全部候选筛掉（0 命中不推送）；改为 `os.getenv(...) or 默认` 使空串也回退默认（护城河默认 Wide,Narrow）。
 - [改进] 晨星价值漏斗默认 `MS_MIN_UPSIDE` 15→5，避免默认阈值过严导致 0 命中不推送；0 命中时打印过滤诊断（护城河/潜在涨幅/星级各单条件通过数），并对抓取超时的分页重试一次减少数据缺口。
 - [新功能] 新增晨星价值漏斗选股 `scripts/morningstar_screen.py` 与 `04-morningstar-funnel.yml`：复用 ai-berkshire `morningstar_fair_value` 抓晨星公允价值/星级/护城河，按潜在涨幅+护城河+星级过滤排序，推送「被低估+有护城河」Top-N（不依赖动量，天天有结果）并写出终选清单；仓库变量 `MORNINGSTAR_DEEP_ANALYSIS=true` 时对终选复用 `00-daily-analysis` 跑四大师深度分析；阈值 `MS_MIN_UPSIDE`/`MS_MIN_STARS`/`MS_MOATS`/`MS_TOP_N`/`MS_FINALISTS`/`MS_MAX_PAGES` 可配置，抓取失败 fail-open；文档见 `docs/screener.md`。
 - [改进] 标普500 基本面补全改为多季度：`populate_sp500_fundamentals` 读 yfinance 季度利润表一次产出多季（每季独立算毛利率、有去年同季时算营收同比），使价值验证的营收加速/毛利率扩张/毛利连续改善跨季度校验首跑即生效；多季路径失败回退单季（fail-open），EPS 超预期按财报日对齐。

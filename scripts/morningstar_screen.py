@@ -186,13 +186,15 @@ def format_message(ranked: List[dict], top_n: int, total: int, finalists: List[d
 
 
 def resolve_config() -> Dict[str, Any]:
+    # 注意：workflow 用 `${{ vars.MS_* }}` 传入，仓库变量未设时为**空字符串**（非未设置），
+    # 故一律用 `os.getenv(...) or 默认` 让空串也回退到默认，避免 MS_MOATS="" 变成空集合筛掉全部。
     return {
-        "min_upside": float(os.getenv("MS_MIN_UPSIDE", "5") or 5),
-        "min_stars": int(os.getenv("MS_MIN_STARS", "4") or 4),
-        "moats": {m.strip() for m in (os.getenv("MS_MOATS", "Wide,Narrow")).split(",") if m.strip()},
-        "top_n": int(os.getenv("MS_TOP_N", "15") or 15),
-        "finalists": int(os.getenv("MS_FINALISTS", "3") or 3),
-        "max_pages": int(os.getenv("MS_MAX_PAGES", "0") or 0),
+        "min_upside": float(os.getenv("MS_MIN_UPSIDE") or "5"),
+        "min_stars": int(os.getenv("MS_MIN_STARS") or "4"),
+        "moats": {m.strip() for m in (os.getenv("MS_MOATS") or "Wide,Narrow").split(",") if m.strip()},
+        "top_n": int(os.getenv("MS_TOP_N") or "15"),
+        "finalists": int(os.getenv("MS_FINALISTS") or "3"),
+        "max_pages": int(os.getenv("MS_MAX_PAGES") or "0"),
     }
 
 
