@@ -65,11 +65,17 @@ def fetch_all_rows(mod: Any, max_pages: int) -> List[dict]:
     if max_pages > 0:
         total_pages = min(total_pages, max_pages)
     for page in range(2, total_pages + 1):
-        try:
-            data = mod.fetch_page(page)
-        except Exception as exc:  # noqa: BLE001 - 单页失败 fail-open，继续后续页
-            print(f"  第 {page} 页抓取失败（fail-open）: {type(exc).__name__}")
-            time.sleep(1)
+        data = None
+        for attempt in range(2):  # 超时/失败重试一次，减少数据缺口
+            try:
+                data = mod.fetch_page(page)
+                break
+            except Exception as exc:  # noqa: BLE001 - 单页失败 fail-open，继续后续页
+                if attempt == 0:
+                    time.sleep(1)
+                    continue
+                print(f"  第 {page} 页抓取失败（fail-open，已重试）: {type(exc).__name__}")
+        if data is None:
             continue
         page_rows = data.get("rows", []) or []
         if not page_rows:
@@ -77,6 +83,19 @@ def fetch_all_rows(mod: Any, max_pages: int) -> List[dict]:
         rows.extend(page_rows)
         time.sleep(0.3)
     return rows
+
+
+def diagnose(candidates: List[dict], cfg: Dict[str, Any]) -> str:
+    """0 命中时的过滤诊断：分别统计各单条件通过数，定位是哪个阈值卡死。"""
+    total = len(candidates)
+    have_moat = sum(1 for c in candidates if c["moat"] in cfg["moats"])
+    pass_upside = sum(1 for c in candidates if c["upside_pct"] >= cfg["min_upside"])
+    pass_stars = sum(1 for c in candidates if c["stars"] is None or c["stars"] >= cfg["min_stars"])
+    return (
+        f"过滤诊断（共 {total} 只有效记录）：护城河∈{sorted(cfg['moats'])} {have_moat} 只 · "
+        f"潜在涨幅≥{cfg['min_upside']}% {pass_upside} 只 · 星级≥{cfg['min_stars']} {pass_stars} 只。"
+        f"命中需同时满足三者；可调低 MS_MIN_UPSIDE / MS_MIN_STARS 或放宽 MS_MOATS。"
+    )
 
 
 def build_candidates(mod: Any, rows: List[dict]) -> List[dict]:
@@ -168,7 +187,7 @@ def format_message(ranked: List[dict], top_n: int, total: int, finalists: List[d
 
 def resolve_config() -> Dict[str, Any]:
     return {
-        "min_upside": float(os.getenv("MS_MIN_UPSIDE", "15") or 15),
+        "min_upside": float(os.getenv("MS_MIN_UPSIDE", "5") or 5),
         "min_stars": int(os.getenv("MS_MIN_STARS", "4") or 4),
         "moats": {m.strip() for m in (os.getenv("MS_MOATS", "Wide,Narrow")).split(",") if m.strip()},
         "top_n": int(os.getenv("MS_TOP_N", "15") or 15),
@@ -195,6 +214,7 @@ def main() -> int:
     ranked = filter_and_rank(candidates, cfg["min_upside"], cfg["min_stars"], cfg["moats"])
     print(f"共 {len(candidates)} 只有效记录，过滤后命中 {len(ranked)} 只")
     if not ranked:
+        print(diagnose(candidates, cfg))
         print("过滤后无命中标的（阈值过严或市场整体高估），退出")
         return 0
 
