@@ -28,15 +28,15 @@ CAT,Caterpillar Inc,26
 LRCX,Lam Research Corp,27
 UNH,UnitedHealth Group Inc,28
 CVX,Chevron Corp,29
-GE,General Electric Co,30
-ORCL,Oracle Corp,31
+ORCL,Oracle Corp,30
+GE,General Electric Co,31
 KO,Coca-Cola Co/The,32
 PG,Procter & Gamble Co/The,33
 MS,Morgan Stanley,34
 HD,Home Depot Inc/The,35
-GS,Goldman Sachs Group Inc/The,36
-PLTR,Palantir Technologies Inc,37
-MRK,Merck & Co Inc,38
+PLTR,Palantir Technologies Inc,36
+MRK,Merck & Co Inc,37
+GS,Goldman Sachs Group Inc/The,38
 PM,Philip Morris International Inc,39
 PANW,Palo Alto Networks Inc,40
 NFLX,Netflix Inc,41
@@ -52,10 +52,10 @@ C,Citigroup Inc,50
 ANET,Arista Networks Inc,51
 TMUS,T-Mobile US Inc,52
 CRWD,Crowdstrike Holdings Inc,53
-IBM,International Business Machines Corp,54
-SNDK,Sandisk Corp/DE,55
-AMGN,Amgen Inc,56
-TMO,Thermo Fisher Scientific Inc,57
+SNDK,Sandisk Corp/DE,54
+IBM,International Business Machines Corp,55
+TMO,Thermo Fisher Scientific Inc,56
+AMGN,Amgen Inc,57
 MCD,McDonald's Corp,58
 PEP,PepsiCo Inc,59
 APH,Amphenol Corp,60
@@ -70,8 +70,8 @@ ABT,Abbott Laboratories,68
 WELL,Welltower Inc,69
 TJX,TJX Cos Inc/The,70
 DIS,Walt Disney Co/The,71
-BA,Boeing Co/The,72
-MRVL,Marvell Technology,73
+MRVL,Marvell Technology,72
+BA,Boeing Co/The,73
 GILD,Gilead Sciences Inc,74
 BLK,Blackrock Inc,75
 WDC,Western Digital Corp,76
@@ -92,21 +92,21 @@ CB,Chubb Ltd,90
 SPGI,S&P Global Inc,91
 GLW,Corning Inc,92
 COF,Capital One Financial Corp,93
-MO,Altria Group Inc,94
-BMY,Bristol-Myers Squibb Co,95
+BMY,Bristol-Myers Squibb Co,94
+MO,Altria Group Inc,95
 VRTX,Vertex Pharmaceuticals Inc,96
 SYK,Stryker Corp,97
 ISRG,Intuitive Surgical Inc,98
 PGR,Progressive Corp/The,99
-PH,Parker-Hannifin Corp,100
-SBUX,Starbucks Corp,101
+SBUX,Starbucks Corp,100
+PH,Parker-Hannifin Corp,101
 FTNT,Fortinet Inc,102
 LMT,Lockheed Martin Corp,103
 LOW,Lowe's Cos Inc,104
-VRT,Vertiv Holdings,105
+VRT,Vertiv Holdings Co,105
 HWM,Howmet Aerospace Inc,106
-SO,Southern Co/The,107
-BNY,Bank of New York Mellon Corp/The,108
+BNY,Bank of New York Mellon Corp/The,107
+SO,Southern Co/The,108
 MDT,Medtronic PLC,109
 NOW,ServiceNow Inc,110
 TT,Trane Technologies PLC,111
@@ -115,28 +115,28 @@ PNC,PNC Financial Services Group Inc/The,113
 EQIX,Equinix Inc,114
 UPS,United Parcel Service Inc,115
 GD,General Dynamics Corp,116
-USB,US Bancorp,117
-MCK,McKesson Corp,118
+MCK,McKesson Corp,117
+USB,US Bancorp,118
 DUK,Duke Energy Corp,119
-WM,Waste Management Inc,120
-MAR,Marriott International Inc/MD,121
-MNST,Monster Beverage Corp,122
-NEM,Newmont Corp,123
-CSX,CSX Corp,124
+MAR,Marriott International Inc/MD,120
+WM,Waste Management Inc,121
+NEM,Newmont Corp,122
+MNST,Monster Beverage Corp,123
+PWR,Quanta Services Inc,124
 ADBE,Adobe Inc,125
-PWR,Quanta Services Inc,126
+CSX,CSX Corp,126
 DDOG,Datadog Inc,127
 VLO,Valero Energy Corp,128
 MPC,Marathon Petroleum Corp,129
 CDNS,Cadence Design Systems Inc,130
-CEG,Constellation Energy Corp,131
-KKR,KKR & Co Inc,132
+KKR,KKR & Co Inc,131
+CEG,Constellation Energy Corp,132
 WMB,Williams Cos Inc/The,133
 HOOD,Robinhood Markets Inc,134
 CMI,Cummins Inc,135
 MCO,Moody's Corp,136
-ACN,Accenture PLC,137
-CME,CME Group Inc,138
+CME,CME Group Inc,137
+ACN,Accenture PLC,138
 MRSH,Marsh & McLennan Cos Inc,139
 ABNB,Airbnb Inc,140
 JCI,Johnson Controls International plc,141
@@ -150,208 +150,208 @@ SHW,Sherwin-Williams Co/The,148
 ELV,Elevance Health Inc,149
 DASH,DoorDash Inc,150
 INTU,Intuit Inc,151
-ICE,Intercontinental Exchange Inc,152
-ITW,Illinois Tool Works Inc,153
-AMT,American Tower Corp,154
+ITW,Illinois Tool Works Inc,152
+AMT,American Tower Corp,153
+ICE,Intercontinental Exchange Inc,154
 TRV,Travelers Cos Inc/The,155
 AON,Aon PLC,156
 MDLZ,Mondelez International Inc,157
 EMR,Emerson Electric Co,158
-ECL,Ecolab Inc,159
-RCL,Royal Caribbean Cruises Ltd,160
+RCL,Royal Caribbean Cruises Ltd,159
+ECL,Ecolab Inc,160
 NSC,Norfolk Southern Corp,161
 ROST,Ross Stores Inc,162
 FDX,FedEx Corp,163
-NOC,Northrop Grumman Corp,164
+EOG,EOG Resources Inc,164
 CI,Cigna Group/The,165
-EOG,EOG Resources Inc,166
-CL,Colgate-Palmolive Co,167
-SPG,Simon Property Group Inc,168
+CL,Colgate-Palmolive Co,166
+SPG,Simon Property Group Inc,167
+NOC,Northrop Grumman Corp,168
 SNPS,Synopsys Inc,169
 HLT,Hilton Worldwide Holdings Inc,170
-AVB,AvalonBay Communities Inc,171
+AEP,American Electric Power Co Inc,171
 KMI,Kinder Morgan Inc,172
-AEP,American Electric Power Co Inc,173
-ORLY,O'Reilly Automotive Inc,174
-HON,Honeywell International Inc,175
-REGN,Regeneron Pharmaceuticals Inc,176
-SLB,SLB Ltd,177
-APO,Apollo Global Management Inc,178
-CRH,CRH PLC,179
-MSI,Motorola Solutions Inc,180
-GM,General Motors Co,181
-HONA,Honeywell Aerospace,182
-RSG,Republic Services Inc,183
-WBD,Warner Bros Discovery Inc,184
-TDG,TransDigm Group Inc,185
-NXPI,NXP Semiconductors NV,186
-PCAR,PACCAR Inc,187
-GWW,WW Grainger Inc,188
-TFC,Truist Financial Corp,189
-APD,Air Products and Chemicals Inc,190
-URI,United Rentals Inc,191
-BSX,Boston Scientific Corp,192
-AJG,Arthur J Gallagher & Co,193
-NKE,NIKE Inc,194
+ORLY,O'Reilly Automotive Inc,173
+HON,Honeywell International Inc,174
+REGN,Regeneron Pharmaceuticals Inc,175
+SLB,SLB Ltd,176
+APO,Apollo Global Management Inc,177
+CRH,CRH PLC,178
+MSI,Motorola Solutions Inc,179
+GM,General Motors Co,180
+RSG,Republic Services Inc,181
+TDG,TransDigm Group Inc,182
+WBD,Warner Bros Discovery Inc,183
+NXPI,NXP Semiconductors NV,184
+HONA,Honeywell Aerospace,185
+PCAR,PACCAR Inc,186
+GWW,WW Grainger Inc,187
+APD,Air Products and Chemicals Inc,188
+URI,United Rentals Inc,189
+BSX,Boston Scientific Corp,190
+TFC,Truist Financial Corp,191
+AJG,Arthur J Gallagher & Co,192
+NKE,NIKE Inc,193
+MPWR,Monolithic Power Systems Inc,194
 DLR,Digital Realty Trust Inc,195
-MPWR,Monolithic Power Systems Inc,196
-ALL,Allstate Corp/The,197
+ALL,Allstate Corp/The,196
+AFL,Aflac Inc,197
 TGT,Target Corp,198
-AFL,Aflac Inc,199
-D,Dominion Energy Inc,200
-O,Realty Income Corp,201
-TRGP,Targa Resources Corp,202
-HPE,Hewlett Packard Enterprise Co,203
-MET,MetLife Inc,204
-SRE,Sempra,205
-COR,Cencora Inc,206
-TEL,TE Connectivity PLC,207
+D,Dominion Energy Inc,199
+O,Realty Income Corp,200
+TRGP,Targa Resources Corp,201
+HPE,Hewlett Packard Enterprise Co,202
+MET,MetLife Inc,203
+SRE,Sempra,204
+COR,Cencora Inc,205
+TEL,TE Connectivity PLC,206
+FIX,Comfort Systems USA Inc,207
 OKE,ONEOK Inc,208
-FIX,Comfort Systems USA Inc,209
-CTVA,Corteva Inc,210
-CARR,Carrier Global Corp,211
-LITE,Lumentum Holdings,212
-F,Ford Motor Co,213
-PSA,Public Storage,214
-BKR,Baker Hughes Co,215
-DAL,Delta Air Lines Inc,216
+CTVA,Corteva Inc,209
+CARR,Carrier Global Corp,210
+LITE,Lumentum Holdings Inc,211
+F,Ford Motor Co,212
+PSA,Public Storage,213
+BKR,Baker Hughes Co,214
+DAL,Delta Air Lines Inc,215
+FANG,Diamondback Energy Inc,216
 OXY,Occidental Petroleum Corp,217
-FANG,Diamondback Energy Inc,218
-AME,AMETEK Inc,219
-COHR,Coherent,220
-KEYS,Keysight Technologies Inc,221
-ETR,Entergy Corp,222
-NUE,Nucor Corp,223
-CAH,Cardinal Health Inc,224
-LHX,L3Harris Technologies Inc,225
-CIEN,Ciena,226
-EA,Electronic Arts Inc,227
-FITB,Fifth Third Bancorp,228
+AME,AMETEK Inc,218
+COHR,Coherent Corp,219
+KEYS,Keysight Technologies Inc,220
+NUE,Nucor Corp,221
+CAH,Cardinal Health Inc,222
+CIEN,Ciena Corp,223
+ETR,Entergy Corp,224
+FITB,Fifth Third Bancorp,225
+LHX,L3Harris Technologies Inc,226
+VST,Vistra Corp,227
+EA,Electronic Arts Inc,228
 FAST,Fastenal Co,229
-VST,Vistra Corp,230
-NDAQ,Nasdaq Inc,231
-ROK,Rockwell Automation Inc,232
+NDAQ,Nasdaq Inc,230
+ROK,Rockwell Automation Inc,231
+DVN,Devon Energy Corp,232
 STT,State Street Corp,233
-DVN,Devon Energy Corp,234
-TER,Teradyne Inc,235
-PYPL,PayPal Holdings Inc,236
+TER,Teradyne Inc,234
+PYPL,PayPal Holdings Inc,235
+EBAY,eBay Inc,236
 AZO,AutoZone Inc,237
-XEL,Xcel Energy Inc,238
-EW,Edwards Lifesciences Corp,239
-EBAY,eBay Inc,240
-ODFL,Old Dominion Freight Line Inc,241
-CVNA,Carvana Co,242
-GRMN,Garmin Ltd,243
-HUM,Humana Inc,244
+EW,Edwards Lifesciences Corp,238
+XEL,Xcel Energy Inc,239
+ODFL,Old Dominion Freight Line Inc,240
+CVNA,Carvana Co,241
+GRMN,Garmin Ltd,242
+HUM,Humana Inc,243
+XYZ,Block Inc,244
 AMP,Ameriprise Financial Inc,245
-XYZ,Block Inc,246
-EXC,Exelon Corp,247
-VTR,Ventas Inc,248
-ADSK,Autodesk Inc,249
-MSCI,MSCI Inc,250
-IDXX,IDEXX Laboratories Inc,251
-WAB,Westinghouse Air Brake Technologies Corp,252
-CMG,Chipotle Mexican Grill Inc,253
+EXC,Exelon Corp,246
+VTR,Ventas Inc,247
+ADSK,Autodesk Inc,248
+MSCI,MSCI Inc,249
+IDXX,IDEXX Laboratories Inc,250
+WAB,Westinghouse Air Brake Technologies Corp,251
+CMG,Chipotle Mexican Grill Inc,252
+MCHP,Microchip Technology Inc,253
 TTWO,Take-Two Interactive Software Inc,254
-MCHP,Microchip Technology Inc,255
-FLEX,Flex,256
-BDX,Becton Dickinson & Co,257
+FLEX,Flex,255
+BDX,Becton Dickinson & Co,256
+AIG,American International Group Inc,257
 DHI,DR Horton Inc,258
-AIG,American International Group Inc,259
-KDP,Keurig Dr Pepper Inc,260
-LYV,Live Nation Entertainment Inc,261
-ED,Consolidated Edison Inc,262
-PRU,Prudential Financial Inc,263
-COIN,Coinbase Global Inc,264
+KDP,Keurig Dr Pepper Inc,259
+LYV,Live Nation Entertainment Inc,260
+ED,Consolidated Edison Inc,261
+ADM,Archer-Daniels-Midland Co,262
+COIN,Coinbase Global Inc,263
+PRU,Prudential Financial Inc,264
 CBRE,CBRE Group Inc,265
 AXON,Axon Enterprise Inc,266
-ADM,Archer-Daniels-Midland Co,267
-YUM,Yum! Brands Inc,268
-PAYX,Paychex Inc,269
-IBKR,Interactive Brokers Group Inc,270
-PEG,Public Service Enterprise Group Inc,271
-SYY,Sysco Corp,272
-HIG,Hartford Insurance Group Inc/The,273
-PCG,PG&E Corp,274
-UAL,United Airlines Holdings Inc,275
-VMC,Vulcan Materials Co,276
-A,Agilent Technologies Inc,277
-HBAN,Huntington Bancshares Inc/OH,278
-WEC,WEC Energy Group Inc,279
-IRM,Iron Mountain Inc,280
+YUM,Yum! Brands Inc,267
+PAYX,Paychex Inc,268
+IBKR,Interactive Brokers Group Inc,269
+PEG,Public Service Enterprise Group Inc,270
+SYY,Sysco Corp,271
+HIG,Hartford Insurance Group Inc/The,272
+PCG,PG&E Corp,273
+UAL,United Airlines Holdings Inc,274
+VMC,Vulcan Materials Co,275
+A,Agilent Technologies Inc,276
+HBAN,Huntington Bancshares Inc/OH,277
+WEC,WEC Energy Group Inc,278
+IRM,Iron Mountain Inc,279
+ROP,Roper Technologies Inc,280
 KVUE,Kenvue Inc,281
-ROP,Roper Technologies Inc,282
-WAT,Waters Corp,283
-CCL,Carnival Corp,284
-MTB,M&T Bank Corp,285
-KR,Kroger Co/The,286
-KMB,Kimberly-Clark Corp,287
-WDAY,Workday Inc,288
-ACGL,Arch Capital Group Ltd,289
-HSY,Hershey Co/The,290
-CCI,Crown Castle Inc,291
-IQV,IQVIA Holdings Inc,292
-NTRS,Northern Trust Corp,293
-ON,ON Semiconductor Corp,294
-STLD,Steel Dynamics Inc,295
-MLM,Martin Marietta Materials Inc,296
-EME,EMCOR Group Inc,297
-RJF,Raymond James Financial Inc,298
-CNC,Centene Corp,299
-EXPE,Expedia Group Inc,300
-IR,Ingersoll Rand Inc,301
-NTAP,NetApp Inc,302
-ZTS,Zoetis Inc,303
-JBL,Jabil Inc,304
-VEEV,Veeva Systems,305
-CASY,Casey's General Stores,306
-EXR,Extra Space Storage Inc,307
-DTE,DTE Energy Co,308
-EQT,EQT Corp,309
-AEE,Ameren Corp,310
-KHC,Kraft Heinz Co/The,311
+WAT,Waters Corp,282
+CCL,Carnival Corp,283
+MTB,M&T Bank Corp,284
+KR,Kroger Co/The,285
+KMB,Kimberly-Clark Corp,286
+WDAY,Workday Inc,287
+ACGL,Arch Capital Group Ltd,288
+HSY,Hershey Co/The,289
+CCI,Crown Castle Inc,290
+IQV,IQVIA Holdings Inc,291
+NTRS,Northern Trust Corp,292
+ON,ON Semiconductor Corp,293
+STLD,Steel Dynamics Inc,294
+MLM,Martin Marietta Materials Inc,295
+EME,EMCOR Group Inc,296
+RJF,Raymond James Financial Inc,297
+CNC,Centene Corp,298
+EXPE,Expedia Group Inc,299
+IR,Ingersoll Rand Inc,300
+NTAP,NetApp Inc,301
+ZTS,Zoetis Inc,302
+CASY,Casey's General Stores,303
+VEEV,Veeva Systems,304
+JBL,Jabil Inc,305
+EXR,Extra Space Storage Inc,306
+EQT,EQT Corp,307
+AEE,Ameren Corp,308
+DTE,DTE Energy Co,309
+KHC,Kraft Heinz Co/The,310
+CFG,Citizens Financial Group Inc,311
 BIIB,Biogen Inc,312
-CFG,Citizens Financial Group Inc,313
+LVS,Las Vegas Sands Corp,313
 EIX,Edison International,314
 EL,Estee Lauder Cos Inc/The,315
-LVS,Las Vegas Sands Corp,316
-DXCM,Dexcom Inc,317
-ATO,Atmos Energy Corp,318
-VICI,VICI Properties Inc,319
-XYL,Xylem Inc/NY,320
-TDY,Teledyne Technologies Inc,321
-HAL,Halliburton Co,322
+ATO,Atmos Energy Corp,316
+VICI,VICI Properties Inc,317
+DXCM,Dexcom Inc,318
+TDY,Teledyne Technologies Inc,319
+HAL,Halliburton Co,320
+XYL,Xylem Inc/NY,321
+FICO,Fair Isaac Corp,322
 RMD,ResMed Inc,323
-GEHC,GE HealthCare Technologies Inc,324
-DOV,Dover Corp,325
-FICO,Fair Isaac Corp,326
-Q,Qnity Electronics Inc,327
-TPL,Texas Pacific Land Corp,328
-CBOE,Cboe Global Markets Inc,329
-TPR,Tapestry Inc,330
-ARES,Ares Management Corp,331
-CNP,CenterPoint Energy Inc,332
-OTIS,Otis Worldwide Corp,333
-FE,FirstEnergy Corp,334
-ES,Eversource Energy,335
-CINF,Cincinnati Financial Corp,336
-DG,Dollar General Corp,337
-WTW,Willis Towers Watson PLC,338
-JBHT,JB Hunt Transport Services Inc,339
+DOV,Dover Corp,324
+GEHC,GE HealthCare Technologies Inc,325
+TPL,Texas Pacific Land Corp,326
+CBOE,Cboe Global Markets Inc,327
+TPR,Tapestry Inc,328
+Q,Qnity Electronics Inc,329
+ARES,Ares Management Corp,330
+CNP,CenterPoint Energy Inc,331
+OTIS,Otis Worldwide Corp,332
+FE,FirstEnergy Corp,333
+ES,Eversource Energy,334
+CINF,Cincinnati Financial Corp,335
+DG,Dollar General Corp,336
+WTW,Willis Towers Watson PLC,337
+JBHT,JB Hunt Transport Services Inc,338
+AVB,AvalonBay Communities Inc,339
 NRG,NRG Energy Inc,340
 RF,Regions Financial Corp,341
 FISV,Fiserv Inc,342
 PPL,PPL Corp,343
 WSM,Williams-Sonoma Inc,344
-AWK,American Water Works Co Inc,345
-ECHO,EchoStar,346
+ECHO,EchoStar Corp,345
+WRB,W R Berkley Corp,346
 MTD,Mettler-Toledo International Inc,347
-VRSK,Verisk Analytics Inc,348
-EQR,Equity Residential,349
-HUBB,Hubbell Inc,350
-WRB,W R Berkley Corp,351
-CPRT,Copart Inc,352
-PPG,PPG Industries Inc,353
+AWK,American Water Works Co Inc,348
+VRSK,Verisk Analytics Inc,349
+PPG,PPG Industries Inc,350
+EQR,Equity Residential,351
+HUBB,Hubbell Inc,352
+CPRT,Copart Inc,353
 KEY,KeyCorp,354
 WST,West Pharmaceutical Services Inc,355
 VRSN,VeriSign Inc,356
@@ -359,8 +359,8 @@ TROW,T Rowe Price Group Inc,357
 SYF,Synchrony Financial,358
 PFG,Principal Financial Group Inc,359
 CHRW,CH Robinson Worldwide Inc,360
-DLTR,Dollar Tree Inc,361
-MRNA,Moderna Inc,362
+MRNA,Moderna Inc,361
+DLTR,Dollar Tree Inc,362
 PHM,PulteGroup Inc,363
 CPAY,Corpay Inc,364
 EXPD,Expeditors International of Washington Inc,365
@@ -370,28 +370,28 @@ LUV,Southwest Airlines Co,368
 INCY,Incyte Corp,369
 DGX,Quest Diagnostics Inc,370
 OMC,Omnicom Group Inc,371
-LH,Labcorp Holdings Inc,372
-SW,Smurfit WestRock PLC,373
-CHD,Church & Dwight Co Inc,374
+CHD,Church & Dwight Co Inc,372
+LH,Labcorp Holdings Inc,373
+SW,Smurfit Westrock PLC,374
 BG,Bunge Global SA,375
 FFIV,F5 Inc,376
 VLTO,Veralto Corp,377
-CMS,CMS Energy Corp,378
-DRI,Darden Restaurants Inc,379
-HPQ,HP Inc,380
-STZ,Constellation Brands Inc,381
-FSLR,First Solar Inc,382
+FSLR,First Solar Inc,378
+CMS,CMS Energy Corp,379
+DRI,Darden Restaurants Inc,380
+HPQ,HP Inc,381
+STZ,Constellation Brands Inc,382
 FDXF,FedEx Freight,383
 RL,Ralph Lauren Corp,384
 NI,NiSource Inc,385
-FIS,Fidelity National Information Services Inc,386
-ROL,Rollins Inc,387
+ROL,Rollins Inc,386
+FIS,Fidelity National Information Services Inc,387
 DOW,Dow Inc,388
 SNA,Snap-on Inc,389
 GPN,Global Payments Inc,390
 STE,STERIS PLC,391
-EFX,Equifax Inc,392
-CTSH,Cognizant Technology Solutions Corp,393
+CTSH,Cognizant Technology Solutions Corp,392
+EFX,Equifax Inc,393
 EXE,Expand Energy Corp,394
 PKG,Packaging Corp of America,395
 ULTA,Ulta Beauty Inc,396
@@ -399,11 +399,11 @@ TSN,Tyson Foods Inc,397
 AMCR,Amcor PLC,398
 GIS,General Mills Inc,399
 LEN,Lennar Corp,400
-IFF,International Flavors & Fragrances Inc,401
-VTRS,Viatris Inc,402
+VTRS,Viatris Inc,401
+IFF,International Flavors & Fragrances Inc,402
 IP,International Paper Co,403
-SBAC,SBA Communications Corp,404
-EVRG,Evergy Inc,405
+EVRG,Evergy Inc,404
+SBAC,SBA Communications Corp,405
 LNT,Alliant Energy Corp,406
 LYB,LyondellBasell Industries NV,407
 LII,Lennox International Inc,408
@@ -414,9 +414,9 @@ DD,DuPont de Nemours Inc,412
 BBY,Best Buy Co Inc,413
 INVH,Invitation Homes Inc,414
 WY,Weyerhaeuser Co,415
-KIM,Kimco Realty Corp,416
-NVR,NVR Inc,417
-ZBH,Zimmer Biomet Holdings Inc,418
+ZBH,Zimmer Biomet Holdings Inc,416
+KIM,Kimco Realty Corp,417
+NVR,NVR Inc,418
 AKAM,Akamai Technologies Inc,419
 BR,Broadridge Financial Solutions Inc,420
 GPC,Genuine Parts Co,421
@@ -425,16 +425,16 @@ BEN,Franklin Resources Inc,423
 BALL,Ball Corp,424
 IEX,IDEX Corp,425
 HST,Host Hotels & Resorts Inc,426
-TSCO,Tractor Supply Co,427
-CHTR,Charter Communications Inc,428
+CHTR,Charter Communications Inc,427
+GEN,Gen Digital Inc,428
 NDSN,Nordson Corp,429
-GEN,Gen Digital Inc,430
+TSCO,Tractor Supply Co,430
 TXT,Textron Inc,431
 MAS,Masco Corp,432
 SMCI,Super Micro Computer Inc,433
 J,Jacobs Solutions Inc,434
-MAA,Mid-America Apartment Communities Inc,435
-DOC,Healthpeak Properties Inc,436
+DOC,Healthpeak Properties Inc,435
+MAA,Mid-America Apartment Communities Inc,436
 DVA,DaVita Inc,437
 EG,Everest Group Ltd,438
 REG,Regency Centers Corp,439
@@ -443,46 +443,46 @@ PTC,PTC Inc,441
 GL,Globe Life Inc,442
 ALB,Albemarle Corp,443
 SOLV,Solventum Corp,444
-HRL,Hormel Foods Corp,445
+SWK,Stanley Black & Decker Inc,445
 COO,Cooper Cos Inc/The,446
-SWK,Stanley Black & Decker Inc,447
+HRL,Hormel Foods Corp,447
 MKC,McCormick & Co Inc/MD,448
 TKO,TKO Group Holdings Inc,449
 AIZ,Assurant Inc,450
 LDOS,Leidos Holdings Inc,451
-TYL,Tyler Technologies Inc,452
-LULU,Lululemon Athletica Inc,453
+LULU,Lululemon Athletica Inc,452
+TYL,Tyler Technologies Inc,453
 IVZ,Invesco Ltd,454
 PNW,Pinnacle West Capital Corp,455
 UDR,UDR Inc,456
-GNRC,Generac Holdings Inc,457
+ZBRA,Zebra Technologies Corp,457
 ALGN,Align Technology Inc,458
-ZBRA,Zebra Technologies Corp,459
+GNRC,Generac Holdings Inc,459
 GDDY,GoDaddy Inc,460
 APA,APA Corp,461
-RVTY,Revvity Inc,462
-TRMB,Trimble Inc,463
+TRMB,Trimble Inc,462
+RVTY,Revvity Inc,463
 AVY,Avery Dennison Corp,464
-CSGP,CoStar Group Inc,465
-APTV,Aptiv PLC,466
-BF-B,Brown-Forman Corp,467
-SJM,J M Smucker Co/The,468
-ERIE,Erie Indemnity Co,469
-MGM,MGM Resorts International,470
-ALLE,Allegion plc,471
-CLX,Clorox Co/The,472
-HAS,Hasbro Inc,473
-BAX,Baxter International Inc,474
+APTV,Aptiv PLC,465
+CSGP,CoStar Group Inc,466
+SJM,J M Smucker Co/The,467
+ERIE,Erie Indemnity Co,468
+MGM,MGM Resorts International,469
+ALLE,Allegion plc,470
+BF-B,Brown-Forman Corp,471
+BAX,Baxter International Inc,472
+CLX,Clorox Co/The,473
+HAS,Hasbro Inc,474
 FOXA,Fox Corp,475
 FOX,Fox Corp,476
 PODD,Insulet Corp,477
-CPT,Camden Property Trust,478
-TECH,Bio-Techne Corp,479
+TECH,Bio-Techne Corp,478
+CPT,Camden Property Trust,479
 BXP,BXP Inc,480
 FRT,Federal Realty Investment Trust,481
-DPZ,Domino's Pizza Inc,482
-CRL,Charles River Laboratories International Inc,483
-JKHY,Jack Henry & Associates Inc,484
+CRL,Charles River Laboratories International Inc,482
+JKHY,Jack Henry & Associates Inc,483
+DPZ,Domino's Pizza Inc,484
 HII,Huntington Ingalls Industries Inc,485
 AES,AES Corp/The,486
 NWSA,News Corp,487
