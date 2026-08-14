@@ -1,8 +1,8 @@
 name: CI
 
 on:
-  pull_request:
-    branches: [main]
+  # Automatic triggers disabled; manual runs only.
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.event.pull_request.number || github.ref }}

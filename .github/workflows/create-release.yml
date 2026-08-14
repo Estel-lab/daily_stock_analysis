@@ -2,9 +2,8 @@ name: Create GitHub Release from Tag
 
 # Trigger: annotated tag pushed (vX.Y.Z)
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  # Automatic triggers disabled; manual runs only.
+  workflow_dispatch:
 
 jobs:
   release:

@@ -1,9 +1,9 @@
 name: Network Smoke
 
 on:
-  schedule:
-    - cron: '0 2 * * 1-5'
+  # Automatic triggers disabled; manual runs only.
   workflow_dispatch:
+
 
 concurrency:
   group: network-smoke-${{ github.ref }}

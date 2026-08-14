@@ -1,15 +1,14 @@
 name: Docker Release Publish
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  # Automatic triggers disabled; manual runs only.
   workflow_dispatch:
     inputs:
       release_tag:
         description: 'Release tag in semver format, e.g. v3.0.6'
         required: true
         type: string
+
 
 concurrency:
   group: docker-publish-${{ github.ref }}

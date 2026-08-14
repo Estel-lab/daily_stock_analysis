@@ -4,30 +4,11 @@
 name: PR Review
 
 on:
-  pull_request_target:
-    types: [opened, synchronize, reopened]
-    paths:
-      - '**.py'
-      - '**.md'
-      - '**.ts'
-      - '**.tsx'
-      - 'docs/**'
-      - 'README.md'
-      - 'AGENTS.md'
-      - 'apps/dsa-web/**'
-      - 'requirements.txt'
-      - '.github/requirements-ci.txt'
-      - 'pyproject.toml'
-      - 'setup.cfg'
-      - '.github/PULL_REQUEST_TEMPLATE.md'
-      - '.github/workflows/**'
-      - '.github/scripts/**'
-      - 'docker/Dockerfile'
-      - 'docker-compose.yml'
-  # 支持手动触发（用于重新审查）
+  # Automatic triggers disabled; manual runs only.
   workflow_dispatch:
 
 # 限制并发，避免同一 PR 多次触发时重复评论
+
 concurrency:
   group: pr-review-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: true

@@ -1,15 +1,14 @@
 name: Desktop Release
 
 on:
-  push:
-    tags:
-      - 'v*.*.*'
+  # Automatic triggers disabled; manual runs only.
   workflow_dispatch:
     inputs:
       release_tag:
         description: 'Existing release tag in semver format, e.g. v3.2.12'
         required: true
         type: string
+
 
 concurrency:
   group: desktop-release-${{ github.ref }}

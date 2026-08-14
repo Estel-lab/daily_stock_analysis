@@ -1,11 +1,7 @@
 name: 标普500 成分与基本面刷新
 
 on:
-  # 每 2 天 UTC 20:00（北京时间次日 04:00）刷新，避开每日分析与选股窗口
-  # 注：*/2 按每月日期计，月末到月初可能出现 1 天间隔（标准 cron 近似）
-  schedule:
-    - cron: '0 20 */2 * *'
-
+  # Automatic triggers disabled; manual runs only.
   workflow_dispatch:
     inputs:
       force:
@@ -13,6 +9,7 @@ on:
         required: false
         default: false
         type: boolean
+
 
 concurrency:
   group: sp500-fundamentals

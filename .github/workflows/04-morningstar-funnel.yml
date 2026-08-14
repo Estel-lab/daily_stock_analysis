@@ -1,10 +1,7 @@
 name: 晨星价值漏斗选股
 
 on:
-  # 每 2 天美股收盘后（UTC 22:30，北京时间次日 06:30），与选股筛(22:00)错开
-  schedule:
-    - cron: '30 22 */2 * *'
-
+  # Automatic triggers disabled; manual runs only.
   workflow_dispatch:
     inputs:
       deep_analysis:
@@ -12,6 +9,7 @@ on:
         required: false
         default: false
         type: boolean
+
 
 concurrency:
   group: morningstar-funnel
